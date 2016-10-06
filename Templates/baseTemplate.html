@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static "css/nav_menu.css" %}">
+    <link rel="stylesheet" href="{% static "jquery-ui/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <script src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
+    <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    <script type="text/javascript">
+        USER_VK_AUTH_URL = '{% url "users:vk_auth" %}';
+    </script>
+    <script src="{% static "js/nav-menu.js" %}"></script>
+    <script src="{% static "jquery-ui/jquery-ui.min.js" %}"></script>
+    {% block script %}
+    {% endblock %}
+</head>
+<body>
+
+    <header>
+		<a href="/" id="logo">WineMatch</a>
+		<nav>
+			<a href="#" class="show-menu" id="menu-icon"></a>
+            <a href="#" class="close-menu" style="display: none"></a>
+			<ul class="top-menu">
+                <li><a href="{% url "surveys:info" %}">Кто мы</a></li>
+                {% if not request.user.is_authenticated or not request.user.vk_id %}
+                    <li><a href="" class="js-login">Войти</a></li>
+                {% else %}
+                    <li><a href="{% url "surveys:favorite" %}">Избранное</a></li>
+                    <li><a href="{% url "users:logout" %}">Выйти</a></li>
+                {% endif %}
+
+                <li><a href="{% url "surveys:survey_next" %}" class="current">Подобрать вино</a></li>
+			</ul>
+		</nav>
+	</header>
+    {% block content %}
+    {% endblock %}
+    <div class="login-block js-login-block">
+
+        <div class="auth-image">
+            <img src="{% static "img/auth-vine.jpg" %}">
+        </div>
+        <div class="auth-buttons">
+            <h1>Войти</h1>
+            <div class="b-button vk-auth js-vk-login">VK</div>
+        </div>
+    </div>
+</body>
+</html>

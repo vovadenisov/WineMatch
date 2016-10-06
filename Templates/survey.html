@@ -1,0 +1,20 @@
+{% extends "baseTemplate.html" %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+    <div class="survey-wrapper">
+{#        {% include "progress_bar.html" %}#}
+        <div class="question item">
+            {{ text }}
+        </div>
+        <div class="answers item">
+            {% for answer in answers %}
+                <a href="{% url "surveys:survey_next" %}?answer={{ answer.pk }}&survey={{ survey }}" class="answer-item">
+                    <p>{{ answer.text }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

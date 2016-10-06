@@ -1,0 +1,399 @@
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: local('Open Sans Cond Light'), local('OpenSans-CondensedLight'), url('/static/fonts/opensanscondlight.woff2') format('woff2'), url('/static/fonts/opensanscondlight.woff') format('woff'), url('/static/fonts/opensanscondlight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: local('Open Sans Cond Light Italic'), local('OpenSans-CondensedLightItalic'), url('/static/fonts/opensanscondlightitalic.woff2') format('woff2'), url('/static/fonts/opensanscondlightitalic.woff') format('woff'), url('/static/fonts/opensanscondlightitalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: local('Open Sans Condensed Bold'), local('OpenSans-CondensedBold'), url('/static/fonts/opensanscondensedbold.woff2') format('woff2'), url('/static/fonts/opensanscondensedbold.woff') format('woff'), url('/static/fonts/opensanscondensedbold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+body{
+    background: #1B0D07 url(/static/img/background-wine.jpg);
+    background-size: cover;
+    font-family: "Open Sans Condensed";
+}
+
+.survey-wrapper{
+    color: white;
+    margin: 10% 0 0 15%;
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 60%;
+}
+
+.survey-wrapper .item{
+    display: inline-block;
+    margin-top: 4%;
+    width: 100%;
+}
+
+.survey-wrapper .answers{
+    margin-left: 15%;
+    width: 70%;
+    margin-bottom: 40px;
+}
+
+.survey-wrapper .submit{
+    margin-bottom: 2%;
+}
+
+.progress .progress-bar{
+    background-color: #1B1111;
+    text-align: center;
+    position: relative;
+    height: inherit;
+    width: 105%;
+}
+
+.progress-bar-wrapper{
+    margin-left: 15%;
+    height: 20px;
+    width: 70%;
+    overflow: hidden;
+}
+
+.progress-item-triangle{
+    float: left;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-left: 20px solid #331F24;
+	border-bottom: 10px solid transparent;
+}
+
+.progress .progress-bar .progress-bar-item{
+    background-color: #331F24;
+    height: inherit;
+    width: 100%;
+    float: left;
+}
+
+.progress-bar .progress-bar-text{
+    position: absolute;
+    top:0;
+    left: 45%
+}
+
+.answers .answer-item{
+    width:49%;
+    height: 80px;
+    float: left;
+    border: 1px solid #5f5f5f;
+    text-align: center;
+    display:inline-block;
+    cursor: pointer;
+}
+
+.answers .answer-item:hover{
+    background-color: rgba(95, 95, 95, 0.3);
+}
+
+.answers .answer-item p{
+    margin-top: 25px;
+}
+
+.question{
+    text-align: center;
+}
+
+.question h1{
+    margin-top: 20px;
+}
+
+.question-image{
+    width:45%;
+}
+
+.submit .submit-button{
+    width:70%;
+    margin-left: 15%;
+}
+
+.b-button{
+    width: 100%;
+    height: 20px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    text-align: center;
+}
+
+.find-wine{
+    display: inline-block;
+    margin-top: 25%;
+    margin-left: 35%;
+    width: 30%;
+    height: 2em;
+    font-size: 2em;
+    border: 3px solid white;
+    text-align: center;
+    color:white;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.find-wine:hover{
+    background-color: rgba(95, 95, 95, 0.3);
+}
+
+.find-wine p{
+    margin-top: 0.6em;
+}
+
+.login-block{
+    display: none;
+}
+
+.auth-image{
+    width: 200px;
+    height: auto;
+    float: left;
+}
+
+.auth-buttons{
+    margin-left: 300px;
+    text-align: center;
+}
+
+.auth-buttons h1{
+    font-size: 1.5em;
+}
+
+.vk-auth{
+    margin-top: 100px;
+    width: 170px;
+    background-color: #45668E!important;
+    color: #ffffff!important;
+    font-weight: bolder!important;
+}
+
+.content-wrapper{
+    background-color: rgba(0, 0, 0, 0.6);
+    margin-top: 10%;
+    width: 60%;
+    margin-left: 20%;
+    padding: 20px;
+    float:left;
+}
+
+.content-text, .context-title{
+    text-align: center;
+    color: #E0D9CB;
+}
+
+.content-wrapper .item{
+    margin-bottom: 20px;
+}
+
+.start-now{
+    width: 40%;
+    margin-left: 30%;
+}
+
+.start-now .b-button{
+    display: inline-block;
+    height: 30px;
+    text-align: center;
+    padding-top: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #F5E8D0;
+    border: 1px solid #F5E8D0;
+}
+
+.context-preview img{
+    margin-left: 10%;
+    width:20%;
+    float:left
+}
+
+.context-preview{
+    width: 100%;
+    float:left;
+}
+
+.context-preview-text{
+    text-align: center;
+    color: #F5E8D0;
+}
+
+.content-info{
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #F5E8D0;
+    width: 70%;
+    margin-left: 15%;
+    text-align: center;
+}
+
+.content-info h3{
+    color: #F5E8D0;
+    margin-bottom: 8px;
+    margin-top: 5px;
+}
+
+.result-wrapper{
+    width: 70%;
+    margin-left: 15%;
+    height: 400px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-top: 200px;
+}
+
+.result-item{
+    width: 90%;
+    color: white!important;
+    height: inherit;
+}
+
+.result-item__title{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0px 30px 0px;
+    font-size: 1.3em;
+    font-weight: 100;
+}
+
+.result-item__content{
+    width: 90%;
+    margin-left: 5%;
+    float: left;
+}
+
+.result-item__content__wine{
+    float: left;
+}
+
+.result-item__content__wine-info{
+    float: left;
+    width: 60%;
+    margin-left: 20%;
+}
+
+.result-item__content__wine img{
+    margin-left: 7%;
+    width: auto;
+    height: 300px;
+}
+
+.result-item__content__wine-info__info{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width:100%
+}
+
+.result-item__content__wine-info__info div{
+    float: left;
+    margin-left: 30px;
+}
+
+.result-item__content__wine-info__info div span{
+    min-width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.result-item__content__wine-info__info div:first-child{
+    margin-left: 0px;
+}
+
+.result-item__content__wine-info__text{
+    float: left;
+}
+
+.result-item__content__wine-info__text p{
+    margin-top: 10px;
+}
+
+.result-item__content__wine-info__text p:last-child{
+    margin-top: 30px;
+}
+
+.result-item__content__wine-info__select{
+    float: left;
+}
+
+.white{
+    background-color: wheat;
+}
+
+.red{
+    background-color: #990000;
+}
+
+.pink{
+    background-color: pink;
+}
+
+.dry{
+    background-color: #F2F2F2;
+    border-radius: 10px;
+}
+
+.result-item__content__wine-info__select{
+    width: 100%;
+    height: 40px;
+    margin-top: 50px;
+}
+
+.result-item__content__wine-info__select .b-button{
+    height: 30px;
+    padding-top: 5px;
+    width: 30%;
+    background-color: rgba(0,0,0,0.0);
+    color:white;
+    border: 1px solid white;
+    float: left;
+    margin-left: 10%;
+    vertical-align: middle;
+}
+
+.result-item__content__wine-info__select .b-button:hover{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.grade{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.grade i{
+    font-size:25px;
+    margin-left: 25px;
+}
+
+.grade i:first-child{
+    margin-left: 0;
+}
+
+.slick-arrow{
+    display: none!important;
+}
+
+.slick-navigation{
+    font-size: 25px!important;
+    color: #990000;
+    top:400px;
+    position:fixed;
+    cursor: pointer;
+}
+
+.slick-navigation-left{
+    left: 6%;
+}
+
+.slick-navigation-right{
+    right: 6%;
+}

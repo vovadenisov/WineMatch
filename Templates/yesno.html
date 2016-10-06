@@ -1,0 +1,27 @@
+{% extends "baseTemplate.html" %}
+{% load staticfiles %}
+{% block script %}
+{% endblock %}
+
+{% block content %}
+    <div class="survey-wrapper">
+{#        {% include "progress_bar.html" %}#}
+
+        <div class="question item">
+                <img class="question-image" src="{% static "img/korica.jpg" %}">
+            <h1>{{ text }}</h1>
+        </div>
+        <div class="answers item">
+            {% for answer in answers %}
+                <a href="{% url "surveys:survey_next" %}?answer={{ answer.pk }}&survey={{ survey }}" class="answer-item">
+                    <p>{{ answer.text }}</p>
+                </a>
+            {% endfor %}
+        </div>
+{#        <div class="submit item">#}
+{#            <div class="submit-button">#}
+{#                <div class="b-button">Ответить</div>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+{% endblock %}

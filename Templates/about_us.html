@@ -1,0 +1,41 @@
+
+{% extends "baseTemplate.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="content-text item">
+            <p>Мы подбираем вкусное вино, которое точно тебе понравится.</p>
+            <p>
+                Мы команда программистов и мы любим вино, автоматизировать и делать мир немного лучше.
+                И не любим мучаться выбором, особенно при выборе вина: это часто съедает кучу времени и сил,
+                а выпить то хочется уже сейчас) Вот мы и решили эту проблему - написав алгоритм, который спросит
+                у тебя о вкусовых предпочтениях и посоветует то, что тебе понравитс.
+            </p>
+        </div>
+        <div class="start-now item">
+            <a href="{% url "surveys:survey_next" %}" class="b-button start-now-button">
+                Попробовать сейчас
+            </a>
+        </div>
+        <div class="context-title item">
+            <h3>Как мы это сделали?</h3>
+        </div>
+        <div class="context-preview item">
+            <img src="{% static "img/robot.png" %}">
+            <img src="{% static "img/wine.png" %}">
+            <img src="{% static "img/man.png" %}">
+        </div>
+        <div class="context-preview-text item">
+            <p>Если коротко, то собрали текстовое описание вкусов вин, выделили отдельные вкусы
+            и вкусовые сочетания, класифицировали по ним вина. Но на самом деле - это были долгие месяцы перевода
+            вкусовых ощущений</p>
+        </div>
+        <div class="content-info">
+            <h3>Как с нами связаться</h3>
+            <h3>+7-999-999-99-99</h3>
+            <h3>example@mail.ru</h3>
+        </div>
+    </div>
+{% endblock %}
