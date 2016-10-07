@@ -59,7 +59,8 @@ nav {
 	display: none;
 	width: 2.7em;
 	height: 2.7em;
-	background: #4C8FEC url(../img/menu-icon.png) center;
+	background: url(/static/img/menu-white.png) center;
+	background-size: contain;
 }
 
 a:hover .close-menu {
@@ -95,13 +96,19 @@ section {
 
 
 /*MEDIA QUERY*/
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 1000px) {
 
 	.show-menu, .close-menu{
 		margin-top: 1.0em;
 	}
+
 	.top-menu{
-		padding-top: 3em;
+		padding-top: 2em;
+		font-size: 2em;
+	}
+
+	.top-menu li{
+		margin-bottom: 1em;
 	}
 
 	header {
@@ -111,6 +118,7 @@ section {
 	#logo{
 		margin-top: 1em;
 		font-size: 2.7em;
+		margin-left: 35%;
 	}
 	.show-menu, .close-menu {
 		display: inline-block;
@@ -120,7 +128,7 @@ section {
 		display: none;
 		position: absolute;
 		right: 20px;
-		top: 60px;
+		top: 1em;
 		width: 100%;
 		border-radius: 4px 0 4px 4px;
 		background-color: rgb(0, 0, 0);

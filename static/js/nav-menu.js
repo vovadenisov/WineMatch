@@ -7,10 +7,11 @@ $(document).ready(function(){
         $(this).parent("nav").addClass("menu-active");
         $(this).hide();
         $(".close-menu").show()
-    })
+    });
     $(".close-menu").click(function (e) {
         $(this).parent("nav").removeClass("menu-active");
         $(this).hide();
         $(".show-menu").show()
-    })
+    });
+    $(".top-menu li").find()
 });
