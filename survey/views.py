@@ -17,15 +17,12 @@ def main(request):
 def survey(request):
 
     answer_pk = request.GET.get("answer")
-    print(answer_pk)
     if not answer_pk:
-        print("create_survey")
         survey_context = {}
         if request.user.is_authenticated():
             survey_context.update({"user": request.user})
         current_survey = Survey.objects.create(**survey_context)
     else:
-        print("get_survey")
         if request.GET.get("survey"):
             current_survey = Survey.objects.get(pk=request.GET.get("survey"))
         else:

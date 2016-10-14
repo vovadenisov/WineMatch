@@ -25,7 +25,7 @@
                         <h3>{{ wine.title }}</h3>
                     </div>
                     <div class="result-item__content__wine">
-                        <img src="{% static "img/wine_bottle.png" %}">
+                        <img src="/media/{{ wine.img }}">
                     </div>
                     <div class="result-item__content__wine-info">
                         <div class="result-item__content__wine-info__title">
@@ -54,7 +54,7 @@
                                 <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
                                     Пить с твердыми сырами и стейком
                                 </div>
-                                <div class=" result-item__content__wine-info__textresult-item__content__wine-info__text__text">
+                                <div class=" result-item__content__wine-info__text result-item__content__wine-info__text__text">
                                     <i class="fa fa-rub" aria-hidden="true"></i>В среднем 1000 Р. за бутылку
                                 </div>
                         {% block buttons %}

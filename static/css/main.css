@@ -419,7 +419,7 @@ body{
     display: none;
 }
 
-@media only screen and (max-width : 1000px) {
+@media only screen and (max-width : 640px) {
     .survey-wrapper {
         margin-top: 30%;
         font-size: 2em;
@@ -538,6 +538,9 @@ body{
 
     .result-item__content__wine-info__textresult-item__content__wine-info__text__text i{
         margin-right: 1em;
+    }
+    .result-item__content__wine-info__textresult-item__content__wine-info__text__text{
+        font-size: 1.2em!important;
     }
 
 }

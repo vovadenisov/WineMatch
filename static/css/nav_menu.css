@@ -114,11 +114,13 @@ section {
 	header {
 		position: absolute;
 		width: 100%;
+		text-align: center;
 	}
 	#logo{
 		margin-top: 1em;
-		font-size: 2.7em;
+		font-size: 1.2em;
 		margin-left: 35%;
+		width: auto;
 	}
 	.show-menu, .close-menu {
 		display: inline-block;
@@ -150,5 +152,11 @@ section {
 
 	.menu-active ul {
 		display: block;
+	}
+
+	.show-menu {
+		width: 1em;
+		height: 1em;
+		float: right;
 	}
 }
