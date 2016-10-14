@@ -5,6 +5,7 @@
 $(document).ready(function(){
     $(".show-menu").click(function (e) {
         e.preventDefault();
+        console.log(111);
         $(this).parent("nav").addClass("menu-active");
         $("#logo").hide();
         $(this).hide();
@@ -12,6 +13,7 @@ $(document).ready(function(){
     });
     $(".close-menu").click(function (e) {
         e.preventDefault();
+        console.log(111);
         $(this).parent("nav").removeClass("menu-active");
         $(this).hide();
         $("#logo").show();

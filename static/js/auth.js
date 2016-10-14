@@ -5,6 +5,7 @@
 
 $(document).ready(function(){
     $('.js-login').click(function(e){
+        console.log("2222 login");
         e.preventDefault();
         $(".js-login-block").dialog({
             width: 500,
@@ -16,6 +17,7 @@ $(document).ready(function(){
         apiId: 5630203
     });
     $(".js-vk-login").on("click", function(){
+        console.log("3333 js-vk")
         VK.Auth.login(
             function(data){
                 $.ajax({

@@ -91,6 +91,9 @@ section {
 	padding: 20px
 }
 
+.js-login{
+    cursor: pointer;
+}
 
 /*MEDIA QUERY*/
 @media only screen and (max-width : 800px) {
@@ -99,7 +102,7 @@ section {
 		position: absolute;
 		padding-top: 2em;
 		font-size: 1.7em;
-		background-color: black;
+		background-color: rgba(0,0,0,0.8);
 		top:0!important;
 		left: 0!important;;
 		width: 100%;
