@@ -56,6 +56,15 @@ nav {
 	margin-top: 1em;
 }
 
+nav li:first-child{
+    display: none;
+}
+
+nav li h1{
+    color: white;
+    font-size: 1.7em;
+}
+
 .show-menu, .close-menu {
 	display: none;
 	width: 2.7em;
@@ -84,13 +93,6 @@ li {
 	color: white;
 }
 
-section {
-	margin: 80px auto 40px;
-	max-width: 980px;
-	position: relative;
-	padding: 20px
-}
-
 .js-login{
     cursor: pointer;
 }
@@ -98,11 +100,16 @@ section {
 /*MEDIA QUERY*/
 @media only screen and (max-width : 800px) {
 
+    nav li:first-child{
+        display: block;
+    }
+
 	.top-menu{
 		position: absolute;
-		padding-top: 2em;
+		padding-top: 1em;
+        padding-bottom: 1em;
 		font-size: 1.7em;
-		background-color: rgba(0,0,0,0.8);
+		background-color: rgba(0,0,0,1);
 		top:0!important;
 		left: 0!important;;
 		width: 100%;
@@ -129,21 +136,8 @@ section {
 		display: inline-block;
 	}
 
-	nav ul, nav:active ul {
+	nav ul {
 		display: none;
-		position: absolute;
-		right: 20px;
-		top: 1em;
-		width: 100%;
-		border-radius: 4px 0 4px 4px;
-		background-color: rgb(0, 0, 0);
-		/* RGBa with 0.6 opacity */
-		background-color: rgba(0, 0, 0, 0.3);
-		/* For IE 5.5 - 7*/
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=rgba(0, 0, 0, 0.6), endColorstr=#99000000);
-		/* For IE 8*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)"
-
 	}
 
 	nav li {
@@ -162,6 +156,7 @@ section {
 		height: 2em;
 		position: absolute;
     	right: 2%;
+        z-index: 1;
 	}
 }
 
@@ -169,10 +164,7 @@ section {
 /*MEDIA QUERY*/
 @media only screen and (max-width : 500px) {
 
-
-
 	.top-menu{
-		padding-top: 2em;
 		font-size: 0.7em;
 	}
 
@@ -197,22 +189,6 @@ section {
 		display: inline-block;
 	}
 
-	nav ul, nav:active ul {
-		display: none;
-		position: absolute;
-		right: 20px;
-		top: 1em;
-		width: 100%;
-		border-radius: 4px 0 4px 4px;
-		background-color: rgb(0, 0, 0);
-		/* RGBa with 0.6 opacity */
-		background-color: rgba(0, 0, 0, 0.3);
-		/* For IE 5.5 - 7*/
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=rgba(0, 0, 0, 0.6), endColorstr=#99000000);
-		/* For IE 8*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)"
-
-	}
 
 	nav li {
 		text-align: center;

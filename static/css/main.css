@@ -40,7 +40,7 @@ body{
 }
 
 .survey-wrapper .answers{
-    margin-left: 15%;
+    margin-left: auto;
     width: 70%;
     margin-bottom: 40px;
 }
@@ -420,18 +420,64 @@ body{
         margin-top: 50%;
         margin-left: auto;
     }
+
+    .survey-wrapper{
+        margin-top: 30%;
+        min-height: auto;
+    }
+
+    .content-wrapper{
+        width: 80%;
+        margin-left: 5%;
+        margin-top: 7em;
+        padding: 5%;
+        font-size: 1.2em;
+    }
+
+    .start-now-button{
+        font-size: 2em;
+    }
+
+    .start-now{
+        width: auto;
+        margin-left: auto;
+    }
+
+
+    .auth-image{
+        display: none;
+    }
+
+    .auth-buttons{
+        margin-left: 0;
+
+    }
+
+    .b-button.vk-auth.js-vk-login{
+        width: auto;
+    }
 }
 
 @media only screen and (max-width : 500px) {
     .survey-wrapper {
         margin-top: 30%;
-        font-size: 2em;
+        font-size: 1em;
     }
+
+    .context-preview{
+        display: none;
+    }
+
+
+    .content-wrapper{
+        font-size: 0.65em;
+    }
+
 
     .answers .answer-item{
         width: 80%;
         margin-left: 10%;
-        height: 3em;
+        height: 2em;
         margin-bottom: 10%;
     }
 
@@ -440,7 +486,7 @@ body{
     }
 
     .answers .answer-item p{
-        margin-top: 1em;
+        margin-top: 0.4em;
     }
 
     .find-wine{

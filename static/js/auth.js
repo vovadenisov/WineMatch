@@ -5,11 +5,12 @@
 
 $(document).ready(function(){
     $('.js-login').click(function(e){
-        console.log("2222 login");
         e.preventDefault();
+        var max_width = $(window).width() * 0.8;
+        var max_height = $(window).height() * 0.8;
         $(".js-login-block").dialog({
-            width: 500,
-            height: 400
+            width: Math.min(max_width, 500),
+            height: Math.min(max_height, 400)
         });
     });
 
@@ -17,7 +18,6 @@ $(document).ready(function(){
         apiId: 5630203
     });
     $(".js-vk-login").on("click", function(){
-        console.log("3333 js-vk")
         VK.Auth.login(
             function(data){
                 $.ajax({
