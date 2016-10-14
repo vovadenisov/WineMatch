@@ -443,12 +443,12 @@ body{
     .find-wine{
         margin-top: 70%;
         width: 70%;
-        height: 4em;
+        height: 2em;
         margin-left: 15%;
     }
 
     .find-wine p{
-        font-size: 2em;
+        font-size: 1em;
     }
 
     .question-image{
