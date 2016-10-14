@@ -95,8 +95,13 @@ section {
 @media only screen and (max-width : 800px) {
 
 	.top-menu{
+		position: absolute;
 		padding-top: 2em;
-		font-size: 2em;
+		font-size: 1.7em;
+		background-color: black;
+		top:0!important;
+		left: 0!important;;
+		width: 100%;
 	}
 
 	.top-menu li{
@@ -160,13 +165,17 @@ section {
 /*MEDIA QUERY*/
 @media only screen and (max-width : 500px) {
 
+
+
 	.top-menu{
 		padding-top: 2em;
-		font-size: 2em;
+		font-size: 0.7em;
 	}
 
 	.top-menu li{
-		margin-bottom: 1em;
+		padding-top: 0.2em;
+		padding-bottom: 0.2em;
+		margin-bottom: 0.2em;
 	}
 
 	header {
@@ -204,7 +213,6 @@ section {
 	nav li {
 		text-align: center;
 		width: 100%;
-		padding: 10px 0;
 		margin: 0;
 	}
 
