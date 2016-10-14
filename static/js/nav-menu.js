@@ -4,14 +4,17 @@
 
 $(document).ready(function(){
     $(".show-menu").click(function (e) {
+        e.preventDefault();
         $(this).parent("nav").addClass("menu-active");
+        $("#logo").hide();
         $(this).hide();
         $(".close-menu").show()
     });
     $(".close-menu").click(function (e) {
+        e.preventDefault();
         $(this).parent("nav").removeClass("menu-active");
         $(this).hide();
+        $("#logo").show();
         $(".show-menu").show()
     });
-    $(".top-menu li").find()
 });

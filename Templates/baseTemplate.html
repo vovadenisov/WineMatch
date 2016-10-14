@@ -21,8 +21,8 @@
     <header>
 		<a href="/" id="logo">WineMatch</a>
 		<nav>
-			<a href="#" class="show-menu" id="menu-icon"></a>
-            <a href="#" class="close-menu" style="display: none"></a>
+			<a class="show-menu" id="menu-icon"></a>
+            <a class="close-menu" style="display: none"></a>
 			<ul class="top-menu">
                 <li><a href="{% url "surveys:info" %}">Кто мы</a></li>
                 {% if not request.user.is_authenticated or not request.user.vk_id %}
