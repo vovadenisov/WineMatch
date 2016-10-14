@@ -22,6 +22,7 @@ body{
     background: #1B0D07 url(/static/img/background-wine.jpg);
     background-size: cover;
     font-family: "Open Sans Condensed";
+    text-align: center;
 }
 
 .survey-wrapper{
@@ -132,23 +133,18 @@ body{
 .find-wine{
     display: inline-block;
     margin-top: 25%;
-    margin-left: 35%;
-    width: 30%;
-    height: 2em;
+    margin-left: auto;
     font-size: 2em;
     border: 3px solid white;
     text-align: center;
     color:white;
     font-weight: bolder;
     cursor: pointer;
+    padding: 0.5em;
 }
 
 .find-wine:hover{
     background-color: rgba(95, 95, 95, 0.3);
-}
-
-.find-wine p{
-    margin-top: 0.6em;
 }
 
 .login-block{
@@ -419,7 +415,14 @@ body{
     display: none;
 }
 
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 800px) {
+    .find-wine{
+        margin-top: 50%;
+        margin-left: auto;
+    }
+}
+
+@media only screen and (max-width : 500px) {
     .survey-wrapper {
         margin-top: 30%;
         font-size: 2em;
@@ -442,13 +445,7 @@ body{
 
     .find-wine{
         margin-top: 70%;
-        width: 70%;
-        height: 2em;
-        margin-left: 15%;
-    }
-
-    .find-wine p{
-        font-size: 1em;
+        margin-left: auto;
     }
 
     .question-image{
