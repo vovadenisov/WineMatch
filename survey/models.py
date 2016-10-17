@@ -26,7 +26,7 @@ class Question(models.Model):
         return self.question_text
 
     def get_answers(self):
-        return self.answer_set.all()
+        answers = self.answer_set.all()
 
 class Country(models.Model):
     name = models.CharField(max_length=100, unique=True)

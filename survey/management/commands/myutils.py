@@ -88,7 +88,7 @@ class Command(BaseCommand):
                 q = Question(question_text=row[2], node=row[0])
                 try:
                     q.save()
-                    answers = {'Да': 1, 'Нет': 2, 'Все равно':3 }
+                    answers = {'Да': 1, 'Нет': 2}
                     for answer in answers.keys():
                         a = Answer(answer_text = answer, question = q, api_response = answers[answer])
                         try:

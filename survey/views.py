@@ -77,11 +77,10 @@ def survey(request):
     params = {
         "user_id": current_survey.pk,
     }
-    print(params)
     if answer_pk:
         params.update({"answer_id": answer_pk})
     match_response = requests.get('/'.join((settings.MATCH_URL,"next")), params=params)
-    print(match_response.text)
+    
     if not match_response.status_code == 200:
         return HttpResponseRedirect("/")
     match_response = json.loads(match_response.text)
@@ -95,7 +94,7 @@ def survey(request):
         q = Question.objects.get(node=node)
         context.update({
             "text": q.get_question(),
-            "answers": q.get_answers(),
+            "answers": question['answers'],#q.get_answers(),
             "survey": current_survey
         })
         if len(context["answers"]) > 2:
@@ -108,9 +107,14 @@ def survey(request):
             return HttpResponseRedirect("/")
         match_response = json.loads(match_response.text)
         wines_list = match_response["wines"]
-        wines = [_wine_description(Wine.objects.get(title=w['title'])) for w in wines_list]
+        wines = []
+        for wine in wines_list:
+           try:
+               wines.append(Wine.objects.get(title=wine['title']))
+           except Wine.DoesNotExist:
+               pass #its ok to loose some wine
         context.update({"wines": wines})
-        print(wines)
+
         return render_to_response(template_name="result.html", context=context)
 
 def _wine_description(wine):
