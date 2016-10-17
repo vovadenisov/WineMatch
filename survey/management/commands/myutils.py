@@ -110,8 +110,8 @@ def insert_contry(name):
 
 def create_one_wine(wine):
     c = Country.objects.get(name=wine[5])
-    path = 'wine/'+wine[15]
-    w = Wine(title = wine[0], img = path, colour =wine[2], type =wine[3], country = c, alcohol = wine[8], year = wine[10], stylistic = wine[11], description=wine[13], food = wine[14])
+    path = wine[15]
+    w = Wine(title = wine[0], img = path, color =wine[2], type =wine[3], country = c, alcohol = wine[8], year = wine[10], stylistic = wine[11], description=wine[13], food = wine[14])
     try:
         w.save()
     except Exception as e:

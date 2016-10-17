@@ -6,7 +6,8 @@ from django.db import models
 
 # Create your models here.
 from django.utils import timezone
-
+from survey.models import Wine, Favorites
+#from favorites.models import Favorites
 
 class UserModel(AbstractBaseUser):
     username = models.CharField(max_length=255, unique=True)
@@ -19,10 +20,14 @@ class UserModel(AbstractBaseUser):
     photo = models.CharField(default="", blank=True, null=True, max_length=255)
     get_notify = models.BooleanField(default=True, verbose_name=u"Получает оповещения")
     vk_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    faworits = models.ManyToManyField(Wine, through=Favorites, blank=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
+
+    def get_favorits(self):
+        return self.favorites_set.all()
 
     def get_short_name(self):
         return self.username
@@ -47,3 +52,4 @@ class UserModel(AbstractBaseUser):
             except PermissionDenied:
                 return False
         return False
+

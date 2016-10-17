@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from survey.views import main, survey, survey_yesno, info, result, favorite
+from survey.views import main, survey, survey_yesno, info, result , favorite
 
 urlpatterns = [
     url(r'^$', main, name="main"),

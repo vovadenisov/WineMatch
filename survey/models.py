@@ -55,3 +55,8 @@ class Answer(models.Model):
     answer_text = models.CharField(max_length=100)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
     api_response = models.IntegerField(default=0)
+
+class Favorites(models.Model):
+    user = models.ForeignKey('users.UserModel')
+    wine = models.ForeignKey(Wine)
+    rating = models.IntegerField(default=0)

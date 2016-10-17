@@ -1,8 +1,9 @@
 import json
 
 from django.conf import settings
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render_to_response
+from users.models import UserModel
 import requests
 
 
@@ -141,4 +142,17 @@ def result(request):
 
 
 def favorite(request):
-    return render_to_response(template_name="favorite.html", context={"request":request})
+    print('faborite')
+    if request.user.is_authenticated():
+        print(request.user)
+        u = UserModel.objects.get(username=request.user)
+        favorites = u.get_favorits()
+        wines = [f.wine for f in favorites]
+        context = {
+            "request": request,
+            "wines": wines
+        }
+        return render_to_response(template_name="favorite.html", context=context)
+    else:
+        return HttpResponseForbidden()
+
