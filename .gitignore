@@ -1,2 +1,4 @@
 *.pyc
 .idea
+survey/migrations/*
+feedback/migrations/*
