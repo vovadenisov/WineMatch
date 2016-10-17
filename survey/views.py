@@ -80,8 +80,7 @@ def survey(request):
     if answer_pk:
         params.update({"answer_id": answer_pk})
     print(settings.MATCH_URL)
-    #match_response = requests.get(settings.MATCH_URL, params=params)
-    match_response = requests.get('http://127.0.0.1:8000/api/v1/next/', params=params)
+    match_response = requests.get(settings.MATCH_URL, params=params)
     print(match_response.text)
     if not match_response.status_code == 200:
         return HttpResponseRedirect("/")
@@ -102,11 +101,9 @@ def survey(request):
         if len(context["answers"]) > 2:
             return render_to_response(template_name="survey.html", context=context)
         else:
-            print('aaa')
-            #return render_to_response(template_name="yesno.html", context=context)
+            return render_to_response(template_name="yesno.html", context=context)
     else:
-        url = 'http://127.0.0.1:8000/api/v1/wine_list/'+str(current_survey.pk)+'/'
-        print(url)
+        url = 'http://p30112.lab1.stud.tech-mail.ru/api/v1/wine_list/'+str(current_survey.pk)+'/'
         match_response = requests.get(url)
         if not match_response.status_code == 200:
             return HttpResponseRedirect("/")
