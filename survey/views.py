@@ -30,7 +30,6 @@ def survey(request):
     params = {
         "user_id": current_survey.pk,
     }
-    print(params)
     if answer_pk:
         params.update({"answer_id": answer_pk})
     print(settings.MATCH_URL)
@@ -75,3 +74,6 @@ def result(request):
 
 def favorite(request):
     return render_to_response(template_name="favorite.html", context={"request":request})
+
+def feedback(request):
+    return render_to_response(template_name="feedbackform.html", context={"request":request})

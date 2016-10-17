@@ -1,0 +1,55 @@
+{% extends "baseTemplate.html" %}
+{% load staticfiles %}
+
+{% block script %}
+    <script src="{% static "slick/slick.min.js" %}"></script>
+    <script src="{% static "js/result.js" %}"></script>
+    <link href="{% static "slick/slick.css" %}" type="text/css" rel="stylesheet">
+    <link href="{% static "css/flags.css"%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "fontawesome/css/font-awesome.min.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="result-wrapper">
+        <div class="result-item js-result-item">
+            <div class="result-item__title">
+                <h2>Вам понравилось?</h2>
+            </div>
+
+            <div class="result-item__content">
+                <div class="result-item__content__wine">
+                    <img src="{% static "img/wine_bottle.png" %}">
+                </div>
+                <div class="result-item__content__wine-info">
+                    <div class="result-item__content__wine-info__title">
+                        <h3>вино dbyj cegth dbyj 1945г</h3>
+                    </div>
+                    {% block grade %}
+                    {% endblock %}
+                    <div class="favorite-item__textarea">
+                        <textarea placeholder="Оставьте свой комментарий"></textarea>
+                    </div>
+                    {% block buttons %}
+                        <div class="result-item__content__wine-info__select">
+                            <div class="grade">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    {% endblock %}
+                    <div class="favorite-item__content__wine-info__select">
+                        <a class="js-response b-button get-it" data-response="3">Не стал пробовать</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="result-item__content__wine-info__select-mobile">
+                <a class="js-see-more b-button see-more">Посмотреть еще</a>
+                <a class="js-get-it b-button get-it">Я возьму!</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
