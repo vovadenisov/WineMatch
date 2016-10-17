@@ -1,0 +1,10 @@
+[database_default]
+DATABASE_BACKEND=django.db.backends.mysql
+DATABASE_NAME=winematch
+DATABASE_USER=root
+DATABASE_PASSWORD=Ahjai7ch
+DATABASE_HOST=localhost
+DATABASE_PORT=3306
+
+[match_system]
+BASE_URL=/

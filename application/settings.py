@@ -61,7 +61,8 @@ INSTALLED_APPS = [
 CREATED_APPS = [
     'users',
     'survey',
-    'wine'
+    'wine',
+    'feedback'
 ]
 
 INSTALLED_APPS += CREATED_APPS

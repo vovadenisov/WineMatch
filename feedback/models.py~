@@ -1,0 +1,22 @@
+from django.db import models
+
+class FeedbackManager(models.Manager):
+    
+class Feedback(models.Model):
+    # логика ревью: в момент выбора пользователем вина созданем пустую модель ревью. 
+    # Далее во вьюшке чекаем, есть ли пустые модели и показываем модалки для них.
+    
+    user = models.ForeignKey('users.UserModel', on_delete=models.CASCADE)
+    wine = models.ForeignKey('survey.Wine', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True) #время выбора вина на ревью
+    completed_at = models.DateTimeField() #время написания ревью
+    rating = models.IntegerField(null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
+    
+    has_answered = models.BooleanField(default=False)
+    has_declined = models.BooleanField(default=False)
+    
+    objects = FeedbackManager()
+    
+    
+    
