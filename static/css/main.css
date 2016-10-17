@@ -22,6 +22,7 @@ body{
     background: #1B0D07 url(/static/img/background-wine.jpg);
     background-size: cover;
     font-family: "Open Sans Condensed";
+    text-align: center;
 }
 
 .survey-wrapper{
@@ -39,7 +40,7 @@ body{
 }
 
 .survey-wrapper .answers{
-    margin-left: 15%;
+    margin-left: auto;
     width: 70%;
     margin-bottom: 40px;
 }
@@ -132,23 +133,18 @@ body{
 .find-wine{
     display: inline-block;
     margin-top: 25%;
-    margin-left: 35%;
-    width: 30%;
-    height: 2em;
+    margin-left: auto;
     font-size: 2em;
     border: 3px solid white;
     text-align: center;
     color:white;
     font-weight: bolder;
     cursor: pointer;
+    padding: 0.5em;
 }
 
 .find-wine:hover{
     background-color: rgba(95, 95, 95, 0.3);
-}
-
-.find-wine p{
-    margin-top: 0.6em;
 }
 
 .login-block{
@@ -419,16 +415,69 @@ body{
     display: none;
 }
 
-@media only screen and (max-width : 1000px) {
-    .survey-wrapper {
+@media only screen and (max-width : 800px) {
+    .find-wine{
+        margin-top: 50%;
+        margin-left: auto;
+    }
+
+    .survey-wrapper{
         margin-top: 30%;
+        min-height: auto;
+    }
+
+    .content-wrapper{
+        width: 80%;
+        margin-left: 5%;
+        margin-top: 7em;
+        padding: 5%;
+        font-size: 1.2em;
+    }
+
+    .start-now-button{
         font-size: 2em;
     }
+
+    .start-now{
+        width: auto;
+        margin-left: auto;
+    }
+
+
+    .auth-image{
+        display: none;
+    }
+
+    .auth-buttons{
+        margin-left: 0;
+
+    }
+
+    .b-button.vk-auth.js-vk-login{
+        width: auto;
+    }
+}
+
+@media only screen and (max-width : 500px) {
+    .survey-wrapper {
+        margin-top: 30%;
+        font-size: 1em;
+    }
+
+    .context-preview{
+        display: none;
+    }
+
+
+    .content-wrapper{
+        font-size: 0.65em;
+    }
+
 
     .answers .answer-item{
         width: 80%;
         margin-left: 10%;
-        height: 3em;
+        height: 2em;
         margin-bottom: 10%;
     }
 
@@ -437,18 +486,12 @@ body{
     }
 
     .answers .answer-item p{
-        margin-top: 1em;
+        margin-top: 0.4em;
     }
 
     .find-wine{
         margin-top: 70%;
-        width: 70%;
-        height: 4em;
-        margin-left: 15%;
-    }
-
-    .find-wine p{
-        font-size: 2em;
+        margin-left: auto;
     }
 
     .question-image{
@@ -538,6 +581,9 @@ body{
 
     .result-item__content__wine-info__textresult-item__content__wine-info__text__text i{
         margin-right: 1em;
+    }
+    .result-item__content__wine-info__textresult-item__content__wine-info__text__text{
+        font-size: 1.2em!important;
     }
 
 }

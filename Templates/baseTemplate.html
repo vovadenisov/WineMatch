@@ -1,6 +1,7 @@
 {% load staticfiles %}
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static "css/nav_menu.css" %}">
     <link rel="stylesheet" href="{% static "jquery-ui/jquery-ui.css" %}">
     <link rel="stylesheet" href="{% static "css/main.css" %}">
@@ -20,12 +21,13 @@
     <header>
 		<a href="/" id="logo">WineMatch</a>
 		<nav>
-			<a href="#" class="show-menu" id="menu-icon"></a>
-            <a href="#" class="close-menu" style="display: none"></a>
+			<a class="show-menu" id="menu-icon"></a>
+            <a class="close-menu" style="display: none"></a>
 			<ul class="top-menu">
+                <li><h1>WineMatch</h1></li>
                 <li><a href="{% url "surveys:info" %}">Кто мы</a></li>
                 {% if not request.user.is_authenticated or not request.user.vk_id %}
-                    <li><a href="" class="js-login">Войти</a></li>
+                    <li><a class="js-login">Войти</a></li>
                 {% else %}
                     <li><a href="{% url "surveys:favorite" %}">Избранное</a></li>
                     <li><a href="{% url "users:logout" %}">Выйти</a></li>

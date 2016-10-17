@@ -81,7 +81,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'application.urls'
 
 TEMPLATE_DIRS = [
-    SOURCE_ROOT + '/templates/',
+    SOURCE_ROOT + 'Templates/',
 ]
 
 TEMPLATES = [
