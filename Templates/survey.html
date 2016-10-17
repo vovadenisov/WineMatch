@@ -11,8 +11,8 @@
         </div>
         <div class="answers item">
             {% for answer in answers %}
-                <a href="{% url "surveys:survey_next" %}?answer={{ answer.id }}&survey={{ survey.id }}" class="answer-item">
-                    <p>{{ answer.text }}</p>
+                <a href="{% url "surveys:survey_next" %}?answer={{ answer.api_response }}&survey={{ survey.id }}" class="answer-item">
+                    <p>{{ answer.answer_text }}</p>
                 </a>
             {% endfor %}
         </div>

@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^yes_no/$', survey_yesno, name="survey_next_yesno"),
     url(r'^info/$', info, name="info"),
     url(r'^result/$', result, name="result"),
-    url(r'^favorite/$', favorite, name="favorite")
+    url(r'^favorite/$', favorite, name="favorite"),
 ]
