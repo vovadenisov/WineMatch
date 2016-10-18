@@ -59,16 +59,23 @@
                                 </div>
                         {% block buttons %}
                             <div class="result-item__content__wine-info__select">
-                                <a class="js-see-more b-button see-more">Посмотреть еще</a>
+                                {% if forloop.last %}
                                 <a class="js-get-it b-button get-it">Я возьму!</a>
+                                {% else %}
+                                <a class="js-see-more b-button see-more">Посмотреть еще</a>
+                                <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
+                                {% endif %}
                             </div>
                         {% endblock %}
                     </div>
                 </div>
-            <div class="result-item__content__wine-info__select-mobile">
-                <a class="js-see-more b-button see-more">Посмотреть еще</a>
-                <a class="js-get-it b-button get-it">Я возьму!</a>
-            </div>
+                <div class="result-item__content__wine-info__select-mobile">
+                    {% if forloop.last %}
+                    <a class="js-see-more b-button see-more">Посмотреть еще</a>
+                    {% else %}
+                    <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
+                    {% endif %}
+                </div>
             </div>
         {% endfor %}
     </div>

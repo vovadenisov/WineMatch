@@ -12,7 +12,7 @@ class Feedback(models.Model):
     user = models.ForeignKey('users.UserModel', on_delete=models.CASCADE)
     wine = models.ForeignKey('survey.Wine', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True) #время выбора вина на ревью
-    completed_at = models.DateTimeField() #время написания ревью
+    completed_at = models.DateTimeField(null=True, blank=True) #время написания ревью
     rating = models.IntegerField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
     

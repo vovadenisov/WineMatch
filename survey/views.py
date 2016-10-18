@@ -1,16 +1,18 @@
 import json
+import requests
 
 from django.conf import settings
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render_to_response
+
 from users.models import UserModel
-import requests
-
-
-# Create your views here.
+from feedback.models import Feedback
 from survey.models import Survey, Question, Wine
 
 def main(request):
+    #if request.user.is_authenticated():
+    #    feedback = Feedback.objects.get_last_review(request.user.id) 
+    #    if feedback: return HttpResponseRedirect("/feedback")    
     return render_to_response(template_name="main.html", context={"request":request})
 
 '''def survey(request):
@@ -29,7 +31,6 @@ def main(request):
     params = {
         "user_id": current_survey.pk,
     }
-    print(params)
     if answer_pk:
         params.update({"answer_id": answer_pk})
     print(settings.MATCH_URL)
@@ -60,6 +61,10 @@ def main(request):
                 return render_to_response(template_name="yesno.html", context=context)'''
 
 def survey(request):
+    if request.user.is_authenticated():
+        feedback = Feedback.objects.get_last_review(request.user.id) 
+        if feedback: return HttpResponseRedirect("/feedback")
+        
     answer_pk = request.GET.get("answer")
     print(answer_pk)
     if not answer_pk:
@@ -144,7 +149,6 @@ def result(request):
 
 
 def favorite(request):
-    print('faborite')
     if request.user.is_authenticated():
         print(request.user)
         u = UserModel.objects.get(username=request.user)
@@ -157,4 +161,12 @@ def favorite(request):
         return render_to_response(template_name="favorite.html", context=context)
     else:
         return HttpResponseForbidden()
+
+
+def feedback(request):
+    if not request.user.is_authenticated():
+        return HttpResponseForbidden()
+    feedback = Feedback.objects.get_last_review(request.user.id) 
+    if not feedback: return HttpResponseRedirect("/")
+    return render_to_response(template_name="feedbackform.html", context={"feedback": feedback})
 
