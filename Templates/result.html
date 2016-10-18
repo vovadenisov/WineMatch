@@ -10,14 +10,18 @@
 {% endblock %}
 
 {% block content %}
-    <i class="js-slick-navigation-left slick-navigation slick-navigation-left fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+    {% if wines %}
+    <i class="js-hide-on-selection js-slick-navigation-left slick-navigation slick-navigation-left fa fa-arrow-circle-o-left" aria-hidden="true"></i>
     <div class="result-wrapper">
         {% for wine in wines %}
             <div class="result-item js-result-item">
                 {% block title %}
-                    <div class="result-item__title">
+                    <div class="js-hide-on-selection result-item__title">
                         <h2>Уверены, вам понравится</h2>
                     </div>
+                    <div class="js-selected result-item__title" style="display: none;">
+                        <h2>Отличный выбор!</h2>
+                    </div>                    
                 {% endblock %}
 
                 <div class="result-item__content">
@@ -58,7 +62,7 @@
                                     <i class="fa fa-rub" aria-hidden="true"></i>В среднем 1000 Р. за бутылку
                                 </div>
                         {% block buttons %}
-                            <div class="result-item__content__wine-info__select">
+                            <div class="js-hide-on-selection result-item__content__wine-info__select">
                                 {% if forloop.last %}
                                 <a class="js-get-it b-button get-it">Я возьму!</a>
                                 {% else %}
@@ -66,18 +70,30 @@
                                 <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                                 {% endif %}
                             </div>
+                            <div style="display: none;" class="js-selected result-item__content__wine-info__select">
+                                <a href="/" class="b-button see-more">На главную</a>
+                            </div>
                         {% endblock %}
                     </div>
                 </div>
-                <div class="result-item__content__wine-info__select-mobile">
+                <div class="js-hide-on-selection result-item__content__wine-info__select-mobile">
                     {% if forloop.last %}
-                    <a class="js-see-more b-button see-more">Посмотреть еще</a>
+                    <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                     {% else %}
+                    <a class="js-see-more b-button see-more">Посмотреть еще</a>
                     <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                     {% endif %}
+                </div>
+                <div style="display: none;" class="js-selected result-item__content__wine-info__select-mobile">
+                    <a href="/" class="b-button see-more">На главную</a>
                 </div>
             </div>
         {% endfor %}
     </div>
-    <i class="js-slick-navigation-right slick-navigation slick-navigation-right fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+    <i class="js-hide-on-selection js-slick-navigation-right slick-navigation slick-navigation-right fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+    {% else %}
+    <div class="feedback-wrapper-thx">
+        <h2>Ой, здесь ничего нет :(</h2>
+    </div>
+    {% endif %}
 {% endblock %}

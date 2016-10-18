@@ -58,7 +58,10 @@ function csrfSafeMethod(method) {
              url: '/feedback/ajax/selectwine/',
              data: 'wine_id=' + $(ev.target).data('id'),
              success: function() {
-                 console.log('success');
+                 $('.js-selected').show();
+                 $('.js-hide-on-selection').hide();
+                 $(".result-wrapper").unslick();
+                 //console.log('success');
              },
              error: function() {
                  console.log('error');
@@ -74,6 +77,7 @@ function csrfSafeMethod(method) {
     
     //feedback page
     var rating = 0;
+    var baseUrl = window.location.protocol + "//" + window.location.host;
     $('.js-answer').click(function(ev) {
         ev.preventDefault();
         $.ajax({
@@ -81,7 +85,8 @@ function csrfSafeMethod(method) {
              url: '/feedback/ajax/answer/',
              data: 'rating=' + rating + '&comment=' + ($('.js-comment').val() || ''),
              success: function() {
-                 console.log('success');
+                 window.location.href = baseUrl + '/thnx/';
+                 //console.log('success');
              },
              error: function() {
                  console.log('error');
@@ -95,7 +100,7 @@ function csrfSafeMethod(method) {
              type: "POST",
              url: '/feedback/ajax/decline/',
              success: function() {
-                 console.log('success');
+                 window.location.href = baseUrl + '/thnx/?declined=true';
              },
              error: function() {
                  console.log('error');

@@ -1,4 +1,5 @@
-from django.db import models
+from django.db import models, IntegrityError
+from survey.models import Wine, Favorites
 
 class FeedbackManager(models.Manager):
     def get_last_review(self, user_id):
@@ -12,7 +13,7 @@ class Feedback(models.Model):
     user = models.ForeignKey('users.UserModel', on_delete=models.CASCADE)
     wine = models.ForeignKey('survey.Wine', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True) #время выбора вина на ревью
-    completed_at = models.DateTimeField() #время написания ревью
+    completed_at = models.DateTimeField(null=True, blank=True) #время написания ревью
     rating = models.IntegerField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
     
@@ -21,5 +22,12 @@ class Feedback(models.Model):
     
     objects = FeedbackManager()
     
-    
+    def convert_to_fav(self):
+        try:
+            print(Favorites.objects.create(user = self.user, wine = self.wine, rating = self.rating))
+        except IntegrityError:
+            Favorites.objects.filter(user = self.user, wine = self.wine).update(rating = self.rating)
+            
+    def delete_fav_if_exists(self):
+        Favorites.objects.filter(user = self.user, wine = self.wine).delete()      
     

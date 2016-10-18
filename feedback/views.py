@@ -6,6 +6,8 @@ from django.http import HttpResponseNotAllowed, HttpResponseForbidden, JsonRespo
 from feedback.models import Feedback
 from survey.models import Wine
 
+FAV_TRESHOLD = 3
+
 def _validate_request_method(request):
     if request.method != "POST": return HttpResponseNotAllowed()
     if not request.user.is_authenticated(): return HttpResponseForbidden()
@@ -20,7 +22,12 @@ def _error_json(message, **kwargs):
 
 def _validate_review_form(post_params):
     if not post_params.get('rating'): return None, ['rating']
-    return {key: post_params.get(key) for key in ['rating', 'comment'] if post_params.get(key)}, None
+    data = {key: post_params.get(key) for key in ['rating', 'comment'] if post_params.get(key)}
+    try:
+        data['rating'] = int(data['rating'])
+    except (ValueError, TypeError):
+        return None, ['rating']
+    return data, None
     
 def _ok_json():
     return JsonResponse({'result': True}) 
@@ -37,7 +44,12 @@ def answer_review(request):
     data4update.update({'has_answered': True, 'completed_at': datetime.now()})
       
     Feedback.objects.filter(id = review.id).update(**data4update)
-    
+    if data4update['rating'] > FAV_TRESHOLD:
+        review.rating = data4update['rating'] 
+        review.convert_to_fav() 
+    else:
+        review.delete_fav_if_exists()
+        
     return _ok_json()
     
 def decline_review(request):

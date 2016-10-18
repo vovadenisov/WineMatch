@@ -150,14 +150,14 @@ def result(request):
 
 def favorite(request):
     if request.user.is_authenticated():
-        print(request.user)
         u = UserModel.objects.get(username=request.user)
         favorites = u.get_favorits()
-        wines = [f.wine for f in favorites]
+        #wines = [f.wine for f in favorites]
         context = {
             "request": request,
-            "wines": wines
+            "wines": favorites
         }
+        print(context)
         return render_to_response(template_name="favorite.html", context=context)
     else:
         return HttpResponseForbidden()
@@ -170,3 +170,5 @@ def feedback(request):
     if not feedback: return HttpResponseRedirect("/")
     return render_to_response(template_name="feedbackform.html", context={"feedback": feedback})
 
+def thnx_for_feedback(request):
+    return render_to_response(template_name="thx_for_feedback.html", context={'declined_flag': request.GET.get('declined')})

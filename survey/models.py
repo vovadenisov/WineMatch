@@ -57,6 +57,38 @@ class Answer(models.Model):
     api_response = models.IntegerField(default=0)
 
 class Favorites(models.Model):
+    wine_attrs = {
+        'color': 1,
+        'type': 1,
+        'description': 1,
+        'stylistic': 1,
+        'food': 1,
+        'alcohol': 1,
+        'year': 1,
+        'price': 1,
+        'title': 1,
+        'img': 1,
+        'country': 1,
+    }
+    
     user = models.ForeignKey('users.UserModel')
     wine = models.ForeignKey(Wine)
     rating = models.IntegerField(default=0)
+    
+    class Meta:
+        unique_together = ('user', 'wine',)
+        
+    #грязный хак для отображения и вина и избранного в одном шаблоне
+    def __getattr__(self, attr):
+        if self.wine_attrs.get(attr): 
+            if attr == 'country': return self.wine.country.name
+            return getattr(self.wine, attr)
+        return super(Favorites, self).__getattr__(attr)
+            
+    @property
+    def full_stars(self):
+        return range(self.rating)
+        
+    @property
+    def emplty_stars(self):
+        return range(5 - self.rating)
