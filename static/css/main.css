@@ -237,6 +237,7 @@ body{
     margin-top: 5px;
 }
 
+.feedback-wrapper-thx,
 .result-wrapper{
     width: 70%;
     margin-left: 15%;
@@ -438,6 +439,12 @@ body{
 
 .grade i{
     cursor: pointer;
+}
+
+.feedback-wrapper-thx h2{
+    margin-top: 200px;
+    color: white;
+    font-size: 1.7em;
 }
 
 @media only screen and (max-width : 800px) {
