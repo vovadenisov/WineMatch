@@ -15,8 +15,8 @@ class Survey(models.Model):
 
 class Question(models.Model):
     question_text = models.CharField(max_length=250, unique=True, default='')
-    node = models.CharField(max_length=250)
-    gender = models.NullBooleanField(default=None)
+    node = models.CharField(max_length=250, verbose_name="Нода для графа")
+    gender = models.NullBooleanField(default=None, verbose_name="Пол юзера")
     img = models.ImageField(default='korica.jpg', upload_to='img/')
 
     def get_node(self):
@@ -41,14 +41,14 @@ class Country(models.Model):
 
 class Wine(models.Model):
     color = models.CharField(max_length=10)
-    type = models.CharField(max_length=50)
-    description = models.CharField(max_length=2000)
-    stylistic = models.CharField(max_length=1000)
-    food = models.CharField(max_length=2000)
-    alcohol = models.CharField(max_length=255, null=True)
-    year = models.IntegerField(null=True)
-    price = models.FloatField(default=0)
-    title = models.CharField(max_length=255, unique=True)
+    type = models.CharField(max_length=50, verbose_name="Сладость")
+    description = models.CharField(max_length=2000, verbose_name="Подробное описание")
+    stylistic = models.CharField(max_length=1000, verbose_name="Краткое описание")
+    food = models.CharField(max_length=2000, verbose_name="Сочетающаяся еда")
+    alcohol = models.CharField(max_length=255, null=True, verbose_name="Процент алкоголя")
+    year = models.IntegerField(null=True, verbose_name="Год производства")
+    price = models.FloatField(default=0, verbose_name="Цена")
+    title = models.CharField(max_length=255, unique=True, verbose_name="Название")
     img = models.ImageField()
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
@@ -80,7 +80,7 @@ class Favorites(models.Model):
     
     user = models.ForeignKey('users.UserModel')
     wine = models.ForeignKey(Wine)
-    rating = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0, verbose_name="Оценка от пользователя")
     
     class Meta:
         unique_together = ('user', 'wine',)
