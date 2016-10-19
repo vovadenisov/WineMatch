@@ -19,8 +19,8 @@
                     <div class="js-hide-on-selection result-item__title">
                         <h2>Уверены, вам понравится</h2>
                     </div>
-                    <div class="js-selected result-item__title" style="opacity: 0;">
-                        <h2>Отличный выбор!</h2>
+                    <div class="js-selected result-item__title">
+                        <h2 style="display: none">Отличный выбор!</h2>
                     </div>                    
                 {% endblock %}
 
@@ -64,14 +64,14 @@
                         {% block buttons %}
                             <div class="js-hide-on-selection result-item__content__wine-info__select">
                                 {% if forloop.last %}
-                                <a class="js-get-it b-button get-it">Я возьму!</a>
+                                <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                                 {% else %}
                                 <a class="js-see-more b-button see-more">Посмотреть еще</a>
                                 <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                                 {% endif %}
                             </div>
-                            <div style="opacity: 0;" class="js-selected result-item__content__wine-info__select">
-                                <a href="/" class="b-button see-more">На главную</a>
+                            <div class="js-selected result-item__content__wine-info__select">
+                                <a style="display: none" href="/" class="b-button see-more">На главную</a>
                             </div>
                         {% endblock %}
                     </div>
@@ -84,8 +84,8 @@
                     <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                     {% endif %}
                 </div>
-                <div style="opacity: 0;" class="js-selected result-item__content__wine-info__select-mobile">
-                    <a href="/" class="b-button see-more">На главную</a>
+                <div class="js-selected result-item__content__wine-info__select-mobile">
+                    <a style="display: none" href="/" class="b-button see-more">На главную</a>
                 </div>
             </div>
         {% endfor %}
