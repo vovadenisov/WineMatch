@@ -273,6 +273,10 @@ body{
     max-width: 20%;
 }
 
+.result-item__content__wine img{
+    margin-left: 70%;
+}
+
 .result-item__content__wine-info{
     float: left;
     width: 60%;
