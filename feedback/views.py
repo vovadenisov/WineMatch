@@ -1,6 +1,5 @@
-from datetime import datetime
+from django.utils import timezone
 
-from django.shortcuts import render_to_response
 from django.http import HttpResponseNotAllowed, HttpResponseForbidden, JsonResponse
 
 from feedback.models import Feedback
@@ -9,7 +8,7 @@ from survey.models import Wine
 FAV_TRESHOLD = 3
 
 def _validate_request_method(request):
-    if request.method != "POST": return HttpResponseNotAllowed()
+    if request.method != "POST": return HttpResponseNotAllowed('Only POST here')
     if not request.user.is_authenticated(): return HttpResponseForbidden()
  
 def _error_json(message, **kwargs):
@@ -41,7 +40,7 @@ def answer_review(request):
     
     data4update, error_fields = _validate_review_form(request.POST)
     if error_fields: return _error_json('Заполните все обязательные поля', fields=error_fields)
-    data4update.update({'has_answered': True, 'completed_at': datetime.now()})
+    data4update.update({'has_answered': True, 'completed_at': timezone.now()})
       
     Feedback.objects.filter(id = review.id).update(**data4update)
     if data4update['rating'] > FAV_TRESHOLD:
@@ -59,7 +58,7 @@ def decline_review(request):
     review = Feedback.objects.get_last_review(request.user.id)
     if not review: return _error_json('Нет выборок для ревью')
 
-    Feedback.objects.filter(id = review.id).update(completed_at = datetime.now(), has_declined = True)
+    Feedback.objects.filter(id = review.id).update(completed_at=timezone.now(), has_declined = True)
     
     return _ok_json()
         
