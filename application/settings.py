@@ -161,7 +161,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = 'http://p30110.lab1.stud.tech-mail.ru/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = config.get('media', 'MEDIA_ROOT')
 STATICFILES_DIRS = os.path.join(SOURCE_ROOT, "static"),
 
