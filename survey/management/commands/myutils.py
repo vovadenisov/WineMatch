@@ -53,7 +53,6 @@ class Command(BaseCommand):
         offset = 0
         length = 100
         tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
-        print(tuples[0])
         while len(tuples) > 0 and tuples[0]:
             for t in tuples:
                 insert_contry(t[5])
