@@ -96,7 +96,10 @@ def survey(request):
     is_end = match_response["is_end"]
     if not is_end:
         node = question["node"]
-        q = Question.objects.get(node=node)
+        try:
+            q = Question.objects.get(node=node)
+        except Question.DoesNotExist:
+            return HttpResponseRedirect("/")
         context.update({
             "text": q.get_question(),
             "answers": question['answers'],#q.get_answers(),

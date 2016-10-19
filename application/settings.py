@@ -102,6 +102,11 @@ WSGI_APPLICATION = 'application.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+TARANTOOL_URL = config.get('tarantool', 'URL')
+TARANTOOL_PORT = config.get('tarantool', 'PORT')
+TARANTOOL_USER = config.get('tarantool', 'USER')
+TARANTOOL_PASSWORD = config.get('tarantool', 'PASSWORD')
+
 DATABASES = {
     'default': {
         'ENGINE': config.get('database_default', 'DATABASE_BACKEND'),

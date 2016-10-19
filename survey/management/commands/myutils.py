@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+
 __author__ = 'alla'
 from django.core.management.base import BaseCommand
 from survey.models import Wine, Country, Question, Answer
@@ -6,10 +8,10 @@ import csv
 import tarantool
 
 TARANTOOL_CONNCTION = {
-    'user': 'root',
-    'password': '1234',
-    'host': 'localhost',
-    'port': 3311
+    'user': settings.TARANTOOL_USER,
+    'password': settings.TARANTOOL_PASSWORD,
+    'host': settings.TARANTOOL_URL,
+    'port': settings.TARANTOOL_PORT
 }
 
 class Command(BaseCommand):
