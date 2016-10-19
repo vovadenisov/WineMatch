@@ -28,8 +28,10 @@ class Question(models.Model):
     def get_answers(self):
         answers = self.answer_set.all()
 
+
 class Country(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, verbose_name="название страны")
+    short_name = models.CharField(max_length=5, unique=True, null=True, blank=True, verbose_name="короткое название страны")
 
 
 class Wine(models.Model):
