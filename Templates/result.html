@@ -19,7 +19,7 @@
                     <div class="js-hide-on-selection result-item__title">
                         <h2>Уверены, вам понравится</h2>
                     </div>
-                    <div class="js-selected result-item__title" style="display: none;">
+                    <div class="js-selected result-item__title" style="opacity: 0;">
                         <h2>Отличный выбор!</h2>
                     </div>                    
                 {% endblock %}
@@ -45,7 +45,7 @@
                                     <span class="span-type dry icon"></span><span>{{ wine.sweetness }}</span>
                                 </div>
                                 <div class="result-item__content__wine-info__info__country">
-                                    <span class="flag flag-fr icon"></span><span>{{ wine.country }}</span>
+                                    <span class="flag flag-fr icon"></span><span>{{ wine.country.name }}</span>
                                 </div>
                                 <div class="result-item__content__wine-info__info__style">
                                     <i class="fa fa-glass result-item-style icon" aria-hidden="true"></i>
@@ -70,7 +70,7 @@
                                 <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                                 {% endif %}
                             </div>
-                            <div style="display: none;" class="js-selected result-item__content__wine-info__select">
+                            <div style="opacity: 0;" class="js-selected result-item__content__wine-info__select">
                                 <a href="/" class="b-button see-more">На главную</a>
                             </div>
                         {% endblock %}
@@ -84,7 +84,7 @@
                     <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
                     {% endif %}
                 </div>
-                <div style="display: none;" class="js-selected result-item__content__wine-info__select-mobile">
+                <div style="opacity: 0;" class="js-selected result-item__content__wine-info__select-mobile">
                     <a href="/" class="b-button see-more">На главную</a>
                 </div>
             </div>

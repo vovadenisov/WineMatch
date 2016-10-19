@@ -81,7 +81,7 @@ class Favorites(models.Model):
     #грязный хак для отображения и вина и избранного в одном шаблоне
     def __getattr__(self, attr):
         if self.wine_attrs.get(attr): 
-            if attr == 'country': return self.wine.country.name
+            #if attr == 'country': return self.wine.country.name
             return getattr(self.wine, attr)
         return super(Favorites, self).__getattr__(attr)
             

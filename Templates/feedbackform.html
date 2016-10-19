@@ -13,7 +13,7 @@
     <div class="result-wrapper">
         <div class="result-item js-result-item">
             <div class="result-item__title">
-                <h2>Вам понравилось?</h2>
+                <h2>Вам понравилось вино "{{ wine.title }}"?</h2>
             </div>
 
             <div class="result-item__content">
@@ -21,9 +21,9 @@
                     <img src="/media/{{ wine.img }}">
                 </div>
                 <div class="result-item__content__wine-info">
-                    <div class="result-item__content__wine-info__title">
-                        <h3>{{ wine.title }}</h3>
-                    </div>
+                    <!-- <div class="result-item__content__wine-info__title">
+                        <h3></h3>
+                    </div> -->
                     {% block grade %}
                     {% endblock %}
                     <div class="favorite-item__textarea">

@@ -58,7 +58,7 @@ function csrfSafeMethod(method) {
              url: '/feedback/ajax/selectwine/',
              data: 'wine_id=' + $(ev.target).data('id'),
              success: function() {
-                 $('.js-selected').show();
+                 $('.js-selected').css( "opacity", 1);
                  $('.js-hide-on-selection').hide();
                  $(".result-wrapper").unslick();
                  //console.log('success');
