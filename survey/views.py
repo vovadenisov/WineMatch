@@ -99,6 +99,7 @@ def survey(request):
         try:
             q = Question.objects.get(node=node)
         except Question.DoesNotExist:
+            print("Does Not Exist")
             return HttpResponseRedirect("/")
         context.update({
             "text": q.get_question(),
