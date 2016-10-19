@@ -12,13 +12,13 @@ class Feedback(models.Model):
     
     user = models.ForeignKey('users.UserModel', on_delete=models.CASCADE)
     wine = models.ForeignKey('survey.Wine', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True) #время выбора вина на ревью
-    completed_at = models.DateTimeField(null=True, blank=True) #время написания ревью
+    created_at = models.DateTimeField(verbose_name="Время выбора вина", auto_now_add=True)
+    completed_at = models.DateTimeField(verbose_name="Время создания отзыва", null=True, blank=True)
     rating = models.IntegerField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
     
-    has_answered = models.BooleanField(default=False)
-    has_declined = models.BooleanField(default=False)
+    has_answered = models.BooleanField(verbose_name="Пользователь оставил отзыв", default=False)
+    has_declined = models.BooleanField(verbose_name="Пользователь отказался осталвть отзыв", default=False)
     
     objects = FeedbackManager()
     
