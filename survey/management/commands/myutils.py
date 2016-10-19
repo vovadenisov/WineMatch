@@ -39,7 +39,7 @@ class Command(BaseCommand):
         self.create_formal_questions()
 
     def download_all_wines(self):
-        print('download ...')
+        print('download wine...')
         tnt = tarantool.connect(**TARANTOOL_CONNCTION)
         offset = 0
         length = 100
@@ -112,7 +112,15 @@ def insert_contry(name):
 def create_one_wine(wine):
     c = Country.objects.get(name=wine[5])
     path = wine[15]
-    w = Wine(title = wine[0], img = path, color =wine[2], type =wine[3], country = c, alcohol = wine[8], year = wine[10], stylistic = wine[11], description=wine[13], food = wine[14])
+    try:
+        food = wine[21]
+    except Exception:
+        food = None
+    try:
+        price = wine[22]
+    except Exception:
+        price = None
+    w = Wine(title = wine[0], img = path, color =wine[2], type =wine[3], country = c, alcohol = wine[8], year = wine[10], stylistic = wine[11], description=wine[13], food = food, price = price)
     try:
         w.save()
     except Exception as e:

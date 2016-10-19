@@ -126,7 +126,7 @@ def survey(request):
 def _wine_description(wine):
     return {
     "title": wine.get_name(),
-    "price": 1000,
+    "price": wine.price,
     'food': wine.food,
     "year": wine.year,
     "description": wine.description,
