@@ -80,14 +80,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'application.urls'
 
-TEMPLATE_DIRS = [
-    SOURCE_ROOT + 'Templates/',
-]
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': TEMPLATE_DIRS,
+        'DIRS': [SOURCE_ROOT + 'Templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
