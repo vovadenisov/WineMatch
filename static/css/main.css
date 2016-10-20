@@ -521,6 +521,10 @@ body{
 
     }
 
+    .feedback-item__content__wine img{
+        margin-left: 45%;
+    }
+
     .b-button.vk-auth.js-vk-login{
         width: auto;
     }
@@ -616,6 +620,10 @@ body{
         width: 60%;
         height: auto;
         margin-right: 0;
+    }
+
+    .feedback-item__content__wine img{
+        margin-left: 45%;
     }
 
     .feedback-item__content__wine-info__select{
