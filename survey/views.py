@@ -50,9 +50,10 @@ def survey(request):
         try:
             q = Question.objects.get(node=node)
         except Question.DoesNotExist:
-            print("Does Not Exist")
+            print("Does Not Exist: {}".format(q))
             return HttpResponseRedirect("/")
         context.update({
+            "image": q.img,
             "text": q.get_question(),
             "answers": question['answers'],#q.get_answers(),
             "survey": current_survey

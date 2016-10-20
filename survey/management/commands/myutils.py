@@ -120,7 +120,7 @@ class Command(BaseCommand):
         for block in request.iter_content(1024 * 8):
             if not block:
                 break
-        lf.write(block)
+            lf.write(block)
         
         return (file_name, files.File(lf))
         
@@ -139,6 +139,7 @@ class Command(BaseCommand):
                 except Question.DoesNotExist:
                     continue
                     
+                print(question.id)
                 if question_text:
                     question.question_text = question_text
                     
@@ -147,7 +148,7 @@ class Command(BaseCommand):
                     #print(img)
                     if not img: print('invalid url {}\n'.format(image))
                     question.img.save(*img)
-                    #print(question.img.path)
+                    print(question.img.path)
                 question.save()   
              
     
