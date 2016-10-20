@@ -56,10 +56,10 @@
                                     {{ wine.description }}
                                 </div>
                                 <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
-                                    Пить с твердыми сырами и стейком
+                                    {{ wine.food }}
                                 </div>
                                 <div class=" result-item__content__wine-info__text result-item__content__wine-info__text__text">
-                                    <i class="fa fa-rub" aria-hidden="true"></i>В среднем 1000 Р. за бутылку
+                                    <i class="fa fa-rub" aria-hidden="true"></i>В среднем {{ wine.price }} Р. за бутылку
                                 </div>
                         {% block buttons %}
                             <div class="js-hide-on-selection result-item__content__wine-info__select">
