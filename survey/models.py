@@ -58,6 +58,9 @@ class Wine(models.Model):
     def get_country(self):
         return self.country.name
 
+    def __str__(self):
+        return self.title
+
 
 class Answer(models.Model):
     answer_text = models.CharField(max_length=100)

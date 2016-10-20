@@ -516,6 +516,11 @@ body{
 }
 
 @media only screen and (max-width : 500px) {
+    .grade i{
+        font-size: 1em;
+        margin-left: 1px;
+    }
+
     .survey-wrapper {
         margin-top: 30%;
         font-size: 1em;
