@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
-
 __author__ = 'alla'
-from django.core.management.base import BaseCommand
-from survey.models import Wine, Country, Question, Answer
 import csv
 import tarantool
+import requests
+import tempfile
+
+from django.core.management.base import BaseCommand
+from django.core import files
+from django.conf import settings
+
+from survey.models import Wine, Country, Question, Answer
 
 TARANTOOL_CONNCTION = {
     'user': settings.TARANTOOL_USER,
@@ -27,6 +31,8 @@ class Command(BaseCommand):
             self.download_taste_questions()
         elif options['command'] == 'formal_question':
             self.create_formal_questions()
+        elif options['command'] == 'reset_taste_questions':
+            self.reset_taste_questions()
         elif options['command'] == 'all':
             self.create_all()
         else:
@@ -99,7 +105,52 @@ class Command(BaseCommand):
                 except Exception as e:
                     print(e)
 
+    def _load_file(self, image_url):
+        user_agent = {'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'}
+        request = requests.get(image_url, headers=user_agent, stream=True)
 
+        if request.status_code != requests.codes.ok:
+            print(request.status_code)
+            return None
+
+        file_name = image_url.split('/')[-1]
+
+        lf = tempfile.NamedTemporaryFile()
+
+        for block in request.iter_content(1024 * 8):
+            if not block:
+                break
+        lf.write(block)
+        
+        return (file_name, files.File(lf))
+        
+    def reset_taste_questions(self):
+        file_name = 'static/csv/questions_new.csv'
+        with open(file_name) as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                if len(row) < 6: continue
+                node = row[0]
+                question_text = row[4]
+                image = row[5]
+                
+                try:
+                    question = Question.objects.get(node = node)
+                except Question.DoesNotExist:
+                    continue
+                    
+                if question_text:
+                    question.question_text = question_text
+                    
+                if image:
+                    img = self._load_file(image)
+                    #print(img)
+                    if not img: print('invalid url {}\n'.format(image))
+                    question.img.save(*img)
+                    #print(question.img.path)
+                question.save()   
+             
+    
 
 def insert_contry(name):
     print(name)
