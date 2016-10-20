@@ -282,16 +282,13 @@ body{
     max-width: 20%;
 }
 
-.result-item__content__wine img{
-    margin-left: 70%;
-}
-
 .result-item__content__wine-info{
     float: left;
     width: 60%;
     margin-left: 20%;
 }
 
+.feedback-item__content__wine img,
 .result-item__content__wine img{
     margin-left: 7%;
     width: auto;
@@ -375,6 +372,7 @@ body{
     height: 40px;
 }
 
+.feedback-item__content__wine-info__select .b-button,
 .favorite-item__content__wine-info__select .b-button,
 .result-item__content__wine-info__select-mobile .b-button,
 .result-item__content__wine-info__select .b-button{
@@ -389,11 +387,13 @@ body{
     vertical-align: middle;
 }
 
+.feedback-item__content__wine-info__select .b-button,
 .favorite-item__content__wine-info__select .b-button{
     width: 60%;
     margin-left: 20%;
 }
 
+.feedback-item__content__wine-info__select .b-button:hover,
 .favorite-item__content__wine-info__select .b-button:hover,
 .result-item__content__wine-info__select-mobile .b-button:hover,
 .result-item__content__wine-info__select .b-button:hover{
@@ -464,6 +464,11 @@ body{
 }
 
 @media only screen and (max-width : 800px) {
+
+    .feedback-wrapper-thx h2{
+        font-size: 1em;
+    }
+
     .find-wine{
         margin-top: 50%;
         margin-left: auto;
@@ -516,6 +521,10 @@ body{
 }
 
 @media only screen and (max-width : 500px) {
+    .favorite-item__textarea{
+        display: none;
+    }
+
     .grade i{
         font-size: 1em;
         margin-left: 1px;
@@ -591,11 +600,25 @@ body{
         vertical-align: top;
     }
 
+    .feedback-item__content__wine{
+        height: 30%;
+    }
+
+    .feedback-item__content__wine img,
     .result-item__content__wine img{
         margin-left: 0;
         width: 60%;
         height: auto;
         margin-right: 0;
+    }
+
+    .feedback-item__content__wine-info__select{
+        height: auto;
+    }
+
+    .feedback-item__content__wine img{
+        width: auto;
+        height: 100%;
     }
 
     .result-item__content__wine-info{
