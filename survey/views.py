@@ -9,6 +9,7 @@ from users.models import UserModel
 from feedback.models import Feedback
 from survey.models import Survey, Question, Wine
 
+MAX_TRIES_COUNT = 3
 
 def main(request):
     return render_to_response(template_name="main.html", context={"request":request})
@@ -43,15 +44,22 @@ def survey(request):
     context = {
         "request": request
     }
-    question = match_response["question"]
-    is_end = match_response["is_end"]
-    if not is_end:
+
+    question = match_response.get("question")
+    is_end = match_response.get("is_end")
+    tries_count = 0
+    q = None
+    while tries_count < MAX_TRIES_COUNT:
+        if is_end: break
         node = question["node"]
         try:
             q = Question.objects.get(node=node)
+            break
         except Question.DoesNotExist:
-            print("Does Not Exist: {}".format(q))
-            return HttpResponseRedirect("/")
+            tries_count += 1
+
+    if not is_end:
+        if not q: return HttpResponseRedirect("/")
         context.update({
             "image": q.img,
             "text": q.get_question(),
