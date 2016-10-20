@@ -254,12 +254,21 @@ body{
     height: inherit;
 }
 
+.result-item__title-result,
 .result-item__title{
     width: 100%;
     text-align: center;
     margin: 20px 0px 30px 0px;
     font-size: 1.3em;
     font-weight: 100;
+}
+
+.result-item__title-result{
+    margin-top: 0;
+}
+
+.result-item__title-result h1{
+    margin-top: 20px;
 }
 
 .result-item__content{
@@ -360,7 +369,6 @@ body{
 .favorite-item__content__wine-info__select{
     width: 100%;
     height: 40px;
-    margin-top: 50px;
 }
 
 .favorite-item__content__wine-info__select .b-button,
@@ -470,6 +478,15 @@ body{
         font-size: 1.2em;
     }
 
+    .feedback-wrapper-thx, .result-wrapper{
+        margin-top: 4em;
+    }
+
+    .result-item__title-result,
+    .result-item__title{
+        margin-bottom: 0;
+    }
+
     .start-now-button{
         font-size: 2em;
     }
@@ -497,6 +514,11 @@ body{
 @media only screen and (max-width : 500px) {
     .survey-wrapper {
         margin-top: 30%;
+        font-size: 1em;
+    }
+
+    .result-item__title-result,
+    .result-item__title{
         font-size: 1em;
     }
 
@@ -535,8 +557,12 @@ body{
     }
 
     .result-wrapper{
+        max-height: 70%;
+        font-size: 1em;
+    }
+
+    .result-item__content{
         max-height: 60%;
-        font-size: 1.5em;
     }
 
     .result-item__content__wine-info__text__text{
@@ -547,7 +573,6 @@ body{
         float: none;
         margin-left: 0;
         margin-bottom: 1.5em;
-        font-size: 1.2em;
         vertical-align: top;
     }
 
@@ -561,6 +586,8 @@ body{
     .result-item__content__wine-info{
         width:50%;
         margin-left: 0;
+        font-size: 13px;
+        text-align: left;
     }
 
     .result-item__content__wine-info__title{
@@ -575,12 +602,11 @@ body{
         margin-left: 5%;
         text-align: center;
         line-height: 1.5em;
+        font-size: 0.7em;
     }
 
     .result-item__content__wine-info__info div span{
         vertical-align: top;
-        width: 1em;
-        height: 1em;
     }
 
     .result-item__content__wine-info__info div span:last-child{
@@ -599,12 +625,13 @@ body{
     .slick-navigation{
         color: white;
         top: 40%;
-        font-size: 5em!important;
+        font-size: 1.5em!important;
     }
 
     .result-item__content__wine-info__select-mobile{
         display: inherit;
         float: left;
+        font-size: 0.7em;
     }
 
     .result-item__content__wine-info__select{
