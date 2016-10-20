@@ -1,5 +1,7 @@
 {% extends "baseTemplate.html" %}
 {% load staticfiles %}
+{% load wine_color %}
+
 
 {% block script %}
     <script src="{% static "slick/slick.min.js" %}"></script>
@@ -11,86 +13,94 @@
 
 {% block content %}
     {% if wines %}
-    <i class="js-hide-on-selection js-slick-navigation-left slick-navigation slick-navigation-left fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-    <div class="result-wrapper">
-        {% for wine in wines %}
-            <div class="result-item js-result-item">
-                {% block title %}
-                    <div class="js-hide-on-selection result-item__title">
-                        <h2>Уверены, вам понравится</h2>
-                    </div>
-                    <div class="js-selected result-item__title">
-                        <h2 style="display: none">Отличный выбор!</h2>
-                    </div>                    
-                {% endblock %}
 
-                <div class="result-item__content">
-                    <div class="result-item__content__wine-info__title-mobile">
-                        <h3>{{ wine.title }}</h3>
-                    </div>
-                    <div class="result-item__content__wine">
-                        <img src="/media/{{ wine.img }}">
-                    </div>
-                    <div class="result-item__content__wine-info">
-                        <div class="result-item__content__wine-info__title">
+        {% if wines.count != 1 %}
+            <i class="js-hide-on-selection js-slick-navigation-left slick-navigation slick-navigation-left fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+        {% endif %}
+        <div class="result-wrapper">
+            {% for wine in wines %}
+                <div class="result-item js-result-item">
+                    {% block title %}
+                        <div class="js-hide-on-selection result-item__title">
+                            <h2>Уверены, вам понравится</h2>
+                        </div>
+                        <div class="js-selected result-item__title-result">
+                            <h2 style="display: none">Отличный выбор!</h2>
+                        </div>
+                    {% endblock %}
+
+                    <div class="result-item__content">
+                        <div class="result-item__content__wine-info__title-mobile">
                             <h3>{{ wine.title }}</h3>
                         </div>
-                        {% block grade %}
-                        {% endblock %}
-                            <div class="result-item__content__wine-info__info">
-                                <div class="result-item__content__wine-info__info__color">
-                                    <span class="span-color red icon"></span><span>{{ wine.color }}</span>
-                                </div>
-                                <div class="result-item__content__wine-info__info__type">
-                                    <span class="span-type dry icon"></span><span>{{ wine.type }}</span>
-                                </div>
-                                <div class="result-item__content__wine-info__info__country">
-                                    <span class="flag flag-{{ wine.country.short_name }} icon"></span><span>{{ wine.country.name }}</span>
-                                </div>
-                                <div class="result-item__content__wine-info__info__style">
-                                    <i class="fa fa-glass result-item-style icon" aria-hidden="true"></i>
-                                    <span class="span-style">{{ wine.style }}</span>
-                                </div>
+                        <div class="result-item__content__wine">
+                            <img src="/media/{{ wine.img }}">
+                        </div>
+                        <div class="result-item__content__wine-info">
+                            <div class="result-item__content__wine-info__title">
+                                <h3>{{ wine.title }}</h3>
                             </div>
-                                <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
-                                    {{ wine.description }}
+                            {% block grade %}
+                            {% endblock %}
+                                <div class="result-item__content__wine-info__info">
+                                    <div class="result-item__content__wine-info__info__color">
+                                        <span class="span-color {{ wine.color|color }} icon"></span><span>{{ wine.color }}</span>
+                                    </div>
+                                    <div class="result-item__content__wine-info__info__type">
+                                        <span class="span-type dry icon"></span><span>{{ wine.type }}</span>
+                                    </div>
+                                    <div class="result-item__content__wine-info__info__country">
+                                        <span class="flag flag-{{ wine.country.short_name }} icon"></span><span>{{ wine.country.name }}</span>
+                                    </div>
+                                    <div class="result-item__content__wine-info__info__style">
+                                        <i class="fa fa-glass result-item-style icon" aria-hidden="true"></i>
+                                        <span class="span-style">{{ wine.stylistic }}</span>
+                                    </div>
                                 </div>
-                                <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
-                                    Пить с твердыми сырами и стейком
+                                    <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
+                                        {{ wine.description }}
+                                    </div>
+                                    <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
+                                        {{ wine.food }}
+                                    </div>
+                                    <div class=" result-item__content__wine-info__text result-item__content__wine-info__text__text">
+                                        <i class="fa fa-rub" aria-hidden="true"></i>В среднем {{ wine.price }} Р. за бутылку
+                                    </div>
+                            {% block buttons %}
+                                <div class="js-hide-on-selection result-item__content__wine-info__select">
+                                    {% if forloop.last %}
+                                    <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
+                                    {% else %}
+                                    <a class="js-see-more b-button see-more">Посмотреть еще</a>
+                                    <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
+                                    {% endif %}
                                 </div>
-                                <div class=" result-item__content__wine-info__text result-item__content__wine-info__text__text">
-                                    <i class="fa fa-rub" aria-hidden="true"></i>В среднем 1000 Р. за бутылку
+                                <div class="js-selected result-item__content__wine-info__select">
+                                    <a style="display: none" href="/" class="b-button see-more">На главную</a>
                                 </div>
-                        {% block buttons %}
-                            <div class="js-hide-on-selection result-item__content__wine-info__select">
-                                {% if forloop.last %}
-                                <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
-                                {% else %}
-                                <a class="js-see-more b-button see-more">Посмотреть еще</a>
-                                <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
-                                {% endif %}
-                            </div>
-                            <div class="js-selected result-item__content__wine-info__select">
-                                <a style="display: none" href="/" class="b-button see-more">На главную</a>
-                            </div>
-                        {% endblock %}
+                            {% endblock %}
+                        </div>
                     </div>
+                    {% block mobile_buttons %}
+                    <div class="js-hide-on-selection result-item__content__wine-info__select-mobile">
+                        {% if forloop.last %}
+                        <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
+                        {% else %}
+                        <a class="js-see-more b-button see-more">Посмотреть еще</a>
+                        <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
+                        {% endif %}
+                    </div>
+
+                    <div class="js-selected result-item__content__wine-info__select-mobile">
+                        <a style="display: none" href="/" class="b-button see-more">На главную</a>
+                    </div>
+                    {% endblock mobile_buttons %}
                 </div>
-                <div class="js-hide-on-selection result-item__content__wine-info__select-mobile">
-                    {% if forloop.last %}
-                    <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
-                    {% else %}
-                    <a class="js-see-more b-button see-more">Посмотреть еще</a>
-                    <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
-                    {% endif %}
-                </div>
-                <div class="js-selected result-item__content__wine-info__select-mobile">
-                    <a style="display: none" href="/" class="b-button see-more">На главную</a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <i class="js-hide-on-selection js-slick-navigation-right slick-navigation slick-navigation-right fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+            {% endfor %}
+        </div>
+        {% if wines.count != 1 %}
+            <i class="js-hide-on-selection js-slick-navigation-right slick-navigation slick-navigation-right fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+        {% endif %}
     {% else %}
     <div class="feedback-wrapper-thx">
         <h2>Ой, здесь ничего нет :(</h2>
