@@ -487,8 +487,14 @@ body{
         font-size: 1.2em;
     }
 
-    .feedback-wrapper-thx, .result-wrapper{
+    .feedback-wrapper-thx{
         margin-top: 4em;
+    }
+
+    .result-wrapper{
+        margin-top: 5em;
+        max-height: 70%;
+        font-size: 1em;
     }
 
     .result-item__title-result,
