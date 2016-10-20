@@ -351,6 +351,10 @@ body{
     background-color: pink;
 }
 
+.white{
+    background-color: white;
+}
+
 .dry{
     background-color: #F2F2F2;
     border-radius: 10px;
@@ -563,6 +567,10 @@ body{
 
     .result-item__content{
         max-height: 60%;
+    }
+
+    .result-item__content__wine{
+        width: 50%;
     }
 
     .result-item__content__wine-info__text__text{

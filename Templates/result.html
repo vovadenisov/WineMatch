@@ -1,5 +1,7 @@
 {% extends "baseTemplate.html" %}
 {% load staticfiles %}
+{% load wine_color %}
+
 
 {% block script %}
     <script src="{% static "slick/slick.min.js" %}"></script>
@@ -39,7 +41,7 @@
                         {% endblock %}
                             <div class="result-item__content__wine-info__info">
                                 <div class="result-item__content__wine-info__info__color">
-                                    <span class="span-color red icon"></span><span>{{ wine.color }}</span>
+                                    <span class="span-color {{ wine.color|color }} icon"></span><span>{{ wine.color }}</span>
                                 </div>
                                 <div class="result-item__content__wine-info__info__type">
                                     <span class="span-type dry icon"></span><span>{{ wine.type }}</span>
