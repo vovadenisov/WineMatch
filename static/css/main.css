@@ -571,6 +571,7 @@ body{
 
     .result-item__content__wine{
         width: 50%;
+        max-width: none;
     }
 
     .result-item__content__wine-info__text__text{
