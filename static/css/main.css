@@ -572,6 +572,7 @@ body{
 
     .result-item__content{
         max-height: 60%;
+        overflow: hidden;
     }
 
     .result-item__content__wine{
@@ -625,6 +626,8 @@ body{
 
     .result-item__content__wine-info__info div span:last-child{
         height: auto;
+        width: 65%!important;
+        font-size: 0.9em;
     }
 
     .span-type{
