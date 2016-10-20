@@ -58,10 +58,15 @@ class Wine(models.Model):
     def get_country(self):
         return self.country.name
 
+    def __str__(self):
+        return self.title
+
+
 class Answer(models.Model):
     answer_text = models.CharField(max_length=100)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
     api_response = models.IntegerField(default=0)
+
 
 class Favorites(models.Model):
     wine_attrs = {
