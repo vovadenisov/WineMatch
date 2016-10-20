@@ -463,7 +463,27 @@ body{
     font-size: 1.7em;
 }
 
+.feedback-item__content__wine{
+    width: 40%;
+    float: left;
+}
+
+.feedback-item__content__wine-info{
+    width: 60%;
+    margin-left: 40%;
+}
+
 @media only screen and (max-width : 800px) {
+
+    .feedback-item__content__wine{
+        width: 100%;
+        float: none;
+    }
+
+    .feedback-item__content__wine-info{
+        width: 100%;
+        margin-left: 0;
+    }
 
     .feedback-wrapper-thx h2{
         font-size: 1em;
