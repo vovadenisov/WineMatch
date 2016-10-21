@@ -68,6 +68,9 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
     api_response = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.answer_text
+
 
 class Favorites(models.Model):
     wine_attrs = {
