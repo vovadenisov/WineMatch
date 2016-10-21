@@ -60,12 +60,18 @@
                                     <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
                                         {{ wine.description }}
                                     </div>
+
                                     <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
-                                        {{ wine.food }}
+                                        {% if wine.food %}
+                                            {{ wine.food }}
+                                        {%endif%}
                                     </div>
                                     <div class=" result-item__content__wine-info__text result-item__content__wine-info__text__text">
-                                        <i class="fa fa-rub" aria-hidden="true"></i>В среднем {{ wine.price }} Р. за бутылку
+                                        {% if wine.price %}
+                                            <i class="fa fa-rub" aria-hidden="true"></i>В среднем {{ wine.price }} Р. за бутылку
+                                        {%endif%}
                                     </div>
+
                             {% block buttons %}
                                 <div class="js-hide-on-selection result-item__content__wine-info__select">
                                     {% if forloop.last %}

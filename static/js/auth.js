@@ -10,7 +10,13 @@ $(document).ready(function(){
         var max_height = $(window).height() * 0.8;
         $(".js-login-block").dialog({
             width: Math.min(max_width, 500),
-            height: Math.min(max_height, 400)
+            height: Math.min(max_height, 400),
+            open: function( event, ui ) {
+                $(".content-wrapper, .result-wrapper, .survey-wrapper").addClass("blur-filter");
+            },
+            close: function( event, ui ) {
+                $(".blur-filter").removeClass("blur-filter");
+            }
         });
     });
 

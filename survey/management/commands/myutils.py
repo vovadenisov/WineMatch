@@ -9,7 +9,8 @@ from django.core.management.base import BaseCommand
 from django.core import files
 from django.conf import settings
 
-from survey.models import Wine, Country, Question, Answer
+from survey.models import Wine, Country, Question, Answer, Favorites
+from feedback.models import Feedback
 
 TARANTOOL_CONNCTION = {
     'user': settings.TARANTOOL_USER,
@@ -24,27 +25,57 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if options['command'] == 'wine':
-            self.download_all_wines()
+            self.create_all_wines()
         elif options['command'] == 'countries':
-            self.download_all_countries()
+            self.create_all_countries()
         elif options['command'] == 'question':
-            self.download_taste_questions()
+            self.create_taste_questions()
         elif options['command'] == 'formal_question':
             self.create_formal_questions()
         elif options['command'] == 'reset_taste_questions':
             self.reset_taste_questions()
         elif options['command'] == 'all':
             self.create_all()
+        elif options['command'] == 'update_wine':
+            self.update_wines()
+        elif options['command'] == 'delete_all':
+            self.delete_all()
         else:
             print ("Command not found!")
 
+    def delete_all(self):
+        favorites = Favorites.objects.all()
+        for f in favorites:
+            f.delete()
+        feedback = Feedback.objects.all()
+        for f in feedback:
+            f.delete()
+        wines = Wine.objects.all()
+        for w in wines:
+            w.delete()
+
+    def update_wines(self):
+        print('update_wine')
+        tnt = tarantool.connect(**TARANTOOL_CONNCTION)
+        offset = 0
+        length = 100
+        tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+        while len(tuples) > 0 and tuples[0]:
+            for t in tuples:
+                update_wine(t)
+            offset += length
+            tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+
+
     def create_all(self):
-        self.download_all_countries()
-        self.download_all_wines()
-        self.download_taste_questions()
+        print('create_all')
+        self.create_all_countries()
+        self.create_all_wines()
+        self.create_taste_questions()
         self.create_formal_questions()
 
-    def download_all_wines(self):
+    def create_all_wines(self):
+        print('create_all_wines')
         print('download wine...')
         tnt = tarantool.connect(**TARANTOOL_CONNCTION)
         offset = 0
@@ -56,7 +87,8 @@ class Command(BaseCommand):
             offset += length
             tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
 
-    def download_all_countries(self):
+    def create_all_countries(self):
+        print('create_all_countries')
         tnt = tarantool.connect(**TARANTOOL_CONNCTION)
         offset = 0
         length = 100
@@ -87,7 +119,8 @@ class Command(BaseCommand):
             except Exception as e:
                 print(e)
 
-    def download_taste_questions(self):
+    def create_taste_questions(self):
+        print('create_taste_questions')
         file_name = 'static/csv/questions.csv'
         with open(file_name) as csvfile:
             reader = csv.reader(csvfile)
@@ -120,7 +153,7 @@ class Command(BaseCommand):
         for block in request.iter_content(1024 * 8):
             if not block:
                 break
-        lf.write(block)
+            lf.write(block)
         
         return (file_name, files.File(lf))
         
@@ -139,6 +172,7 @@ class Command(BaseCommand):
                 except Question.DoesNotExist:
                     continue
                     
+                print(question.id)
                 if question_text:
                     question.question_text = question_text
                     
@@ -147,9 +181,8 @@ class Command(BaseCommand):
                     #print(img)
                     if not img: print('invalid url {}\n'.format(image))
                     question.img.save(*img)
-                    #print(question.img.path)
-                question.save()   
-             
+                    print(question.img.path)
+                question.save()
     
 
 def insert_contry(name):
@@ -176,3 +209,20 @@ def create_one_wine(wine):
         w.save()
     except Exception as e:
         print(e)
+
+def update_wine(wine):
+    print(wine[0])
+#    print (Wine.objects.get(pk=2).title)
+#    w = Wine.objects.get(title=wine[0])
+#    try:
+#        food = wine[21]
+#    except Exception:
+#        food = None
+#    try:
+#        price = wine[22]
+#    except Exception:
+#        price = None
+#    w.food = food
+#    w.price = price
+#    w.save()
+#    print(w.title)

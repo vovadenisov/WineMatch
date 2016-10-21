@@ -48,9 +48,10 @@ class Wine(models.Model):
     alcohol = models.CharField(max_length=255, null=True, verbose_name="Процент алкоголя")
     year = models.IntegerField(null=True, verbose_name="Год производства")
     price = models.FloatField(null=True, verbose_name="Цена")
-    title = models.CharField(max_length=255, unique=True, verbose_name="Название")
+    title = models.CharField(max_length=255, verbose_name="Название", unique=True)
     img = models.ImageField()
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
+
 
     def get_name(self):
         return self.title
