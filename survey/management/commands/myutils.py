@@ -9,7 +9,8 @@ from django.core.management.base import BaseCommand
 from django.core import files
 from django.conf import settings
 
-from survey.models import Wine, Country, Question, Answer
+from survey.models import Wine, Country, Question, Answer, Favorites
+from feedback.models import Feedback
 
 TARANTOOL_CONNCTION = {
     'user': settings.TARANTOOL_USER,
@@ -37,8 +38,21 @@ class Command(BaseCommand):
             self.create_all()
         elif options['command'] == 'update_wine':
             self.update_wines()
+        elif options['command'] == 'delete_all':
+            self.delete_all()
         else:
             print ("Command not found!")
+
+    def delete_all(self):
+        favorites = Favorites.objects.all()
+        for f in favorites:
+            f.delete()
+        feedback = Feedback.objects.all()
+        for f in feedback:
+            f.delete()
+        wines = Wine.objects.all()
+        for w in wines:
+            w.delete()
 
     def update_wines(self):
         print('update_wine')
@@ -168,8 +182,7 @@ class Command(BaseCommand):
                     if not img: print('invalid url {}\n'.format(image))
                     question.img.save(*img)
                     print(question.img.path)
-                question.save()   
-             
+                question.save()
     
 
 def insert_contry(name):
