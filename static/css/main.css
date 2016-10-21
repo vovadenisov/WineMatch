@@ -575,7 +575,7 @@ body{
     }
 
     .feedback-item__content__wine img{
-        margin-left: 45%;
+        margin-left: 0;
     }
 
     .b-button.vk-auth.js-vk-login{
