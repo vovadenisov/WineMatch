@@ -37,6 +37,8 @@ class Command(BaseCommand):
             self.create_all()
         elif options['command'] == 'update_wine':
             self.update_wines()
+        elif options['command'] == 'update_wine_title':
+            self.cut_name()
         else:
             print ("Command not found!")
 
@@ -168,8 +170,15 @@ class Command(BaseCommand):
                     if not img: print('invalid url {}\n'.format(image))
                     question.img.save(*img)
                     print(question.img.path)
-                question.save()   
-             
+                question.save()
+	
+    def cut_name(self):
+        wines = Wine.objects.all()
+        for wine in wines:
+            print(wine.title.split(',')[0])
+            new_title = wine.title.split(',')[0]
+#            wine.title = new_title
+#            wine.save()
     
 
 def insert_contry(name):
@@ -198,16 +207,18 @@ def create_one_wine(wine):
         print(e)
 
 def update_wine(wine):
-    w = Wine.objects.get(title=wine[0])
-    try:
-        food = wine[21]
-    except Exception:
-        food = None
-    try:
-        price = wine[22]
-    except Exception:
-        price = None
-    w.food = food
-    w.price = price
-    w.save()
-    print(w.title)
+    print(wine[0])
+#    print (Wine.objects.get(pk=2).title)
+#    w = Wine.objects.get(title=wine[0])
+#    try:
+#        food = wine[21]
+#    except Exception:
+#        food = None
+#    try:
+#        price = wine[22]
+#    except Exception:
+#        price = None
+#    w.food = food
+#    w.price = price
+#    w.save()
+#    print(w.title)
