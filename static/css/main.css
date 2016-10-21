@@ -49,6 +49,12 @@ body{
     margin-bottom: 2%;
 }
 
+.main-time-info{
+    margin-top: 20px;
+    font-weight: bold;
+    color: white;
+}
+
 .progress .progress-bar{
     background-color: #1B1111;
     text-align: center;
