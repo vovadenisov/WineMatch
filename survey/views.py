@@ -132,8 +132,13 @@ def feedback(request):
         return HttpResponseForbidden()
     feedback = Feedback.objects.get_last_review(request.user.id) 
     if not feedback: return HttpResponseRedirect("/")
-    return render_to_response(template_name="feedbackform.html", context={"wine": feedback.wine})
+    return render_to_response(template_name="feedbackform.html", context={"wine": feedback.wine, "request": request})
 
 
 def thnx_for_feedback(request):
-    return render_to_response(template_name="thx_for_feedback.html", context={'declined_flag': request.GET.get('declined')})
+    return render_to_response(
+        template_name="thx_for_feedback.html", context={
+            'declined_flag': request.GET.get('declined'),
+            "request": request
+        }
+    )
