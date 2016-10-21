@@ -211,16 +211,18 @@ def create_one_wine(wine):
         print(e)
 
 def update_wine(wine):
-    w = Wine.objects.get(title=wine[0])
-    try:
-        food = wine[21]
-    except Exception:
-        food = None
-    try:
-        price = wine[22]
-    except Exception:
-        price = None
-    w.food = food
-    w.price = price
-    w.save()
-    print(w.title)
+    print(wine[0])
+#    print (Wine.objects.get(pk=2).title)
+#    w = Wine.objects.get(title=wine[0])
+#    try:
+#        food = wine[21]
+#    except Exception:
+#        food = None
+#    try:
+#        price = wine[22]
+#    except Exception:
+#        price = None
+#    w.food = food
+#    w.price = price
+#    w.save()
+#    print(w.title)
