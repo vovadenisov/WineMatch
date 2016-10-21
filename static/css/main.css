@@ -175,9 +175,12 @@ body{
 .vk-auth{
     margin-top: 100px;
     width: 170px;
-    background-color: #45668E!important;
-    color: #ffffff!important;
+    background-color: black;
+    color: white;
     font-weight: bolder!important;
+    height: 30px;
+    border: 2px solid white;
+    padding-top: 5px;
 }
 
 .content-wrapper{
