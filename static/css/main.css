@@ -604,6 +604,13 @@ body{
         display: none;
     }
 
+    .feedback-item__content__wine-info__select .b-button,
+    .favorite-item__content__wine-info__select .b-button,
+    .result-item__content__wine-info__select-mobile .b-button,
+    .result-item__content__wine-info__select .b-button{
+        width: 35%;
+    }
+
     .grade i{
         font-size: 1em;
         margin-left: 1px;

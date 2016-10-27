@@ -60,7 +60,7 @@ function csrfSafeMethod(method) {
              success: function() {
                  $('.js-selected').children().show();
                  $('.js-hide-on-selection').hide();
-                 $(".result-wrapper").unslick();
+                 $(".result-wrapper").unslick(); // todo нет такой функции удалять все другие итемы из слайдера
              },
              error: function() {
                  console.log('error');
