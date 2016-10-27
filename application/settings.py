@@ -61,7 +61,8 @@ INSTALLED_APPS = [
 CREATED_APPS = [
     'users',
     'survey',
-    'wine'
+    'wine',
+    'feedback'
 ]
 
 INSTALLED_APPS += CREATED_APPS
@@ -79,14 +80,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'application.urls'
 
-TEMPLATE_DIRS = [
-    SOURCE_ROOT + 'Templates/',
-]
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': TEMPLATE_DIRS,
+        'DIRS': [SOURCE_ROOT + 'Templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,6 +101,11 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+
+TARANTOOL_URL = config.get('tarantool', 'URL')
+TARANTOOL_PORT = config.get('tarantool', 'PORT')
+TARANTOOL_USER = config.get('tarantool', 'USER')
+TARANTOOL_PASSWORD = config.get('tarantool', 'PASSWORD')
 
 DATABASES = {
     'default': {
@@ -159,6 +161,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = config.get('media', 'MEDIA_ROOT')
 STATICFILES_DIRS = os.path.join(SOURCE_ROOT, "static"),
 
 AUTH_USER_MODEL = "users.UserModel"

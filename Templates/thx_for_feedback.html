@@ -5,7 +5,22 @@
 {% endblock %}
 
 {% block content %}
+    {% if declined_flag %}
+    <div class="feedback-wrapper-thx">
+        <h2>Спасибо за ответ! Давай попробуем еще раз)</h2>
+    </div>
+    {% else %}
     <div class="feedback-wrapper-thx">
         <h2>Спасибо за обратную связь! Она поможет нам стать лучше</h2>
     </div>
+    {% endif %}
+    
+    <script>
+    $(document).ready(function() {
+        var baseUrl = window.location.protocol + "//" + window.location.host;
+        setTimeout(function() {
+            window.location.href = baseUrl + '/find/';
+        }, 2000);
+    });
+    </script>
 {% endblock %}

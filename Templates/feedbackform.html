@@ -10,45 +10,42 @@
 {% endblock %}
 
 {% block content %}
-    <div class="result-wrapper">
+    <div class="feedback-wrapper">
         <div class="result-item js-result-item">
             <div class="result-item__title">
-                <h2>Вам понравилось?</h2>
+                <h2>В прошлый раз мы подобрали вино "{{ wine.title }}". Вам понравилось?</br></br> 
+                    Обратная связь сделает наши подборки еще вкуснее :)
+                </h2>
             </div>
 
             <div class="result-item__content">
-                <div class="result-item__content__wine">
-                    <img src="{% static "img/wine_bottle.png" %}">
+                <div class="feedback-item__content__wine">
+                    <img src="/media/{{ wine.img }}">
                 </div>
-                <div class="result-item__content__wine-info">
-                    <div class="result-item__content__wine-info__title">
-                        <h3>вино dbyj cegth dbyj 1945г</h3>
-                    </div>
+                <div class="feedback-item__content__wine-info">
                     {% block grade %}
                     {% endblock %}
-                    <div class="favorite-item__textarea">
-                        <textarea placeholder="Оставьте свой комментарий"></textarea>
-                    </div>
                     {% block buttons %}
-                        <div class="result-item__content__wine-info__select">
+                        <div class="feedback-item__content__wine-info__select">
                             <div class="grade">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <i id="js-rating-1" class="js-rating fa fa-star-o" aria-hidden="true" data-rating="1" ></i>
+                                <i id="js-rating-2" class="js-rating fa fa-star-o" aria-hidden="true" data-rating="2"></i>
+                                <i id="js-rating-3" class="js-rating fa fa-star-o" aria-hidden="true" data-rating="3"></i>
+                                <i id="js-rating-4" class="js-rating fa fa-star-o" aria-hidden="true" data-rating="4"></i>
+                                <i id="js-rating-5" class="js-rating fa fa-star-o" aria-hidden="true" data-rating="5"></i>
                             </div>
                         </div>
                     {% endblock %}
-                    <div class="favorite-item__content__wine-info__select">
-                        <a class="js-response b-button get-it" data-response="3">Не стал пробовать</a>
+
+                    <div class="favorite-item__textarea">
+                        <textarea class="js-comment" placeholder="Оставьте свой комментарий"></textarea>
+                    </div>
+                    <div class="feedback-item__content__wine-info__select">
+                        <a class="js-answer b-button get-it">Ответить</a>
+                        <a class="js-decline b-button get-it">Не стал пробовать</a>
                     </div>
                 </div>
 
-            </div>
-            <div class="result-item__content__wine-info__select-mobile">
-                <a class="js-see-more b-button see-more">Посмотреть еще</a>
-                <a class="js-get-it b-button get-it">Я возьму!</a>
             </div>
         </div>
     </div>

@@ -10,12 +10,16 @@
 {% block buttons %}
 {% endblock %}
 
+{% block mobile_buttons %}
+{% endblock %}
+
 {% block grade %}
     <div class="grade">
+        {% for star in wine.full_stars %}
         <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa fa-star" aria-hidden="true"></i>
+        {% endfor %}
+        {% for star in wine.empty_stars %}
         <i class="fa fa-star-o" aria-hidden="true"></i>
+        {% endfor %}
     </div>
 {% endblock %}

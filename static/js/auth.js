@@ -9,8 +9,18 @@ $(document).ready(function(){
         var max_width = $(window).width() * 0.8;
         var max_height = $(window).height() * 0.8;
         $(".js-login-block").dialog({
+            modal: true,
             width: Math.min(max_width, 500),
-            height: Math.min(max_height, 400)
+            height: Math.min(max_height, 400),
+            open: function( event, ui ) {
+                $(".ui-widget-overlay").click(function () {
+                    $(".js-login-block").dialog("close")
+                });
+                $(".content-wrapper, .result-wrapper, .survey-wrapper").addClass("blur-filter");
+            },
+            close: function( event, ui ) {
+                $(".blur-filter").removeClass("blur-filter");
+            }
         });
     });
 

@@ -1,21 +1,25 @@
 import json
-
-from django.conf import settings
-from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
 import requests
 
+from django.conf import settings
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.shortcuts import render_to_response
 
-# Create your views here.
-from survey.models import Survey
+from users.models import UserModel
+from feedback.models import Feedback
+from survey.models import Survey, Question, Wine
 
+MAX_TRIES_COUNT = 3
 
 def main(request):
     return render_to_response(template_name="main.html", context={"request":request})
 
 
 def survey(request):
-
+    if request.user.is_authenticated():
+        feedback = Feedback.objects.get_last_review(request.user.id) 
+        if feedback: return HttpResponseRedirect("/feedback")
+        
     answer_pk = request.GET.get("answer")
     if not answer_pk:
         survey_context = {}
@@ -32,32 +36,70 @@ def survey(request):
     }
     if answer_pk:
         params.update({"answer_id": answer_pk})
-    print(settings.MATCH_URL)
-    match_response = requests.get(settings.MATCH_URL, params=params)
-    print(match_response.text)
+    match_response = requests.get('/'.join((settings.MATCH_URL,"next")), params=params)
+    
     if not match_response.status_code == 200:
         return HttpResponseRedirect("/")
     match_response = json.loads(match_response.text)
     context = {
         "request": request
     }
-    if match_response.get("wine"):
-        wines = match_response.get("wines")
-        context.update({"wines": wines})
-        return render_to_response(template_name="result.html", context=context)
+
+    question = match_response.get("question")
+    is_end = match_response.get("is_end")
+    tries_count = 0
+    q = None
+    while tries_count < MAX_TRIES_COUNT:
+        if is_end: break
+        node = question["node"]
+        try:
+            q = Question.objects.get(node=node)
+            break
+        except Question.DoesNotExist:
+            tries_count += 1
+
+    if not is_end:
+        if not q: return HttpResponseRedirect("/")
+        context.update({
+            "image": q.img,
+            "text": q.get_question(),
+            "answers": question['answers'],#q.get_answers(),
+            "survey": current_survey
+        })
+        if len(context["answers"]) > 2:
+            return render_to_response(template_name="survey.html", context=context)
+        else:
+            return render_to_response(template_name="yesno.html", context=context)
     else:
-        question = match_response["question"]
-        if question:
-            answers = question["answers"]
-            context.update({
-                "text": question["text"],
-                "answers": answers,
-                "survey": current_survey
-            })
-            if len(context["answers"]) > 2:
-                return render_to_response(template_name="survey.html", context=context)
-            else:
-                return render_to_response(template_name="yesno.html", context=context)
+        match_response = requests.get('/'.join((settings.MATCH_URL,"wine_list", str(current_survey.pk))))
+        if not match_response.status_code == 200:
+            return HttpResponseRedirect("/")
+        match_response = json.loads(match_response.text)
+        wines_list = match_response["wines"]
+        wines = []
+        for wine in wines_list:
+           try:
+               wines.append(Wine.objects.get(title=wine['title']))
+           except Wine.DoesNotExist:
+               pass #its ok to loose some wine
+        context.update({"wines": wines})
+
+        return render_to_response(template_name="result.html", context=context)
+
+
+def _wine_description(wine):
+    return {
+        "title": wine.get_name(),
+        "price": wine.price,
+        'food': wine.food,
+        "year": wine.year,
+        "description": wine.description,
+        "color": wine.color,
+        "sweetness": wine.type,
+        'country': wine.get_country(),
+        'image': wine.img,
+        'style': wine.stylistic
+    }
 
 
 def survey_yesno(request):
@@ -73,7 +115,30 @@ def result(request):
 
 
 def favorite(request):
-    return render_to_response(template_name="favorite.html", context={"request":request})
+    if request.user.is_authenticated():
+        u = UserModel.objects.get(username=request.user)
+        favorites = u.get_favorits()
+        context = {
+            "request": request,
+            "wines": favorites
+        }
+        return render_to_response(template_name="favorite.html", context=context)
+    else:
+        return HttpResponseForbidden()
+
 
 def feedback(request):
-    return render_to_response(template_name="feedbackform.html", context={"request":request})
+    if not request.user.is_authenticated():
+        return HttpResponseForbidden()
+    feedback = Feedback.objects.get_last_review(request.user.id) 
+    if not feedback: return HttpResponseRedirect("/")
+    return render_to_response(template_name="feedbackform.html", context={"wine": feedback.wine, "request": request})
+
+
+def thnx_for_feedback(request):
+    return render_to_response(
+        template_name="thx_for_feedback.html", context={
+            'declined_flag': request.GET.get('declined'),
+            "request": request
+        }
+    )
