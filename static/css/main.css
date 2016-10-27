@@ -504,7 +504,6 @@ body{
         margin-left: 20px;
     }
 
-    .feedback-item__content__wine-info__select .b-button,
     .favorite-item__content__wine-info__select .b-button,
     .result-item__content__wine-info__select-mobile .b-button,
     .result-item__content__wine-info__select .b-button{
@@ -547,7 +546,6 @@ body{
         margin-top: 4em;
     }
 
-    .feedback-item__content__wine img,
     .result-item__content__wine img{
         height: 450px;
     }
