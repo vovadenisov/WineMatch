@@ -28,6 +28,8 @@ class Question(models.Model):
     def get_answers(self):
         answers = self.answer_set.all()
 
+    def __str__(self):
+        return self.question_text
 
 class Country(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="название страны")

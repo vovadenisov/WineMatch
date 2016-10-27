@@ -211,7 +211,7 @@ def create_one_wine(wine):
         print(e)
 
 def update_wine(wine):
-    print(wine[0])
+    print(wine)
 #    print (Wine.objects.get(pk=2).title)
 #    w = Wine.objects.get(title=wine[0])
 #    try:
