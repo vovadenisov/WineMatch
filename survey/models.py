@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import urllib
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.db import models
+from django.db import models, IntegrityError
 
 
 # Create your models here.
@@ -107,3 +109,43 @@ class Favorites(models.Model):
     @property
     def emplty_stars(self):
         return range(5 - self.rating)
+
+ANSWER_TYPE_CHOICES = (('json', 'json'), ('html', 'html'))
+class WineShop(models.Model):
+    #code name photo search_url answer_type base_url
+    code = models.CharField(verbose_name='Для выбора метода-парсера в краулере', max_length=30)
+    name = models.CharField(verbose_name='Название магазина', max_length=255)
+    photo = models.ImageField(upload_to='img/')
+    search_url = models.CharField(verbose_name='Урл для поиска', max_length=255)
+    answer_type = models.CharField(verbose_name='Тип ответа (json/html)', max_length=10, choices=ANSWER_TYPE_CHOICES)
+    base_url = models.CharField(verbose_name='Базовый урл', max_length=255)
+
+    def form_query(self, query_string):
+        query_string = urllib.quote(query_string)
+        return self.base_url.format(query_string)
+
+    def __unicode__(self):
+        return self.name
+
+class WineToShopManager(models.Manager):
+    def _form_url_inplace(self, kwargs):
+        if not kwargs.get('url').startswith(kwargs.get('shop').base_url):
+            kwargs['url'] = kwargs.get('shop').base_url + kwargs.get('url')
+
+    def create_or_update(self, **kwargs):
+        self._form_url_inplace(self, kwargs)
+
+        try:
+            return self.create(**kwargs)
+        except IntegrityError:
+            self.filter(wine__id=kwargs['wine'].id).filter(shop__id=kwargs.get('shop').id).update(**kwargs)
+            return self.get(wine__id=kwargs['wine'].id, shop__id=kwargs.get('shop').id)
+
+class WineToShop(models.Model):
+    #wine, shop, price, url
+    wine = models.ForeignKey(Wine)
+    shop = models.ForeignKey(WineShop)
+    price = models.IntegerField()
+    url = models.CharField(verbose_name='Ссылка на товар', max_length=255)
+
+    objects = WineToShopManager()
