@@ -8,7 +8,6 @@ except ImportError:
     from asyncio import Queue
     
 from difflib import SequenceMatcher
-
 from bs4 import BeautifulSoup as bs
 import requests
 from django.core.management.base import BaseCommand
