@@ -6,9 +6,8 @@ try:
     from asyncio import Queue
 except ImportError:
     from asyncio import JoinableQueue as Queue
-    
-from difflib import SequenceMatcher
 
+from difflib import SequenceMatcher
 from bs4 import BeautifulSoup as bs
 import requests
 from django.core.management.base import BaseCommand
@@ -114,10 +113,10 @@ class WineCrawler:
         wine_items = wine_info.select('.poduct_light')
         if not wine_items: return
         price = wine_items[0].select_one('.price span').string
-        #name = wine_items[0].select_one('.title a p')
-
-        #if self._count_words_simularity(name, expected_name) < SIMULARITY_TRESHOLD:
-        #    return
+        name = wine_items[0].select_one('.title a p')
+        name = self._to_latin(name)
+        if self._count_words_simularity(name, expected_name) < SIMULARITY_TRESHOLD:
+            return
         price = get_int_from_price_str(price)
         url = wine_items[0].select_one('.title a')
         if not url: return
