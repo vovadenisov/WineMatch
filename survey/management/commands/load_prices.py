@@ -21,6 +21,7 @@ SUCCESS_STATUS_CODES = [200, 202, ]
 SIMULARITY_TRESHOLD = 0.5
 
 def get_int_from_price_str(s):
+    s = re.sub(r'\s+', '', s)
     return int(re.search(r'\d+', s).group())
 
 def fix_ssl_unverified_err():
@@ -277,7 +278,7 @@ class WineCrawler:
         wine_items = wine.select('.category__item_new__inner')
         if not wine_items: return
         price = wine_items[0].select_one('.price .bold').string
-        price = re.sub(r'\s+', '', price)
+        #price = re.sub(r'\s+', '', price)
         #name = wine_items[0].select_one('.title a p')
 
         #if self._count_words_simularity(name, expected_name) < SIMULARITY_TRESHOLD:
