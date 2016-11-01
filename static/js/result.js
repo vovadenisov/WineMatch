@@ -36,6 +36,18 @@ function csrfSafeMethod(method) {
     });
 
     //result page
+    $(".js-tabs-about-wine").click(function(){
+        $(".js-tabs-about-wine").addClass("js-tabs-active");
+        $(".js-tabs-where").removeClass("js-tabs-active");
+        $(".result-item__content_conteiner").addClass("js-active");
+        $(".result-item__where").removeClass("js-active");
+    });
+    $(".js-tabs-where").click(function () {
+        $(".js-tabs-where").addClass("js-tabs-active");
+        $(".js-tabs-about-wine").removeClass("js-tabs-active");
+        $(".result-item__where").addClass("js-active");
+        $(".result-item__content_conteiner").removeClass("js-active");
+    });
     $(".result-wrapper").slick({
         dots: false,
         infinite: true,
@@ -60,7 +72,7 @@ function csrfSafeMethod(method) {
              success: function() {
                  $('.js-selected').children().show();
                  $('.js-hide-on-selection').hide();
-                 $(".result-wrapper").unslick(); // todo нет такой функции удалять все другие итемы из слайдера
+                 //$(".result-wrapper").unslick(); // todo нет такой функции удалять все другие итемы из слайдера
              },
              error: function() {
                  console.log('error');

@@ -264,6 +264,37 @@ body{
     color: white!important;
 }
 
+.result-item__tabs{
+    width: 100%;
+}
+
+.result-item__tabs__where,
+.result-item__tabs__about_wine{
+    width: 49%;
+    float: left;
+    height: 30px;
+    padding-top: 10px;
+    cursor: pointer;
+    margin: 0 0 5px;
+}
+
+
+.result-item__tabs__where,
+.result-item__tabs__about_wine{
+    border-bottom: 1px solid #95784E;
+}
+
+.result-item__tabs__about_wine {
+    border-right: 1px solid #95784E;
+}
+
+.js-tabs-active.result-item__tabs__about_wine,
+.js-tabs-active.result-item__tabs__where{
+    border-bottom: none;
+    border-top: 1px solid #95784E;
+
+}
+
 .result-item__title-result,
 .result-item__title{
     width: 100%;
@@ -287,6 +318,46 @@ body{
     width: 90%;
     margin-left: 5%;
     float: left;
+}
+
+.result-item__where{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.result-item__where,
+.result-item__content_conteiner{
+    display: none;
+}
+
+.result-item__where.js-active,
+.result-item__content_conteiner.js-active{
+    display: block;
+    float: left;
+    margin-top: 20px;
+}
+
+.result-item__where__store{
+    width: 100%;
+    margin-bottom: 30px;
+    float: left;
+}
+
+.result-item__where__store__img{
+    width: 20%;
+    float: left;
+}
+
+.result-item__where__store__text{
+    width: 60%;
+    float: left;
+    font-size: 1.3em;
+}
+
+.result-item__where__store__cost{
+    width: 20%;
+    float: left;
+    font-size: 1.3em;
 }
 
 .result-item__content__wine{
@@ -598,6 +669,15 @@ body{
 }
 
 @media only screen and (max-width : 500px) {
+    .result-item__tabs{
+        display: none;
+    }
+
+    .result-item__where.js-active,
+    .result-item__content_conteiner.js-active{
+        margin-top: 0;
+    }
+
     .favorite-item__textarea{
         display: none;
     }
