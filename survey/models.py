@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import urllib
+from urllib.parse import quote
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -121,10 +121,10 @@ class WineShop(models.Model):
     base_url = models.CharField(verbose_name='Базовый урл', max_length=255)
 
     def form_query(self, query_string):
-        query_string = urllib.quote(query_string)
-        return self.base_url.format(query_string)
+        query_string = quote(query_string)
+        return self.search_url.format(query_string)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class WineToShopManager(models.Manager):
@@ -133,7 +133,7 @@ class WineToShopManager(models.Manager):
             kwargs['url'] = kwargs.get('shop').base_url + kwargs.get('url')
 
     def create_or_update(self, **kwargs):
-        self._form_url_inplace(self, kwargs)
+        self._form_url_inplace(kwargs)
 
         try:
             return self.create(**kwargs)
