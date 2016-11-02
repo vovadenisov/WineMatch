@@ -115,15 +115,18 @@
                         </div>
                         {% endblock mobile_buttons %}
                     </div>
+                    {% for shop in wine.get_shops %}
                     <div class="result-item__where">
                         <div class="result-item__where__store">
                             <div class="result-item__where__store__img">
-                                <a href=""><img src="{% static "img/logo.png" %}"></a>
+
+                                <a href="{{ shop.url }}"><img src="/media/{{ shop.shop.photo }}"></a>
                             </div>
                             <a class="result-item__where__store__text" href="">{{ wine.title }}</a>
-                            <p class="result-item__where__store__cost">1000р</p>
+                            <p class="result-item__where__store__cost">{{shop.price}}</p>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             {% endfor %}
         </div>

@@ -56,6 +56,9 @@ class Wine(models.Model):
     img = models.ImageField()
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
+    def get_shops(self):
+        return self.winetoshop_set.all()
+        #return [s.shop for s in shops]
 
     def get_name(self):
         return self.title
