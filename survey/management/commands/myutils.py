@@ -40,8 +40,25 @@ class Command(BaseCommand):
             self.update_wines()
         elif options['command'] == 'delete_all':
             self.delete_all()
+        elif options['command'] == 'remove_duplicates':
+            self.remove_duplicates()
         else:
             print ("Command not found!")
+
+    def remove_duplicates(self):
+        wines = Wine.objects.all()
+        for w in wines:
+            shops = [s for s in w.get_shops()]
+            res_shops = []
+            for s in shops:
+                if len(res_shops) != 0:
+                    if s.shop.name in [i.shop.name for i in res_shops]:
+                        print('delete', w.title, s.shop.name)
+                        s.delete()
+                    else:
+                        res_shops.append(s)
+                else:
+                    res_shops.append(s)
 
     def delete_all(self):
         favorites = Favorites.objects.all()
