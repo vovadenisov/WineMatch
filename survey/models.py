@@ -152,3 +152,6 @@ class WineToShop(models.Model):
     url = models.CharField(verbose_name='Ссылка на товар', max_length=255)
 
     objects = WineToShopManager()
+
+    def __str__(self):
+        return '{}--{}'.format(self.wine.title, self.shop.name)
