@@ -78,10 +78,10 @@ def survey(request):
         wines_list = match_response["wines"]
         wines = []
         for wine in wines_list:
-           try:
-               wines.append(Wine.objects.get(title=wine['title']))
-           except Wine.DoesNotExist:
-               pass #its ok to loose some wine
+            try:
+                wines.append(Wine.objects.get(title=wine['title']))
+            except Wine.DoesNotExist:
+                pass #its ok to loose some wine
         context.update({"wines": wines})
 
         return render_to_response(template_name="result.html", context=context)
@@ -118,9 +118,10 @@ def favorite(request):
     if request.user.is_authenticated():
         u = UserModel.objects.get(username=request.user)
         favorites = u.get_favorits()
+        wines = [ w.wine for w in favorites]
         context = {
             "request": request,
-            "wines": favorites
+            "wines": wines
         }
         return render_to_response(template_name="favorite.html", context=context)
     else:
