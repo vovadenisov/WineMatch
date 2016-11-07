@@ -102,6 +102,17 @@ body{
     cursor: pointer;
 }
 
+.answers .answer-item.not-even{
+    float: none;
+    margin-bottom: 10px;
+    width:60%;
+    height: 2em;
+}
+
+.answers .answer-item.not-even p{
+    margin-top: 0.2em;
+}
+
 .answers .answer-item:hover{
     background-color: rgba(95, 95, 95, 0.3);
 }

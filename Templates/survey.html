@@ -1,17 +1,17 @@
 {% extends "baseTemplate.html" %}
 
+{% load wine_color %}
 {% block script %}
 {% endblock %}
 
 {% block content %}
     <div class="survey-wrapper">
-{#        {% include "progress_bar.html" %}#}
         <div class="question item">
             {{ text }}
         </div>
         <div class="answers item">
             {% for answer in answers %}
-                <a href="{% url "surveys:survey_next" %}?answer={{ answer.id }}&survey={{ survey.id }}" class="answer-item">
+                <a href="{% url "surveys:survey_next" %}?answer={{ answer.id }}&survey={{ survey.id }}" class="answer-item {% if not answers|is_even %}not-even{% endif %}">
                     <p>{{ answer.text }}</p>
                 </a>
             {% endfor %}
