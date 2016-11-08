@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 PROJECT_NAME = 'WineMatch'
 
@@ -44,7 +44,14 @@ else:
     raise Exception("Разместите конфиг файл проекта в папке conf на уровень выше проекта")
 ALLOWED_HOSTS = []
 
-SECRET_KEY = "(n3o_nj%w^w+l-vm2np1&oiw3zwwr7@1zd($3d^nr(v8dkm5t+"
+SECRET_KEY = config.get('secret', 'KEY')
+
+debug_key = config.get("debug", "DEBUG")
+
+if debug_key == "TRUE":
+    DEBUG = True
+else:
+    DEBUG = False
 
 
 # Application definition
@@ -172,3 +179,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 SESSION_COOKIE_AGE = 12096000
 
 MATCH_URL = config.get('match_system', 'BASE_URL')
+
+ADMINS = (
+    ('Vladimir Denisov', 'v.denisov@corp.mail.ru'),
+)
