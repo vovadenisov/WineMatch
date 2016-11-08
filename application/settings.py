@@ -42,7 +42,6 @@ if os.path.exists(local_config_path):
     config.read(local_config_path)
 else:
     raise Exception("Разместите конфиг файл проекта в папке conf на уровень выше проекта")
-ALLOWED_HOSTS = []
 
 SECRET_KEY = config.get('secret', 'KEY')
 
@@ -172,7 +171,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = config.get('media', 'MEDIA_ROOT')
-STATICFILES_DIRS = os.path.join(SOURCE_ROOT, "static"),
+STATICFILES_DIRS = [os.path.join(SOURCE_ROOT, "static"),"/root/winematch/static"]
 
 AUTH_USER_MODEL = "users.UserModel"
 
