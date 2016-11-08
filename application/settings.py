@@ -56,6 +56,8 @@ else:
 
 # Application definition
 
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "78.155.218.63", "winematch.ru"]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
