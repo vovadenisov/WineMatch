@@ -14,8 +14,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 import configparser
 
-SOURCE_ROOT = (os.path.dirname(os.path.dirname(__file__))) + '/'
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+SOURCE_ROOT = (os.path.dirname(os.path.abspath(__file__))) + '/'
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -172,7 +172,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = config.get('media', 'MEDIA_ROOT')
 STATICFILES_DIRS = os.path.join(SOURCE_ROOT, "static"),
-STATIC_ROOT = "/root/winematch/static",
+STATIC_ROOT = "/root/winematch/static"
 
 AUTH_USER_MODEL = "users.UserModel"
 
