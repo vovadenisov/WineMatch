@@ -12,7 +12,6 @@ from survey.models import Survey, Question, Wine
 MAX_TRIES_COUNT = 3
 
 def main(request):
-    raise Exception()
     return render_to_response(template_name="main.html", context={"request":request})
 
 
