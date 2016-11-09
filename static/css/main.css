@@ -257,6 +257,10 @@ body{
     margin-top: 5px;
 }
 
+.slick-slide{
+    height: auto;
+}
+
 .feedback-wrapper,
 .feedback-wrapper-thx,
 .result-wrapper{
@@ -271,7 +275,6 @@ body{
 
 .result-item{
     width: 90%;
-    height: 100%;
     color: white!important;
 }
 
