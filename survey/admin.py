@@ -25,7 +25,7 @@ class BrokenWinesFilter(admin.SimpleListFilter):
 class Wine2ShopAdmin(admin.ModelAdmin):
     list_filter = (BrokenWinesFilter,)
     search_fields = ["wine__title"]
-    list_display = ["wine", "price"]
+    list_display = ["wine", "price", "shop"]
 
 admin.site.register(Country)
 admin.site.register(Wine)
