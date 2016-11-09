@@ -650,7 +650,7 @@ body{
     .feedback-wrapper,
     .result-wrapper{
         margin-top: 8em;
-        max-height: 60%;
+        max-height: 65%;
         font-size: 1em;
         padding-bottom: 1em;
     }
