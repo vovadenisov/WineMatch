@@ -258,7 +258,7 @@ body{
 }
 
 .slick-slide{
-    height: auto;
+    height: auto!important;
 }
 
 .feedback-wrapper,
