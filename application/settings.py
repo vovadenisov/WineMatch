@@ -55,7 +55,7 @@ else:
 
 # Application definition
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "78.155.218.63", "winematch.ru"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "78.155.218.63", "winematch.ru", "winematch"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -184,4 +184,14 @@ MATCH_URL = config.get('match_system', 'BASE_URL')
 
 ADMINS = (
     ('Vladimir Denisov', 'v.denisov@corp.mail.ru'),
+    ('Anastasiya Dudina', 'a.dyudina@corp.mail.ru'),
 )
+
+EMAIL_HOST = config.get('mailing', 'EMAIL_HOST')
+EMAIL_PORT = config.get('mailing', 'EMAIL_PORT')
+EMAIL_HOST_USER = config.get('mailing', 'EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config.get('mailing', 'EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+print(EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, SERVER_EMAIL, DEFAULT_FROM_EMAIL)
