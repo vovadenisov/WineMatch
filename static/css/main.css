@@ -716,7 +716,10 @@ body{
         display: none;
     }
 
-    .feedback-item__content__wine-info__select .b-button,
+    .feedback-item__content__wine-info__select .b-button{
+        height: 3em;
+    }
+
     .favorite-item__content__wine-info__select .b-button,
     .result-item__content__wine-info__select-mobile .b-button,
     .result-item__content__wine-info__select .b-button{
@@ -747,6 +750,10 @@ body{
         font-size: 0.65em;
     }
 
+
+    .feedback-item__content__wine-info__select .b-button:last-child{
+        margin-top: 0!important;
+    }
 
     .answers .answer-item{
         width: 80%;
@@ -810,10 +817,6 @@ body{
         margin-left: 0;
         height: 80%;
         margin-right: 0;
-    }
-
-    .feedback-item__content__wine img{
-        margin-left: 45%;
     }
 
     .feedback-item__content__wine-info__select{
