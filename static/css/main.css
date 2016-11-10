@@ -808,8 +808,7 @@ body{
     .feedback-item__content__wine img,
     .result-item__content__wine img{
         margin-left: 0;
-        width: 60%;
-        height: auto;
+        height: 80%;
         margin-right: 0;
     }
 
