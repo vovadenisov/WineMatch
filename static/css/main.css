@@ -433,8 +433,6 @@ body{
 .favorite-item__content__wine-info__select,
 .result-item__content__wine-info__select{
     float: left;
-    position: absolute;
-    bottom: 10px;
 }
 
 .result-item__content__wine-info__select{
@@ -597,11 +595,6 @@ body{
 
     .result-item__content__wine-info__select{
         width: 60%;
-    }
-
-    .result-item__content__wine-info__select-mobile{
-        position: absolute;
-        bottom: 40px;
     }
 
     .favorite-item__content__wine-info__select .b-button,
