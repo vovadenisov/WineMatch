@@ -699,6 +699,10 @@ body{
 
 @media only screen and (max-width : 500px) {
 
+    .result-item{
+        height: 100%!important;
+    }
+
     .result-item__where.js-active,
     .result-item__content_conteiner.js-active{
         margin-top: 0;
