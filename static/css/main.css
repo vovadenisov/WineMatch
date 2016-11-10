@@ -601,7 +601,7 @@ body{
 
     .result-item__content__wine-info__select-mobile{
         position: absolute;
-        bottom: -40px;
+        bottom: 40px;
     }
 
     .favorite-item__content__wine-info__select .b-button,
