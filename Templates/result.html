@@ -100,7 +100,9 @@
                                 {% endblock %}
                             </div>
                         </div>
-                        {% block mobile_buttons %}
+
+                    </div>
+                    {% block mobile_buttons %}
                         <div class="js-hide-on-selection result-item__content__wine-info__select-mobile">
                             {% if forloop.last %}
                             <a class="js-get-it b-button get-it" data-id="{{ wine.id }}">Я возьму!</a>
@@ -113,8 +115,7 @@
                         <div class="js-selected result-item__content__wine-info__select-mobile">
                             <a style="display: none" href="/" class="b-button see-more">На главную</a>
                         </div>
-                        {% endblock mobile_buttons %}
-                    </div>
+                    {% endblock mobile_buttons %}
                     {% for shop in wine.get_shops %}
                     <div class="result-item__where">
                         <div class="result-item__where__store">
