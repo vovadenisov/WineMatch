@@ -720,6 +720,7 @@ body{
         height: 3em;
     }
 
+    .feedback-item__content__wine-info__select .b-button,
     .favorite-item__content__wine-info__select .b-button,
     .result-item__content__wine-info__select-mobile .b-button,
     .result-item__content__wine-info__select .b-button{
