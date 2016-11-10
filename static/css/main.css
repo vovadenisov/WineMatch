@@ -718,6 +718,7 @@ body{
 
     .feedback-item__content__wine-info__select .b-button{
         height: 3em;
+        margin-left: 14%;
     }
 
     .feedback-item__content__wine-info__select .b-button,
