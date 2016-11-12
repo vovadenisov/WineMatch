@@ -15,7 +15,10 @@ MAX_TRIES_COUNT = 3
 
 def send_error_mail(message):
     admins_email = [email[1] for email in settings.ADMINS]
-    send_mail('Redirect to main', message, settings.SERVER_EMAIL, admins_email, fail_silently=False)
+    try:
+        send_mail('Redirect to main', message, settings.SERVER_EMAIL, admins_email, fail_silently=False)
+    except Exception:
+        pass
 
 
 def main(request):
