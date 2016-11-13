@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^ajax/answer/$', answer_review, name="answer_review"),
     url(r'^ajax/decline/$', decline_review, name="decline_review"),
     url(r'^ajax/selectwine/$', select_wine4review, name="select_wine4review"),
+
 ]
