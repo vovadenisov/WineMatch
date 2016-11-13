@@ -120,9 +120,9 @@
                         <div class="result-item__where__store">
                             <div class="result-item__where__store__img">
 
-                                <a href="{{ shop.url }}"><img src="/media/{{ shop.shop.photo }}"></a>
+                                <a href="{{ shop.url }}" onClick="ga('send', 'event', 'Link', 'Follow', '{{ shop.shop.code}}');"><img src="/media/{{ shop.shop.photo }}"></a>
                             </div>
-                            <a class="result-item__where__store__text" href="">{{ wine.title }}</a>
+                            <a class="result-item__where__store__text" href="" onClick="ga('send', 'event', 'Link', 'Follow', '{{ shop.shop.code}}');">{{ wine.title }}</a>
                             <p class="result-item__where__store__cost">{{shop.price}}</p>
                         </div>
                     </div>
