@@ -131,8 +131,8 @@ def result(request):
 
 def favorite(request):
     if request.user.is_authenticated():
-        u = UserModel.objects.get(username=request.user)
-        favorites = u.get_favorits()
+        user = UserModel.objects.get(username=request.user)
+        favorites = user.get_favorits()
         wines = [ w.wine for w in favorites]
         context = {
             "request": request,

@@ -26,6 +26,7 @@
 			<ul class="top-menu">
                 <li><h1>WineMatch</h1></li>
                 <li><a href="{% url "surveys:info" %}">Кто мы</a></li>
+                <li><a href="{% url "recommended" %}">Рекомендованное</a></li>
                 <li><a href="{% url "surveys:favorite" %}">Избранное</a></li>
                 {% if not request.user.is_authenticated or not request.user.vk_id %}
                     <li><a class="js-login">Войти</a></li>
