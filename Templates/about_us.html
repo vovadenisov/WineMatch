@@ -15,7 +15,7 @@
             </p>
         </div>
         <div class="start-now item">
-            <a href="{% url "surveys:survey_next" %}" class="b-button start-now-button">
+            <a onClick="ga('send', 'event', 'SelectWine', 'About');" href="{% url "surveys:survey_next" %}" class="b-button start-now-button">
                 Попробовать&nbspсейчас
             </a>
         </div>
