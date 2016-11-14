@@ -11,6 +11,11 @@ $(document).ready(function(){
             modal:true,
             close: function (e) {
                 localStorage.setItem("is_adult", "confirm")
+            },
+            buttons: { "OK": function() { $(this).dialog("close"); } },
+            closeOnEscape: false,
+            open: function(event, ui) {
+                $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
             }
         })
     }
