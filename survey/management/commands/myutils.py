@@ -42,8 +42,19 @@ class Command(BaseCommand):
             self.delete_all()
         elif options['command'] == 'remove_duplicates':
             self.remove_duplicates()
+        elif options['command'] == 'price':
+            self.price()
         else:
             print ("Command not found!")
+
+    def price(self):
+        wines = Wine.objects.all()
+        for w in wines:
+            shops =[s.price for s in w.get_shops()]
+            if len(shops) != 0:
+                average_price = round(sum(shops)/len(shops), 1)
+                print(average_price)
+                print('p', w.price)
 
     def remove_duplicates(self):
         wines = Wine.objects.all()
