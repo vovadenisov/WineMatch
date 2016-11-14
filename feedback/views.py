@@ -85,6 +85,7 @@ def select_wine4review(request):
 class Recommended(ListView):
     model = Feedback
     template_name = "favorite.html"
+    context_object_name = "wines"
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
@@ -102,6 +103,5 @@ class Recommended(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["request"] = self.request
-        context["wines"] = context["object_list"]
         context["recommended"] = True
         return context

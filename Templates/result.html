@@ -102,6 +102,18 @@
                         </div>
 
                     </div>
+                    {% for shop in wine.get_shops %}
+                        <div class="result-item__where">
+                            <div class="result-item__where__store">
+                                <div class="result-item__where__store__img">
+
+                                    <a href="{{ shop.url }}"><img src="/media/{{ shop.shop.photo }}"></a>
+                                </div>
+                                <a href="{{ shop.url }}" class="result-item__where__store__text" href="">{{ wine.title }}</a>
+                                <p class="result-item__where__store__cost">{{shop.price}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
                     {% block mobile_buttons %}
                         <div class="js-hide-on-selection result-item__content__wine-info__select-mobile">
                             {% if forloop.last %}
@@ -116,18 +128,6 @@
                             <a style="display: none" href="/" class="b-button see-more">На главную</a>
                         </div>
                     {% endblock mobile_buttons %}
-                    {% for shop in wine.get_shops %}
-                    <div class="result-item__where">
-                        <div class="result-item__where__store">
-                            <div class="result-item__where__store__img">
-
-                                <a href="{{ shop.url }}"><img src="/media/{{ shop.shop.photo }}"></a>
-                            </div>
-                            <a href="{{ shop.url }}" class="result-item__where__store__text" href="">{{ wine.title }}</a>
-                            <p class="result-item__where__store__cost">{{shop.price}}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
                 </div>
             {% endfor %}
         </div>
