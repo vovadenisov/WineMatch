@@ -8,11 +8,22 @@
     <script src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
     <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
     <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/is_adult.js' %}"></script>
     <script type="text/javascript">
         USER_VK_AUTH_URL = '{% url "users:vk_auth" %}';
     </script>
     <script src="{% static "js/nav-menu.js" %}"></script>
     <script src="{% static "jquery-ui/jquery-ui.min.js" %}"></script>
+    <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-87349920-1', 'auto');
+       ga('send', 'pageview');
+    </script>
+
     {% block script %}
     {% endblock %}
 </head>
@@ -26,10 +37,11 @@
 			<ul class="top-menu">
                 <li><h1>WineMatch</h1></li>
                 <li><a href="{% url "surveys:info" %}">Кто мы</a></li>
+                <li><a href="{% url "recommended" %}">Рекомендованное</a></li>
+                <li><a href="{% url "surveys:favorite" %}">Избранное</a></li>
                 {% if not request.user.is_authenticated or not request.user.vk_id %}
                     <li><a class="js-login">Войти</a></li>
                 {% else %}
-                    <li><a href="{% url "surveys:favorite" %}">Избранное</a></li>
                     <li><a href="{% url "users:logout" %}">Выйти</a></li>
                 {% endif %}
 

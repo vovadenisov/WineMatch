@@ -16,3 +16,4 @@ six==1.10.0
 tarantool==0.5.4
 wheel==0.24.0
 xlwt==1.0.0
+beautifulsoup4=0.0.1.

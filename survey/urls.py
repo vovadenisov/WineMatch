@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^result/$', result, name="result"),
     url(r'^favorite/$', favorite, name="favorite"),
     url(r'^feedback/$', feedback, name="feedback"),
-    url(r'^thnx/$', thnx_for_feedback, name="thnx")
+    url(r'^thnx/$', thnx_for_feedback, name="thnx"),
 ]
