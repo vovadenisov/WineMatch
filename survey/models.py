@@ -62,6 +62,7 @@ class Wine(models.Model):
     year = models.IntegerField(null=True, verbose_name="Год производства")
     price = models.FloatField(null=True, verbose_name="Цена")
     title = models.CharField(max_length=255, verbose_name="Название", unique=True)
+    translit_title = models.CharField(max_length=255, verbose_name="Название транслитом", unique=True, null=True, blank=True)
     img = models.ImageField(verbose_name="Картинка вина")
     country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name="Страна")
 

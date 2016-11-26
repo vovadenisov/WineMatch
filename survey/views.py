@@ -4,11 +4,12 @@ import requests
 from django.conf import settings
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render_to_response
+from django.core.mail import send_mail
 
+import survey.sphinx as sphinx
 from users.models import UserModel
 from feedback.models import Feedback
 from survey.models import Survey, Question, Wine
-from django.core.mail import send_mail
 
 MAX_TRIES_COUNT = 3
 
@@ -24,6 +25,25 @@ def send_error_mail(message):
 def main(request):
     return render_to_response(template_name="main.html", context={"request":request})
 
+def search(request):
+    q = request.GET.get('query')
+    if q:
+        wine_ids = sphinx.search(q)
+        print(wine_ids)
+        wines = {w.id: w for w in Wine.objects.filter(id__in=wine_ids)}
+        wines = [wines.get(id_) for id_ in wine_ids]
+    else:
+        wines = []
+    return render_to_response(template_name="result.html", context={'wines': wines})
+
+def wine(request, wine_id):
+   try:
+       wines = [
+           Wines.object.get(wine_id)
+       ]
+   except Wines.DoesNotExist:
+       wines = []
+   return render_to_response(template_name="result.html", context={'wines': wines})
 
 def survey(request):
     if request.user.is_authenticated():

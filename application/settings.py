@@ -128,6 +128,15 @@ DATABASES = {
         'PORT': config.get('database_default', 'DATABASE_PORT'),
         'OPTIONS': {'charset': 'utf8'},
         'CONN_MAX_AGE': 0
+    },
+    'sphinx': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
+        'PORT': 9312,
+        'USER': '',
+        'PASSWORD': '',
+        'NAME': '',
+        'OPTIONS': {'charset': 'utf8'},
     }
 }
 
