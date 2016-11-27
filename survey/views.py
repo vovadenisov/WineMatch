@@ -29,7 +29,6 @@ def search(request):
     q = request.GET.get('query')
     if q:
         wine_ids = sphinx.search(q)
-        print(wine_ids)
         wines = {w.id: w for w in Wine.objects.filter(id__in=wine_ids)}
         wines = [wines.get(id_) for id_ in wine_ids]
     else:

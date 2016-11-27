@@ -8,7 +8,7 @@ def _search(query):
     cur = connections['sphinx'].cursor()
     qry = '''
         SELECT id, weight() FROM {} WHERE MATCH(%s) LIMIT {}
-        OPTION field_weights=(title=100, tranlist_title=100, description=30, stylistic=30)
+        OPTION field_weights=(title=100, tranlist_title=100, food=60, description=30, stylistic=30)
     '''.format(SPHINX_INDEX, SPHINX_LIMIT)
 
     cur.execute(qry, (query,))
