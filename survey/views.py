@@ -38,9 +38,9 @@ def search(request):
 def wine(request, wine_id):
    try:
        wines = [
-           Wines.object.get(wine_id)
+           Wine.objects.get(id=wine_id)
        ]
-   except Wines.DoesNotExist:
+   except Wine.DoesNotExist:
        wines = []
    return render_to_response(template_name="result.html", context={'wines': wines})
 
