@@ -57,4 +57,4 @@ class Command(BaseCommand):
         for wine in Wine.objects.all():
             if not wine.img: continue
             self._process_wine(wine)
-            break
+            #break
