@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models, IntegrityError
 
-
+from application.settings import MEDIA_ROOT
 # Create your models here.
 
 
@@ -64,7 +64,12 @@ class Wine(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название", unique=True)
     translit_title = models.CharField(max_length=255, verbose_name="Название транслитом", null=True, blank=True)
     img = models.ImageField(verbose_name="Картинка вина")
+    image2share = models.ImageField(verbose_name="Картинка вина", null=True, blank=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name="Страна")
+
+    @property
+    def absolute_img_path(self):
+        return "{0}/..{1}".format(MEDIA_ROOT, self.img.url)
 
     def get_shops(self):
         return self.winetoshop_set.all()
