@@ -54,10 +54,9 @@ def filtration(request):
     for category in ('color', 'type'):
         category_list = request.GET.getlist(category)
         if category_list: categories.update({category + '__in': category_list})
-    year_lt = request.GET.get('year_lt')
-    if year_lt: categories.update({'year__lt': int(year_lt)})
-    year_gt = request.GET.get('year_gt')
-    if year_gt: categories.update({'year__gt': int(year_gt)})
+    for category in ('year__lt', 'year__gt', 'price__lt', 'price__lt'):
+        c = request.GET.get(category)
+        if c: categories.update({category: int(c)})
     wines = Wine.objects.filter(**categories)
     return render_to_response(template_name="result.html", context={'wines': wines})
 
