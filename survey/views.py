@@ -9,7 +9,8 @@ from django.core.mail import send_mail
 import survey.sphinx as sphinx
 from users.models import UserModel
 from feedback.models import Feedback
-from survey.models import Survey, Question, Wine
+from survey.models import Survey, Question, Wine, Country
+
 
 MAX_TRIES_COUNT = 3
 
@@ -43,6 +44,22 @@ def wine(request, wine_id):
    except Wine.DoesNotExist:
        wines = []
    return render_to_response(template_name="result.html", context={'wines': wines})
+
+def filtration(request):
+    categories = {}
+    country_list = request.GET.getlist('country')
+    if country_list:
+        category_list = [ Country.objects.get(name=с) for с in country_list]
+        categories.update({'country__in': category_list})
+    for category in ('color', 'type'):
+        category_list = request.GET.getlist(category)
+        if category_list: categories.update({category + '__in': category_list})
+    year_lt = request.GET.get('year_lt')
+    if year_lt: categories.update({'year__lt': int(year_lt)})
+    year_gt = request.GET.get('year_gt')
+    if year_gt: categories.update({'year__gt': int(year_gt)})
+    wines = Wine.objects.filter(**categories)
+    return render_to_response(template_name="result.html", context={'wines': wines})
 
 def survey(request):
     if request.user.is_authenticated():
