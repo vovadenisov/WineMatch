@@ -2,9 +2,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="{% static "css/nav_menu.css" %}">
     <link rel="stylesheet" href="{% static "jquery-ui/jquery-ui.css" %}">
     <link rel="stylesheet" href="{% static "css/main.css" %}">
+
     <script src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
     <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
     <script src="{% static 'js/auth.js' %}"></script>
@@ -26,6 +30,75 @@
     <script type="text/javascript" src="https://vk.com/js/api/share.js?93" charset="windows-1251"></script>
     {% block script %}
     {% endblock %}
+    <style>
+
+.top-menu__search {
+    width: 297px;
+    padding: 15px 0 15px 20px;
+    font-size: 16px;
+    border: 0 none;
+    height: 34px;
+    margin-right: 0;
+    color: white;
+    outline: none;
+    background: #AA7339;
+    float: left;
+    box-sizing: border-box;
+    transition: all 0.15s;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: white;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: white;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: white;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: white;
+}
+.top-menu__search_button {
+    border: 0 none;
+    background: #804C15 url('/media/128.png') center no-repeat;
+    width: 60px;
+    float: left;
+    padding: 0;
+    text-align: center;
+    height: 34px;
+    cursor: pointer;
+    background-size: 50% auto; //contain;
+}
+    </style>
+
+<script>
+   function getParameters() {
+     var searchString = window.location.search.substring(1),
+       params = searchString.split("&"),
+       hash = {};
+
+     if (searchString == "") return {};
+     for (var i = 0; i < params.length; i++) {
+       var val = params[i].split("=");
+       hash[unescape(val[0])] = decodeURIComponent(val[1]);
+     }
+
+     return hash;
+   }
+
+    $(document).ready(function() {
+        var param = getParameters();
+        if (typeof param.query != 'undefined') {
+            $('.js-search-value').val(param.query);
+        }
+        $('.js-search').click(function() {
+            var query = $('.js-search-value').val();
+            if (query && query.length > 2) {
+                window.location.href = '/search/?query=' + query;
+            }
+        });
+    });
+</script>
 </head>
 <body>
 
@@ -36,6 +109,10 @@
             <a class="close-menu" style="display: none"></a>
 			<ul class="top-menu">
                 <li><h1>WineMatch</h1></li>
+                <li>
+                    <input class="top-menu__search js-search-value" type="text" name="search" placeholder="поиск винишка."/>
+                    <input type="button" name="search_button" class="js-search top-menu__search_button"/>
+                </li>
                 <li><a href="{% url "surveys:info" %}">Кто мы</a></li>
                 <li><a href="{% url "recommended" %}">Рекомендованное</a></li>
                 <li><a href="{% url "surveys:favorite" %}">Избранное</a></li>
