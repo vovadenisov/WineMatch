@@ -64,7 +64,7 @@ class Wine(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название", unique=True)
     translit_title = models.CharField(max_length=255, verbose_name="Название транслитом", null=True, blank=True)
     img = models.ImageField(verbose_name="Картинка вина")
-    image2share = models.ImageField(verbose_name="Картинка вина", null=True, blank=True)
+    image2share = models.ImageField(verbose_name="Картинка вина для шаринга", null=True, blank=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name="Страна")
 
     @property
