@@ -5,6 +5,23 @@
 {% block script %}
     <link href="{% static "css/flags.css"%}" rel="stylesheet">
     <link rel="stylesheet" href="{% static "fontawesome/css/font-awesome.min.css" %}">
+    <script>
+       $('.wine-item__types__icon').hover(
+           function() {
+               var id = $( this ).data('id');
+               $('#' + id).attr("visibility", "visible");
+           }, 
+           function() {
+               var id = $( this ).data('id');
+               $('#' + id).attr("visibility", "hidden");
+           }
+       );
+    </script>
+    <style>
+        .wine-item__types__description {
+            visibility: hidden
+        }
+   </style>
 {% endblock %}
 
 {% block content %}
@@ -23,24 +40,24 @@
                                 background-size: contain;"></div>
                 </div>
                 <div class="wine-item__types">
-                    <div class="wine-item__types__color">
+                    <div class="wine-item__types__color wine-item__types__description" id="color-{[ wine.id }}">
                         <span>{{ wine.color }}</span>
                     </div>
-                    <div class="wine-item__types__type">
+                    <div class="wine-item__types__type wine-item__types__description" id="type-{{ wine.id }}">
                         <span>{{ wine.type }}</span>
                     </div>
-                    <div class="wine-item__types__country">
+                    <div class="wine-item__types__country wine-item__types__description" id="flag-{{ wine.id }}">
                         <span>{{ wine.country}}</span>
                     </div>
                 </div>
                 <div class="wine-item__types">
-                    <div class="wine-item__types__color">
+                    <div class="wine-item__types__color wine-item__types__icon" data-id="color-{[ wine.id }}">
                         <span style="min-width: 15px; height: 15px; display: inline-block;" class="span-color {{ wine.color|color }} icon"></span>
                     </div>
-                    <div class="wine-item__types__type">
+                    <div class="wine-item__types__type wine-item__types__icon" data-id="type-{{ wine.id }}">
                         <span style="min-width: 15px; height: 15px; display: inline-block;" class="span-type dry icon"></span>
                     </div>
-                    <div class="wine-item__types__country">
+                    <div class="wine-item__types__country wine-item__types__icon" data-id="flag-{{ wine.id }}">
                         <span style="min-width: 15px; height: 15px; display: inline-block;" class="flag flag-{{ wine.country.short_name }} icon"></span>
                     </div>
                 </div>
