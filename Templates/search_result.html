@@ -3,8 +3,9 @@
 {% load wine_color %}
 {% load staticfiles %}
 {% block script %}
+    <link href="{% static "css/flags.css"%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "fontawesome/css/font-awesome.min.css" %}">
 {% endblock %}
-
 
 {% block content %}
     <div class="search-wrapper">
@@ -12,12 +13,12 @@
         {% for wine in wines  %}
             <a href="/wine/{{ wine.id }}">
             <div class="wine-item">
-                <div class="wine-item__title">
+                <div style="min-height: 42px" class="wine-item__title">
                     <span>{{ wine.title }}</span>
                 </div>
                 <div class="wine-item__img">
                     <div class="wine-item__img_background" 
-                         style="height: 200px; 
+                         style="height: 190px; 
                                 background: url('{% if wine.img %}/media/{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}') no-repeat center center;
                                 background-size: contain;"></div>
                 </div>
@@ -34,17 +35,17 @@
                 </div>
                 <div class="wine-item__types">
                     <div class="wine-item__types__color">
-                        <span style="min-width: 15px; height: 15px;" class="span-color {{ wine.color|color }} icon"></span>
+                        <span style="min-width: 15px; height: 15px; display: inline-block;" class="span-color {{ wine.color|color }} icon"></span>
                     </div>
                     <div class="wine-item__types__type">
-                        <span style="min-width: 15px; height: 15px;" class="span-type dry icon"></span>
+                        <span style="min-width: 15px; height: 15px; display: inline-block;" class="span-type dry icon"></span>
                     </div>
                     <div class="wine-item__types__country">
-                        <span style="min-width: 15px; height: 15px;" class="flag flag-{{ wine.country.short_name }} icon"></span>
+                        <span style="min-width: 15px; height: 15px; display: inline-block;" class="flag flag-{{ wine.country.short_name }} icon"></span>
                     </div>
                 </div>
                 <div class="wine-item__price">
-                    <span>{{ wine.price }} Руб</span>
+                    <span>{{ wine.price|floatformat:"0" }} Руб</span>
                 </div>
             </div>
             </a>
