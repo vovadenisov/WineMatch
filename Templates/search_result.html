@@ -8,6 +8,7 @@
 
 {% block content %}
     <div class="search-wrapper">
+{% if wines %}
         {% for wine in wines  %}
             <a href="/wine/{{ wine.id }}">
             <div class="wine-item">
@@ -15,7 +16,10 @@
                     <span>{{ wine.title }}</span>
                 </div>
                 <div class="wine-item__img">
-                    <img src="{% if wine.img %}{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}">
+                    <div class="wine-item__img_background" 
+                         style="height: 200px; 
+                                background: url('{% if wine.img %}/media/{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}') no-repeat center center;
+                                background-size: contain;"></div>
                 </div>
                 <div class="wine-item__types">
                     <div class="wine-item__types__color">
@@ -30,13 +34,13 @@
                 </div>
                 <div class="wine-item__types">
                     <div class="wine-item__types__color">
-                        <span class="span-color {{ wine.color|color }} icon"></span>
+                        <span style="min-width: 15px; height: 15px;" class="span-color {{ wine.color|color }} icon"></span>
                     </div>
                     <div class="wine-item__types__type">
-                        <span class="span-type dry icon"></span>
+                        <span style="min-width: 15px; height: 15px;" class="span-type dry icon"></span>
                     </div>
                     <div class="wine-item__types__country">
-                        <span class="flag flag-{{ wine.country.short_name }} icon"></span>
+                        <span style="min-width: 15px; height: 15px;" class="flag flag-{{ wine.country.short_name }} icon"></span>
                     </div>
                 </div>
                 <div class="wine-item__price">
@@ -45,5 +49,10 @@
             </div>
             </a>
         {% endfor %}
+    {% else %}
+    <div class="feedback-wrapper-thx">
+        <h2>Ой, здесь ничего нет :(</h2>
     </div>
+    {% endif %}
+  </div>
 {% endblock %}

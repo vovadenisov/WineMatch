@@ -677,6 +677,10 @@ body{
         margin-right: 50px;
     }
 
+    .wine-item__img_background {
+        height: 250px;
+    }
+
     .result-item__content__wine-info__info div{
         float: none;
         margin-left: 0;
