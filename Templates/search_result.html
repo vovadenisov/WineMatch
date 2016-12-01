@@ -6,22 +6,24 @@
     <link href="{% static "css/flags.css"%}" rel="stylesheet">
     <link rel="stylesheet" href="{% static "fontawesome/css/font-awesome.min.css" %}">
     <script>
+       $(document).ready(function() {
        $('.wine-item__types__icon').hover(
            function() {
                var id = $( this ).data('id');
-               $('#' + id).attr("visibility", "visible");
+               $('#' + id).css({'opacity': 1}); //.fadeIn(); //.attr("visibility", "visible");
            }, 
            function() {
                var id = $( this ).data('id');
-               $('#' + id).attr("visibility", "hidden");
+               $('#' + id).css({'opacity': 0});//.fadeOut(); //attr("visibility", "hidden");
            }
        );
+       });
     </script>
     <style>
-        .wine-item__types__description {
-            visibility: hidden
-        }
-   </style>
+       .wine-item__types__description {
+           opacity: 0;
+       }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -40,7 +42,7 @@
                                 background-size: contain;"></div>
                 </div>
                 <div class="wine-item__types">
-                    <div class="wine-item__types__color wine-item__types__description" id="color-{[ wine.id }}">
+                    <div class="wine-item__types__color wine-item__types__description" id="color-{{ wine.id }}">
                         <span>{{ wine.color }}</span>
                     </div>
                     <div class="wine-item__types__type wine-item__types__description" id="type-{{ wine.id }}">
@@ -51,7 +53,7 @@
                     </div>
                 </div>
                 <div class="wine-item__types">
-                    <div class="wine-item__types__color wine-item__types__icon" data-id="color-{[ wine.id }}">
+                    <div class="wine-item__types__color wine-item__types__icon" data-id="color-{{ wine.id }}">
                         <span style="min-width: 15px; height: 15px; display: inline-block;" class="span-color {{ wine.color|color }} icon"></span>
                     </div>
                     <div class="wine-item__types__type wine-item__types__icon" data-id="type-{{ wine.id }}">
