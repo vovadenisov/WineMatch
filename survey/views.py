@@ -22,6 +22,10 @@ def send_error_mail(message):
         pass
 
 
+def search_result(request):
+    return render_to_response(template_name="search_result.html", context={"request":request})
+
+
 def main(request):
     return render_to_response(template_name="main.html", context={"request":request})
 
