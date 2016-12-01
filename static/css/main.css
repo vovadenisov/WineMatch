@@ -662,6 +662,11 @@ body{
 
 @media only screen and (max-width : 800px) {
 
+    .top-menu__search {
+        width: 50%;
+        margin-left: 20%;
+    }
+
     .search-wrapper{
         width: 600px;
         margin-top: 7em;
