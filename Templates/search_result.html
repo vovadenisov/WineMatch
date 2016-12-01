@@ -1,0 +1,49 @@
+{% extends "baseTemplate.html" %}
+
+{% load wine_color %}
+{% load staticfiles %}
+{% block script %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="search-wrapper">
+        {% for wine in "asdfasdfasdfasdfasdfasdf" %}
+            <a href="">
+            <div class="wine-item">
+                <div class="wine-item__title">
+                    <span>Очень сложное название вкусного вина</span>
+                </div>
+                <div class="wine-item__img">
+                    <img src="{% if wine.img %}{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}">
+                </div>
+                <div class="wine-item__types">
+                    <div class="wine-item__types__color">
+                        <span>{{ wine.color }}Красое</span>
+                    </div>
+                    <div class="wine-item__types__type">
+                        <span>{{ wine.type }}Сухое</span>
+                    </div>
+                    <div class="wine-item__types__country">
+                        <span>{{ wine.country}}Россия</span>
+                    </div>
+                </div>
+                <div class="wine-item__types">
+                    <div class="wine-item__types__color">
+                        <span class="span-color {{ wine.color|color }} icon"></span>
+                    </div>
+                    <div class="wine-item__types__type">
+                        <span class="span-type dry icon"></span>
+                    </div>
+                    <div class="wine-item__types__country">
+                        <span class="flag flag-{{ wine.country.short_name }} icon"></span>
+                    </div>
+                </div>
+                <div class="wine-item__price">
+                    <span>1799 Руб</span>
+                </div>
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
