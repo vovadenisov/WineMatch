@@ -21,7 +21,7 @@
 body{
     background: #1B0D07 url(/static/img/background-wine.jpg);
     background-size: cover;
-    font-family: "Open Sans Condensed";
+    font-family: "Open Sans Condensed"!important;
     text-align: center;
 }
 

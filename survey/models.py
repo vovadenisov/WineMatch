@@ -71,6 +71,7 @@ class Sort(models.Model):
         verbose_name = "Сорт винограда"
         verbose_name_plural = "Сорт винограда"
 
+
 class Wine(models.Model):
     color = models.CharField(max_length=10, verbose_name="Цвет")
     type = models.CharField(max_length=50, verbose_name="Сладость")

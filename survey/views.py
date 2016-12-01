@@ -26,6 +26,7 @@ def send_error_mail(message):
 def main(request):
     return render_to_response(template_name="main.html", context={"request":request})
 
+
 def search(request):
     q = request.GET.get('query')
     if q:
@@ -36,6 +37,7 @@ def search(request):
         wines = []
     return render_to_response(template_name="result.html", context={'wines': wines})
 
+
 def wine(request, wine_id):
    try:
        wines = [
@@ -44,6 +46,11 @@ def wine(request, wine_id):
    except Wine.DoesNotExist:
        wines = []
    return render_to_response(template_name="result.html", context={'wines': wines})
+
+
+def mobile_filtration(request):
+    return render_to_response(template_name="filtration.html")
+
 
 def filtration(request):
     categories = {}
@@ -61,6 +68,7 @@ def filtration(request):
     if sort: categories.update({'wine_to_sort__name': sort})
     wines = Wine.objects.filter(**categories)
     return render_to_response(template_name="result.html", context={'wines': wines})
+
 
 def survey(request):
     if request.user.is_authenticated():

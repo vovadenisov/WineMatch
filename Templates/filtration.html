@@ -1,0 +1,66 @@
+{% extends "baseTemplate.html" %}
+
+{% load wine_color %}
+{% load staticfiles %}
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
+    <link rel="stylesheet" href="{% static "css/filtering.css" %}" />
+    {{ super }}
+{% endblock %}
+
+{% block content %}
+<div class="row filter-content">
+    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+        <div class="filters__container">
+            <div class="filters__container__block flex_container flex_horizontal_between">
+                <span class="filters__container__title">Фильтры</span>
+                <span class="filters__container__title filters__clearall">Очистить все</span>
+            </div>
+            <div class="flex_container flex_vertical_stretch text-left flex_wrapper">
+                <div class="filters__container__block filters__container__block__half">
+                    <span class="filters__container__title">Цвет</span>
+                    <div class="filters__checkbox__container">
+                        <input type="checkbox" name="Красное" value="" id="Красное">
+                        <label for="Красное"></label>
+                        <span class="filters__container__subtitle">Красное</span>
+                    </div>
+                    <div class="filters__checkbox__container">
+                        <input type="checkbox" name="Белое" value="" id="Белое">
+                        <label for="Белое"></label>
+                        <span class="filters__container__subtitle">Белое</span>
+                    </div>
+                    <div class="filters__checkbox__container">
+                        <input type="checkbox" name="Розовое" value="" id="Розовое">
+                        <label for="Розовое"></label>
+                        <span class="filters__container__subtitle">Розовое</span>
+                    </div>
+                </div>
+                <div class="filters__container__block filters__container__block__half">
+                    <span class="filters__container__title">Сладость</span>
+                    <div class="filters__checkbox__container">
+                        <input type="checkbox" name="сухое" value="" id="сухое">
+                        <label for="сухое"></label>
+                        <span class="filters__container__subtitle">сухое</span>
+                    </div>
+                    <div class="filters__checkbox__container">
+                        <input type="checkbox" name="полусухое" value="" id="полусухое">
+                        <label for="полусухое"></label>
+                        <span class="filters__container__subtitle">полусухое</span>
+                    </div>
+                    <div class="filters__checkbox__container">
+                        <input type="checkbox" name="полусладкое" value="" id="полусладкое">
+                        <label for="полусладкое"></label>
+                        <span class="filters__container__subtitle">полусладкое</span>
+                    </div>
+                    <div class="filters__checkbox__container">
+                        <input type="checkbox" name="сладкое" value="" id="сладкое">
+                        <label for="сладкое"></label>
+                        <span class="filters__container__subtitle">сладкое</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
