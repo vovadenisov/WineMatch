@@ -464,6 +464,12 @@ body{
     border-radius: 10px;
 }
 
+.desktop-share{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .result-item-style{
     background-image: url("/static/img/110580.svg");
 }

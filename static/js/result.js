@@ -128,5 +128,14 @@ function csrfSafeMethod(method) {
         for (var i = rating + 1; i <= 5; ++i) {
             $('#js-rating-' + i).removeClass('fa-star').addClass('fa-star-o');
         }    
-    });  
+    });
+
+    $('.desktop-share').each(function(){
+        var title = "Я пью " + $(this).closest(".result-item__content_conteiner").find(".js-wine-name").text();
+        var url = "http://winematch.ru";
+        var description = $(this).closest(".result-item__content_conteiner").find(".js-stylistic").text();
+        var image = $(this).closest(".result-item__content_conteiner").find("img").attr("src");
+        var button = VK.Share.button({url: url, title: title, description: description, image: url+image}, {type: 'round_nocount', text: "поделиться"})
+        $(this).append(button)
+    });
 });
