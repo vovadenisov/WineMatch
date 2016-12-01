@@ -8,24 +8,24 @@
 
 {% block content %}
     <div class="search-wrapper">
-        {% for wine in "asdfasdfasdfasdfasdfasdf" %}
-            <a href="">
+        {% for wine in wines  %}
+            <a href="/wine/{{ wine.id }}">
             <div class="wine-item">
                 <div class="wine-item__title">
-                    <span>Очень сложное название вкусного вина</span>
+                    <span>{{ wine.title }}</span>
                 </div>
                 <div class="wine-item__img">
                     <img src="{% if wine.img %}{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}">
                 </div>
                 <div class="wine-item__types">
                     <div class="wine-item__types__color">
-                        <span>{{ wine.color }}Красое</span>
+                        <span>{{ wine.color }}</span>
                     </div>
                     <div class="wine-item__types__type">
-                        <span>{{ wine.type }}Сухое</span>
+                        <span>{{ wine.type }}</span>
                     </div>
                     <div class="wine-item__types__country">
-                        <span>{{ wine.country}}Россия</span>
+                        <span>{{ wine.country}}</span>
                     </div>
                 </div>
                 <div class="wine-item__types">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="wine-item__price">
-                    <span>1799 Руб</span>
+                    <span>{{ wine.price }} Руб</span>
                 </div>
             </div>
             </a>

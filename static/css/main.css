@@ -657,7 +657,7 @@ body{
     text-align: center;
     height: 26px;
     cursor: pointer;
-    background-size: 50% auto; //contain;
+    background-size: 35% auto; //contain;
 }
 
 @media only screen and (max-width : 800px) {
