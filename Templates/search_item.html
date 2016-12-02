@@ -6,7 +6,7 @@
             <span>{{ wine.title }}</span>
         </div>
         <div class="wine-item__img">
-            <img src="{% if wine.img %}{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}">
+            <img src="{% if wine.img %}{{ wine.img.url }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}">
         </div>
         <div class="wine-item__types">
             <div class="wine-item__types__color">

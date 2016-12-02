@@ -70,8 +70,11 @@ def filtration(request):
         if c: categories.update({category: int(c)})
     #sort = request.GET.get('sort')
     #if sort: categories.update({'wine_to_sort__name': sort})
-    wines = Wine.objects.select_related("country").filter(**categories)[:50]
-    return render_to_response("filter_results.html", context={"wines": wines, })
+    countries = [c.name for c in Country.objects.all()]
+    wines = Wine.objects.select_related("country").filter(**categories)[:5]
+    return render_to_response("filter_results.html", context={ "wines": wines,
+                                                              "countries" : countries,
+                                                              })
 
 
 def survey(request):
