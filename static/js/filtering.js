@@ -9,4 +9,25 @@ $(document).ready(function () {
         var content = $(this).text();
         $(this).closest(".js-choice-container").find('.countryChoice').val(content);
     });
+
+    console.log("input")
+
+    $("input").on("change", function(){
+        console.log("change");
+        var form = $(this).closest("form")
+        var data = form.serialize()
+        var url = form.data("url")
+        $.ajax({
+            url: url,
+            data: data,
+            method: "get",
+            success: function(data){
+                var cont = $(".js-container");
+                cont.html(data)
+            },
+            error: function(data){
+                alert("error")
+            }
+        })
+    })
 });

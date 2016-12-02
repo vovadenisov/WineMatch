@@ -12,6 +12,7 @@
 
 {% block content %}
 <div class="row filter-content">
+    <form class="desktop_form" data-url="{% url "surveys:filtration" %}">
     <div class="desktop-filters col-lg-4 col-md-5 col-sm-12 col-xs-12">
         <div class="filters__container">
             <div class="filters__container__block flex_container flex_horizontal_between">
@@ -22,17 +23,17 @@
                 <div class="filters__container__block filters__container__block__half">
                     <span class="filters__container__title">Цвет</span>
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="Красное" value="" id="Красное">
+                        <input type="checkbox" name="color" value="красное" id="Красное">
                         <label for="Красное"></label>
                         <span class="filters__container__subtitle">Красное</span>
                     </div>
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="Белое" value="" id="Белое">
+                        <input type="checkbox" name="color" value="белое" id="Белое">
                         <label for="Белое"></label>
                         <span class="filters__container__subtitle">Белое</span>
                     </div>
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="Розовое" value="" id="Розовое">
+                        <input type="checkbox" name="color" value="розовое" id="Розовое">
                         <label for="Розовое"></label>
                         <span class="filters__container__subtitle">Розовое</span>
                     </div>
@@ -40,22 +41,22 @@
                 <div class="filters__container__block filters__container__block__half">
                     <span class="filters__container__title">Сладость</span>
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="сухое" value="" id="сухое">
+                        <input type="checkbox" name="type" value="сухое" id="сухое">
                         <label for="сухое"></label>
                         <span class="filters__container__subtitle">сухое</span>
                     </div>
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="полусухое" value="" id="полусухое">
+                        <input type="checkbox" name="type" value="полусухое" id="полусухое">
                         <label for="полусухое"></label>
                         <span class="filters__container__subtitle">полусухое</span>
                     </div>
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="полусладкое" value="" id="полусладкое">
+                        <input type="checkbox" name="type" value="полусладкое" id="полусладкое">
                         <label for="полусладкое"></label>
                         <span class="filters__container__subtitle">полусладкое</span>
                     </div>
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="сладкое" value="" id="сладкое">
+                        <input type="checkbox" name="type" value="сладкое" id="сладкое">
                         <label for="сладкое"></label>
                         <span class="filters__container__subtitle">сладкое</span>
                     </div>
@@ -67,11 +68,11 @@
             <div class="flex_container flex_wrapper ">
                 <div class="filters__container__block__half filters__container__textinput text-left">
                     <span class="filters__container__subtitle">От</span>
-                    <input type="text" name="" value="">
+                    <input type="text" name="price__gt" value="">
                 </div>
                 <div class="filters__container__block__half filters__container__textinput text-right">
                     <span class="filters__container__subtitle">До</span>
-                    <input type="text" name="" value="">
+                    <input type="text" name="price__lt" value="">
                 </div>
             </div>
         </div>
@@ -80,17 +81,17 @@
             <div class="flex_container flex_wrapper ">
                 <div class="filters__container__block__half filters__container__textinput text-left">
                     <span class="filters__container__subtitle">От</span>
-                    <input type="text" name="" value="">
+                    <input type="text" name="year__gt" value="">
                 </div>
                 <div class="filters__container__block__half filters__container__textinput text-right">
                     <span class="filters__container__subtitle">До</span>
-                    <input type="text" name="" value="">
+                    <input type="text" name="year__lt" value="">
                 </div>
             </div>
         </div>
         <div class="filters__container__block js-choice-container">
             <div class="filters__dropdown__container text-left toggleDropdown">
-                <input class="countryChoice" id="countryChoice" type="text" name="" value="" placeholder="Страна" disabled>
+                <input class="countryChoice" id="countryChoice" type="text" name="country" value="" placeholder="Страна" disabled>
                 <span class="filters__container__title open__dropdown "><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
             </div>
             <ul class="filters__dropdown__body text-left active">
@@ -113,9 +114,9 @@
             </ul>
         </div>
     </div>
+    </form>
 
-
-
+    <form class="mobile_form" data-url="{% url "surveys:filtration" %}">
     <div class="mobile-filters col-sm-12 col-xs-12">
         <div class="col-sm-12 col-xs-12">
             <span class="filters__container__title">Фильтры</span>
@@ -128,21 +129,21 @@
             <ul class="filters__dropdown__body text-left">
                 <li class="filters__container__subtitle">
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="Красное-mobile" value="" id="Красное-mobile">
+                        <input type="checkbox" name="color" value="красное" id="Красное-mobile">
                         <label for="Красное-mobile"></label>
                         <span class="filters__container__subtitle">Красное</span>
                     </div>
                 </li>
                 <li class="filters__container__subtitle">
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="Белое-mobile" value="" id="Белое-mobile">
+                        <input type="checkbox" name="color" value="белое" id="Белое-mobile">
                         <label for="Белое-mobile"></label>
                         <span class="filters__container__subtitle">Белое</span>
                     </div>
                 </li>
                 <li class="filters__container__subtitle">
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="Розовое-mobile" value="" id="Розовое-mobile">
+                        <input type="checkbox" name="color" value="розовое" id="Розовое-mobile">
                         <label for="Розовое-mobile"></label>
                         <span class="filters__container__subtitle">Розовое</span>
                     </div>
@@ -157,28 +158,28 @@
             <ul class="filters__dropdown__body text-left">
                 <li class="filters__container__subtitle">
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="сухое-mobile" value="" id="сухое-mobile">
+                        <input type="checkbox" name="type" value="сухое" id="сухое-mobile">
                         <label for="сухое-mobile"></label>
                         <span class="filters__container__subtitle">сухое</span>
                     </div>
                 </li>
                 <li class="filters__container__subtitle">
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="полусухое-mobile" value="" id="полусухое-mobile">
+                        <input type="checkbox" name="type" value="полусухое" id="полусухое-mobile">
                         <label for="полусухое-mobile"></label>
                         <span class="filters__container__subtitle">полусухое</span>
                     </div>
                 </li>
                 <li class="filters__container__subtitle">
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="полусладкое-mobile" value="" id="полусладкое-mobile">
+                        <input type="checkbox" name="type" value="полусладкое" id="полусладкое-mobile">
                         <label for="полусладкое-mobile"></label>
                         <span class="filters__container__subtitle">полусладкое</span>
                     </div>
                 </li>
                 <li class="filters__container__subtitle">
                     <div class="filters__checkbox__container">
-                        <input type="checkbox" name="сладкое-mobile" value="" id="сладкое-mobile">
+                        <input type="checkbox" name="type" value="сладкое" id="сладкое-mobile">
                         <label for="сладкое-mobile"></label>
                         <span class="filters__container__subtitle">сладкое</span>
                     </div>
@@ -195,13 +196,13 @@
                     <li>
                         <div class="filters__container__block__half filters__container__textinput text-left">
                             <span class="filters__container__subtitle">От</span>
-                            <input type="text" name="" value="">
+                            <input type="text" name="price__gt" value="">
                         </div>
                     </li>
                     <li>
                         <div class="filters__container__block__half filters__container__textinput text-right">
                             <span class="filters__container__subtitle">До</span>
-                            <input type="text" name="" value="">
+                            <input type="text" name="price__lt" value="">
                         </div>
                     </li>
                 </ul>
@@ -217,13 +218,13 @@
                     <li>
                         <div class="filters__container__block__half filters__container__textinput text-left">
                             <span class="filters__container__subtitle">От</span>
-                            <input type="text" name="" value="">
+                            <input type="text" name="year__gt" value="">
                         </div>
                     </li>
                     <li>
                         <div class="filters__container__block__half filters__container__textinput text-right">
                             <span class="filters__container__subtitle">До</span>
-                            <input type="text" name="" value="">
+                            <input type="text" name="year__lt" value="">
                         </div>
                     </li>
                 </ul>
@@ -231,7 +232,7 @@
         </div>
         <div class="col-sm-12 col-xs-12 mobile-filters-menu-item js-choice-container">
             <div class="filters__dropdown__container text-left toggleDropdown">
-                <input class="countryChoice" id="countryChoice" type="text" name="" value="" placeholder="Страна" disabled>
+                <input class="countryChoice" id="countryChoice" type="text" name="country" value="" placeholder="Страна" disabled>
                 <span class="mobile-filters__container__title open__dropdown"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
             </div>
             <ul class="filters__dropdown__body text-left active">
@@ -254,13 +255,11 @@
             </ul>
         </div>
     </div>
+    </form>
 
 
 
-    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
-        {% for wine in "asdfasdfasdfasdfasdfasdf" %}
-            {% include "search_item.html" %}
-        {% endfor %}
+    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 js-container">
     </div>
 </div>
 {% endblock %}

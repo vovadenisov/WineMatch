@@ -2,7 +2,7 @@ import json
 import requests
 
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse
 from django.shortcuts import render_to_response
 from django.core.mail import send_mail
 
@@ -58,20 +58,20 @@ def mobile_filtration(request):
 
 def filtration(request):
     categories = {}
-    country_list = request.GET.getlist('country')
-    if country_list:
-        category_list = [ Country.objects.get(name=с) for с in country_list]
-        categories.update({'country__in': category_list})
-    for category in ('color', 'type', 'region'):
+    #country_list = request.GET.getlist('country')
+    country = request.GET.get('country')
+    if country:
+        categories.update({'country__name': country})
+    for category in ('color', 'type'):
         category_list = request.GET.getlist(category)
         if category_list: categories.update({category + '__in': category_list})
-    for category in ('year__lt', 'year__gt', 'price__lt', 'price__lt'):
+    for category in ('year__lt', 'year__gt', 'price__lt', 'price__gt'):
         c = request.GET.get(category)
         if c: categories.update({category: int(c)})
-    sort = request.GET.get('sort')
-    if sort: categories.update({'wine_to_sort__name': sort})
-    wines = Wine.objects.filter(**categories)
-    return render_to_response(template_name="result.html", context={'wines': wines})
+    #sort = request.GET.get('sort')
+    #if sort: categories.update({'wine_to_sort__name': sort})
+    wines = Wine.objects.filter(**categories)[:5]
+    return render_to_response("filter_results.html", context={"wines": wines})
 
 
 def survey(request):
