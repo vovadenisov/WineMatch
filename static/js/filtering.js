@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 
 
-    $("input").on("change", function(){
+    $("form").find("input").on("change", function(){
         var form = $(this).closest("form");
         var data = form.serialize();
         var url = form.data("url");
