@@ -1,6 +1,6 @@
 {% load wine_color %}
 {% load staticfiles %}
-<a href="">
+<a href="{% url "surveys:wine" wine.id %}">
     <div class="wine-item">
         <div class="wine-item__title">
             <span>{{ wine.title }}</span>

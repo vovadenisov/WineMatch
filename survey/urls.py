@@ -14,6 +14,5 @@ urlpatterns = [
     url(r'^filtration/$', filtration, name='filtration'),
     url(r'^filters/$', mobile_filtration, name='filters'),
     url(r'^wine/(?P<wine_id>\d+)', wine, name='wine'),
-    url(r'^wine/(?P<wine_id>\d+)', wine, name='wine'),
     url(r'^search_result/', search_result, name='search_result')
 ]
