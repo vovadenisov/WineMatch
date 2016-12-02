@@ -13,7 +13,7 @@ from survey.models import Survey, Question, Wine, Country
 
 
 MAX_TRIES_COUNT = 3
-
+WINES_LIMIT = 21
 
 def send_error_mail(message):
     admins_email = [email[1] for email in settings.ADMINS]
@@ -60,8 +60,8 @@ def filtration(request):
     categories = {}
     country_list = request.GET.getlist('country')
     if country_list:
-        category_list = [ Country.objects.get(name=с) for с in country_list]
-        categories.update({'country__in': category_list})
+        #category_list = [ Country.objects.get(name=с) for с in country_list]
+        categories.update({'country_id__in': category_list})
     for category in ('color', 'type', 'region'):
         category_list = request.GET.getlist(category)
         if category_list: categories.update({category + '__in': category_list})
@@ -70,9 +70,12 @@ def filtration(request):
         if c: categories.update({category: int(c)})
     sort = request.GET.get('sort')
     if sort: categories.update({'wine_to_sort__name': sort})
-    wines = Wine.objects.filter(**categories)
-    return render_to_response(template_name="result.html", context={'wines': wines})
-
+    wines = Wine.objects.filter(**categories)[:WINES_LIMIT]
+    if request.is_ajax():
+        return render_to_response(template_name="search_result.html", context={'wines': wines})
+    else:
+        countries = Country.objects.order_by('name')
+        return render_to_response(template_name="filtration.html", context={'request': request, 'countries': countries, 'wines': wines})
 
 def survey(request):
     if request.user.is_authenticated():

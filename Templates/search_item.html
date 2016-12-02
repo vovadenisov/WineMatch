@@ -1,37 +1,40 @@
 {% load wine_color %}
 {% load staticfiles %}
-<a href="">
-    <div class="wine-item">
-        <div class="wine-item__title">
-            <span>Очень сложное название вкусного вина</span>
-        </div>
-        <div class="wine-item__img">
-            <img src="{% if wine.img %}{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}">
-        </div>
-        <div class="wine-item__types">
-            <div class="wine-item__types__color">
-                <span>{{ wine.color }}Красое</span>
+          <a href="/wine/{{ wine.id }}">
+            <div class="wine-item">
+                <div style="min-height: 42px" class="wine-item__title">
+                    <span>{{ wine.title }}</span>
+                </div>
+                <div class="wine-item__img">
+                    <div class="wine-item__img_background" 
+                         style="height: 190px; 
+                                background: url('{% if wine.img %}/media/{{ wine.img }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}') no-repeat center center;
+                                background-size: contain;"></div>
+                </div>
+                <div class="wine-item__types">
+                    <div class="wine-item__types__color wine-item__types__description" id="color-{{ wine.id }}">
+                        <span>{{ wine.color }}</span>
+                    </div>
+                    <div class="wine-item__types__type wine-item__types__description" id="type-{{ wine.id }}">
+                        <span>{{ wine.type }}</span>
+                    </div>
+                    <div class="wine-item__types__country wine-item__types__description" id="flag-{{ wine.id }}">
+                        <span>{{ wine.country}}</span>
+                    </div>
+                </div>
+                <div class="wine-item__types">
+                    <div class="wine-item__types__color wine-item__types__icon" data-id="color-{{ wine.id }}">
+                        <span style="min-width: 15px; height: 15px; display: inline-block;" class="span-color {{ wine.color|color }} icon"></span>
+                    </div>
+                    <div class="wine-item__types__type wine-item__types__icon" data-id="type-{{ wine.id }}">
+                        <span style="min-width: 15px; height: 15px; display: inline-block;" class="span-type dry icon"></span>
+                    </div>
+                    <div class="wine-item__types__country wine-item__types__icon" data-id="flag-{{ wine.id }}">
+                        <span style="min-width: 15px; height: 15px; display: inline-block;" class="flag flag-{{ wine.country.short_name }} icon"></span>
+                    </div>
+                </div>
+                <div class="wine-item__price">
+                    <span>{{ wine.price|floatformat:"0" }} Руб</span>
+                </div>
             </div>
-            <div class="wine-item__types__type">
-                <span>{{ wine.type }}Сухое</span>
-            </div>
-            <div class="wine-item__types__country">
-                <span>{{ wine.country}}Россия</span>
-            </div>
-        </div>
-        <div class="wine-item__types">
-            <div class="wine-item__types__color">
-                <span class="span-color {{ wine.color|color }} icon"></span>
-            </div>
-            <div class="wine-item__types__type">
-                <span class="span-type dry icon"></span>
-            </div>
-            <div class="wine-item__types__country">
-                <span class="flag flag-{{ wine.country.short_name }} icon"></span>
-            </div>
-        </div>
-        <div class="wine-item__price">
-            <span>1799 Руб</span>
-        </div>
-    </div>
-</a>
+            </a>
