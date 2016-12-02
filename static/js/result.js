@@ -27,6 +27,14 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
+
+function setAboutTab() {
+    $(".js-tabs-about-wine").addClass("js-tabs-active");
+    $(".js-tabs-where").removeClass("js-tabs-active");
+    $(".result-item__content_conteiner").addClass("js-active");
+    $(".result-item__where").removeClass("js-active");
+}
+
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -37,11 +45,9 @@ function csrfSafeMethod(method) {
 
     //result page
     $(".js-tabs-about-wine").click(function(){
-        $(".js-tabs-about-wine").addClass("js-tabs-active");
-        $(".js-tabs-where").removeClass("js-tabs-active");
-        $(".result-item__content_conteiner").addClass("js-active");
-        $(".result-item__where").removeClass("js-active");
+        setAboutTab();
     });
+
     $(".js-tabs-where").click(function () {
         $(".js-tabs-where").addClass("js-tabs-active");
         $(".js-tabs-about-wine").removeClass("js-tabs-active");
@@ -57,10 +63,12 @@ function csrfSafeMethod(method) {
     });
     $(".js-slick-navigation-right").click(function(){
         $(".slick-next").click();
+        setAboutTab();
     });
 
     $(".js-slick-navigation-left").click(function(){
         $(".slick-prev").click();
+        setAboutTab();
     });
 
     $(".js-get-it") .click(function(ev) {
@@ -128,5 +136,14 @@ function csrfSafeMethod(method) {
         for (var i = rating + 1; i <= 5; ++i) {
             $('#js-rating-' + i).removeClass('fa-star').addClass('fa-star-o');
         }    
-    });  
+    });
+
+    $('.desktop-share').each(function(){
+        var title = "Я пью " + $(this).closest(".result-item__content_conteiner").find(".js-wine-name").text();
+        var url = "http://winematch.ru";
+        var description = $(this).closest(".result-item__content_conteiner").find(".js-stylistic").text();
+        var image = $(this).closest(".result-item__content_conteiner").find("img").attr("src");
+        var button = VK.Share.button({url: url, title: title, description: description, image: url+image}, {type: 'round_nocount', text: "поделиться"})
+        $(this).append(button)
+    });
 });

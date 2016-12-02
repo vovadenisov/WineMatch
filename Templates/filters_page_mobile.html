@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
+    <style media="screen">
+      .main-container {
+        background-size: cover;
+        background-position: center;
+        background-image: url('img/background-wine.jpg');
+        min-height: 100vh;
+        padding: 50px;
+      }
+      .filters__container {
+
+      }
+      .filters__container__block {
+        background-color: #000;
+        margin: 15px;
+        padding: 10px;
+        position: relative;
+      }
+      .flex_container {
+        display: flex;
+      }
+      .flex_horizontal_between {
+        justify-content: space-between;
+      }
+      .flex_vertical_stretch {
+        align-items: stretch;
+      }
+      .filters__container__title {
+        font-size: 24px;
+        line-height: 1.4em;
+        color: #fff;
+      }
+      .filters__container__subtitle {
+        font-size: 20px;
+        line-height: 1.4em;
+        color: #fff;
+      }
+      .filters__clearall {
+        cursor: pointer;
+      }
+      .filters__container__block.filters__container__block__half {
+        width: calc(50% - 30px);
+      }
+      .filters__container__block__half {
+        width: 50%;
+      }
+      .filters__checkbox__container {
+        margin: 10px 0;
+        position: relative;
+      }
+      .filters__checkbox__container input {
+        visibility: hidden;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+      }
+      .filters__checkbox__container label {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border: 4px solid #777;
+        display: block;
+        background-color: #777;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        cursor: pointer;
+      }
+      .filters__checkbox__container input:checked + label {
+        background-color: #fff;
+      }
+      .fliters__container__price input {
+        margin-left: 10px;
+        background-color: #777;
+        border: none;
+      }
+      .filters__container__textinput {
+        margin-top: 10px;
+      }
+      .filters__dropdown__container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+      }
+      .filters__dropdown__container input{
+        background-color: transparent;
+        border: none;
+        height: 30px;
+        color: #fff;
+        font-size: 24px;
+      }
+      .filters__dropdown__container input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #fff;
+        opacity: 1;
+        font-size: 24px;
+      }
+      .filters__dropdown__container input::-moz-placeholder { /* Firefox 19+ */
+        color: #fff;
+        font-size: 24px;
+
+      }
+      .filters__dropdown__container input:-ms-input-placeholder { /* IE 10+ */
+        color: #fff;
+        font-size: 24px;
+
+      }
+      .filters__dropdown__container input:-moz-placeholder { /* Firefox 18- */
+        color: #fff;
+        font-size: 24px;
+      }
+      .filters__dropdown__body {
+        max-height: 250px;
+        position: absolute;
+        display: none;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #000;
+        overflow-y: scroll;
+        z-index: 2;
+      }
+      .filters__dropdown__body ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .filters__dropdown__choice {
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all .1s linear;
+      }
+      .filters__dropdown__choice:hover {
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+      .wines__block {
+        background-color: #000;
+        margin: 15px;
+        padding: 10px 30px;
+      }
+      .wines__block__title {
+        font-size: 18px;
+        color: #fff;
+      }
+      .wines__block__photo {
+        height: 300px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin: 20px 0;
+      }
+      .wine__indicator {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+      }
+      .red-wine__indicator {
+        background-color: #722f37;
+      }
+      .white-wine__indicator {
+        background-color: white;
+      }
+      .country__indicator {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+      }
+      .wines__block__price {
+        margin-top: 20px;
+        font-size: 20px;
+        line-height: 24px;
+        color: #fff;
+      }
+      @media screen and (max-width: 480px) {
+        .main-container {
+          padding: 20px 10px;
+        }
+        .filters__container__block__half {
+          width: 100%;
+        }
+        .filters__container__block.filters__container__block__half {
+          width: 100%;
+        }
+        .flex_wrapper {
+          flex-wrap: wrap;
+        }
+        .filters__container__textinput.text-right {
+          text-align: left;
+        }
+        .filters__dropdown__container input {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="row">
+        <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+          <div class="filters__container">
+            <div class="filters__container__block flex_container flex_horizontal_between">
+              <span class="filters__container__title">Фильтры</span>
+              <span class="filters__container__title filters__clearall">Очистить все</span>
+            </div>
+            <div class="flex_container flex_vertical_stretch text-left flex_wrapper">
+              <div class="filters__container__block filters__container__block__half">
+                <span class="filters__container__title">Цвет</span>
+                <div class="filters__checkbox__container">
+                  <input type="checkbox" name="Красное" value="" id="Красное">
+                  <label for="Красное"></label>
+                  <span class="filters__container__subtitle">Красное</span>
+                </div>
+                <div class="filters__checkbox__container">
+                  <input type="checkbox" name="Белое" value="" id="Белое">
+                  <label for="Белое"></label>
+                  <span class="filters__container__subtitle">Белое</span>
+                </div>
+                <div class="filters__checkbox__container">
+                  <input type="checkbox" name="Розовое" value="" id="Розовое">
+                  <label for="Розовое"></label>
+                  <span class="filters__container__subtitle">Розовое</span>
+                </div>
+              </div>
+              <div class="filters__container__block filters__container__block__half">
+                  <span class="filters__container__title">Сладость</span>
+                  <div class="filters__checkbox__container">
+                    <input type="checkbox" name="сухое" value="" id="сухое">
+                    <label for="сухое"></label>
+                    <span class="filters__container__subtitle">сухое</span>
+                  </div>
+                  <div class="filters__checkbox__container">
+                    <input type="checkbox" name="полусухое" value="" id="полусухое">
+                    <label for="полусухое"></label>
+                    <span class="filters__container__subtitle">полусухое</span>
+                  </div>
+                  <div class="filters__checkbox__container">
+                    <input type="checkbox" name="полусладкое" value="" id="полусладкое">
+                    <label for="полусладкое"></label>
+                    <span class="filters__container__subtitle">полусладкое</span>
+                  </div>
+                  <div class="filters__checkbox__container">
+                    <input type="checkbox" name="сладкое" value="" id="сладкое">
+                    <label for="сладкое"></label>
+                    <span class="filters__container__subtitle">сладкое</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="filters__container__block fliters__container__price text-left">
+              <span class="filters__container__title">Цена</span>
+              <div class="flex_container flex_wrapper ">
+                <div class="filters__container__block__half filters__container__textinput text-left">
+                  <span class="filters__container__subtitle">От</span>
+                  <input type="text" name="" value="">
+                </div>
+                <div class="filters__container__block__half filters__container__textinput text-right">
+                  <span class="filters__container__subtitle">До</span>
+                  <input type="text" name="" value="">
+                </div>
+              </div>
+            </div>
+            <div class="filters__container__block fliters__container__price text-left">
+              <span class="filters__container__title">Год</span>
+              <div class="flex_container flex_wrapper ">
+                <div class="filters__container__block__half filters__container__textinput text-left">
+                  <span class="filters__container__subtitle">От</span>
+                  <input type="text" name="" value="">
+                </div>
+                <div class="filters__container__block__half filters__container__textinput text-right">
+                  <span class="filters__container__subtitle">До</span>
+                  <input type="text" name="" value="">
+                </div>
+              </div>
+            </div>
+            <div class="filters__container__block">
+              <div class="filters__dropdown__container text-left">
+                <input id="countryChoice" type="text" name="" value="" placeholder="Страна" disabled>
+                <span class="filters__container__title open__dropdown toggleDropdown"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+              </div>
+              <div class="filters__dropdown__body text-left active">
+                <ul>
+                  <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
+                  <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
+                  <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
+                  <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
+                </ul>
+              </div>
+            </div>
+            <div class="filters__container__block text-left">
+              <span class="filters__container__title">Выдержка</span>
+              <div class="filters__checkbox__container">
+                <input type="radio" name="extract" value="Да" id="Да" checked>
+                <label for="Да"></label>
+                <span class="filters__container__subtitle">Да</span>
+              </div>
+              <div class="filters__checkbox__container">
+                <input type="radio" name="extract" value="Нет" id="Нет">
+                <label for="Нет"></label>
+                <span class="filters__container__subtitle">Нет</span>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+          <div class="row wines__container">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+              <div class="wines__block">
+                <p class="wines__block__title">Вино Il Grigio Chianti Classico</p>
+                <div class="wines__block__photo" style="background-image:url('http://winematch.ru/media/9acd5280b7b372f4bb11fe2bc58a1e225a8ccde230db4f3351c0c0b6.png')">
+
+                </div>
+                <div class="flex_container flex_horizontal_between">
+                  <span class="red-wine__indicator wine__indicator"></span>
+                  <span class="white-wine__indicator wine__indicator"></span>
+                  <span class="country__indicator" style="background-image:url('http://flaglane.com/download/italian-flag/italian-flag-graphic.png')"></span>
+                </div>
+                <p class="wines__block__price text-right">1000 руб</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+              <div class="wines__block">
+                <p class="wines__block__title">Вино Il Grigio Chianti Classico</p>
+                <div class="wines__block__photo" style="background-image:url('http://winematch.ru/media/9acd5280b7b372f4bb11fe2bc58a1e225a8ccde230db4f3351c0c0b6.png')">
+
+                </div>
+                <div class="flex_container flex_horizontal_between">
+                  <span class="red-wine__indicator wine__indicator"></span>
+                  <span class="white-wine__indicator wine__indicator"></span>
+                  <span class="country__indicator" style="background-image:url('http://flaglane.com/download/italian-flag/italian-flag-graphic.png')"></span>
+                </div>
+                <p class="wines__block__price text-right">1000 руб</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+              <div class="wines__block">
+                <p class="wines__block__title">Вино Il Grigio Chianti Classico</p>
+                <div class="wines__block__photo" style="background-image:url('http://winematch.ru/media/9acd5280b7b372f4bb11fe2bc58a1e225a8ccde230db4f3351c0c0b6.png')">
+
+                </div>
+                <div class="flex_container flex_horizontal_between">
+                  <span class="red-wine__indicator wine__indicator"></span>
+                  <span class="white-wine__indicator wine__indicator"></span>
+                  <span class="country__indicator" style="background-image:url('http://flaglane.com/download/italian-flag/italian-flag-graphic.png')"></span>
+                </div>
+                <p class="wines__block__price text-right">1000 руб</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+              <div class="wines__block">
+                <p class="wines__block__title">Вино Il Grigio Chianti Classico</p>
+                <div class="wines__block__photo" style="background-image:url('http://winematch.ru/media/9acd5280b7b372f4bb11fe2bc58a1e225a8ccde230db4f3351c0c0b6.png')">
+
+                </div>
+                <div class="flex_container flex_horizontal_between">
+                  <span class="red-wine__indicator wine__indicator"></span>
+                  <span class="white-wine__indicator wine__indicator"></span>
+                  <span class="country__indicator" style="background-image:url('http://flaglane.com/download/italian-flag/italian-flag-graphic.png')"></span>
+                </div>
+                <p class="wines__block__price text-right">1000 руб</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+              <div class="wines__block">
+                <p class="wines__block__title">Вино Il Grigio Chianti Classico</p>
+                <div class="wines__block__photo" style="background-image:url('http://winematch.ru/media/9acd5280b7b372f4bb11fe2bc58a1e225a8ccde230db4f3351c0c0b6.png')">
+
+                </div>
+                <div class="flex_container flex_horizontal_between">
+                  <span class="red-wine__indicator wine__indicator"></span>
+                  <span class="white-wine__indicator wine__indicator"></span>
+                  <span class="country__indicator" style="background-image:url('http://flaglane.com/download/italian-flag/italian-flag-graphic.png')"></span>
+                </div>
+                <p class="wines__block__price text-right">1000 руб</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+              <div class="wines__block">
+                <p class="wines__block__title">Вино Il Grigio Chianti Classico</p>
+                <div class="wines__block__photo" style="background-image:url('http://winematch.ru/media/9acd5280b7b372f4bb11fe2bc58a1e225a8ccde230db4f3351c0c0b6.png')">
+
+                </div>
+                <div class="flex_container flex_horizontal_between">
+                  <span class="red-wine__indicator wine__indicator"></span>
+                  <span class="white-wine__indicator wine__indicator"></span>
+                  <span class="country__indicator" style="background-image:url('http://flaglane.com/download/italian-flag/italian-flag-graphic.png')"></span>
+                </div>
+                <p class="wines__block__price text-right">1000 руб</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      //Dropdown
+      //Toggle animation
+      $('.toggleDropdown').click(function(event) {
+        $('.filters__dropdown__body').slideToggle(200);
+      });
+      //Choice
+      $('.filters__dropdown__choice').click(function(event) {
+        var content = $(this).text();
+        $('#countryChoice').val(content);
+      });
+    </script>
+  </body>
+</html>

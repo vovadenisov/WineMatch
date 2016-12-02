@@ -10,4 +10,9 @@ def get_color(value):
         return 'pink'
     return 'white'
 
+
+def is_even(value):
+    return not (len(value) % 2)
+
 register.filter('color', get_color)
+register.filter("is_even", is_even)

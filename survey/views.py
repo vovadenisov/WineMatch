@@ -2,17 +2,77 @@ import json
 import requests
 
 from django.conf import settings
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse
 from django.shortcuts import render_to_response
+from django.core.mail import send_mail
 
+import survey.sphinx as sphinx
 from users.models import UserModel
 from feedback.models import Feedback
-from survey.models import Survey, Question, Wine
+from survey.models import Survey, Question, Wine, Country
+
 
 MAX_TRIES_COUNT = 3
 
+
+def send_error_mail(message):
+    admins_email = [email[1] for email in settings.ADMINS]
+    try:
+        send_mail('Redirect to main', message, settings.SERVER_EMAIL, admins_email, fail_silently=False)
+    except Exception:
+        pass
+
+
+def search_result(request):
+    return render_to_response(template_name="search_result.html", context={"request":request})
+
+
 def main(request):
     return render_to_response(template_name="main.html", context={"request":request})
+
+
+def search(request):
+    q = request.GET.get('query')
+    if q:
+        wine_ids = sphinx.search(q)
+        wines = {w.id: w for w in Wine.objects.filter(id__in=wine_ids)}
+        wines = [wines.get(id_) for id_ in wine_ids]
+    else:
+        wines = []
+    return render_to_response(template_name="search_result.html", context={'wines': wines, "request": request})
+
+
+def wine(request, wine_id):
+   try:
+       wines = [
+           Wine.objects.get(id=wine_id)
+       ]
+   except Wine.DoesNotExist:
+       wines = []
+   return render_to_response(template_name="result.html", context={'wines': wines, 'one_wine_page': True})
+
+
+def mobile_filtration(request):
+    countries = [c.name for c in Country.objects.all()]
+    return render_to_response(template_name="filtration.html", context={ "countries": countries,})
+
+
+def filtration(request):
+    categories = {}
+    #country_list = request.GET.getlist('country')
+    country = request.GET.get('country')
+    if country:
+        categories.update({'country__name': country})
+    for category in ('color', 'type'):
+        category_list = request.GET.getlist(category)
+        if category_list: categories.update({category + '__in': category_list})
+    for category in ('year__lt', 'year__gt', 'price__lt', 'price__gt'):
+        c = request.GET.get(category)
+        if c: categories.update({category: int(c)})
+    #sort = request.GET.get('sort')
+    #if sort: categories.update({'wine_to_sort__name': sort})
+    wines = Wine.objects.select_related("country").filter(**categories)[:50]
+    return render_to_response("filter_results.html", context={ "wines": wines})
 
 
 def survey(request):
@@ -30,6 +90,7 @@ def survey(request):
         if request.GET.get("survey"):
             current_survey = Survey.objects.get(pk=request.GET.get("survey"))
         else:
+            send_error_mail("survey is missed in GET params")
             return HttpResponseRedirect("/")
     params = {
         "user_id": current_survey.pk,
@@ -39,6 +100,7 @@ def survey(request):
     match_response = requests.get('/'.join((settings.MATCH_URL,"next")), params=params)
     
     if not match_response.status_code == 200:
+        send_error_mail("next resonse return not 200 \n returned {}".format(match_response.text))
         return HttpResponseRedirect("/")
     match_response = json.loads(match_response.text)
     context = {
@@ -59,7 +121,9 @@ def survey(request):
             tries_count += 1
 
     if not is_end:
-        if not q: return HttpResponseRedirect("/")
+        if not q:
+            send_error_mail("returned question is not find node: {}".format(question))
+            return HttpResponseRedirect("/")
         context.update({
             "image": q.img,
             "text": q.get_question(),
@@ -73,15 +137,16 @@ def survey(request):
     else:
         match_response = requests.get('/'.join((settings.MATCH_URL,"wine_list", str(current_survey.pk))))
         if not match_response.status_code == 200:
+            send_error_mail("next resonse return not 200 \n returned {}".format(match_response.text))
             return HttpResponseRedirect("/")
         match_response = json.loads(match_response.text)
         wines_list = match_response["wines"]
         wines = []
         for wine in wines_list:
-           try:
-               wines.append(Wine.objects.get(title=wine['title']))
-           except Wine.DoesNotExist:
-               pass #its ok to loose some wine
+            try:
+                wines.append(Wine.objects.get(title=wine['title']))
+            except Wine.DoesNotExist:
+                pass #its ok to loose some wine
         context.update({"wines": wines})
 
         return render_to_response(template_name="result.html", context=context)
@@ -116,11 +181,12 @@ def result(request):
 
 def favorite(request):
     if request.user.is_authenticated():
-        u = UserModel.objects.get(username=request.user)
-        favorites = u.get_favorits()
+        user = UserModel.objects.get(username=request.user)
+        favorites = user.get_favorits()
+        wines = [ w.wine for w in favorites]
         context = {
             "request": request,
-            "wines": favorites
+            "wines": wines
         }
         return render_to_response(template_name="favorite.html", context=context)
     else:
@@ -130,9 +196,10 @@ def favorite(request):
 def feedback(request):
     if not request.user.is_authenticated():
         return HttpResponseForbidden()
-    feedback = Feedback.objects.get_last_review(request.user.id) 
-    if not feedback: return HttpResponseRedirect("/")
-    return render_to_response(template_name="feedbackform.html", context={"wine": feedback.wine, "request": request})
+    feed_back = Feedback.objects.get_last_review(request.user.id)
+    if not feed_back:
+        return HttpResponseRedirect("/")
+    return render_to_response(template_name="feedbackform.html", context={"wine": feed_back.wine, "request": request})
 
 
 def thnx_for_feedback(request):

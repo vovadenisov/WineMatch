@@ -14,11 +14,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 import configparser
 
-SOURCE_ROOT = (os.path.dirname(os.path.dirname(__file__))) + '/'
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+SOURCE_ROOT = (os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/'
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 PROJECT_NAME = 'WineMatch'
 
@@ -42,12 +42,20 @@ if os.path.exists(local_config_path):
     config.read(local_config_path)
 else:
     raise Exception("Разместите конфиг файл проекта в папке conf на уровень выше проекта")
-ALLOWED_HOSTS = []
 
-SECRET_KEY = "(n3o_nj%w^w+l-vm2np1&oiw3zwwr7@1zd($3d^nr(v8dkm5t+"
+SECRET_KEY = config.get('secret', 'KEY')
+
+debug_key = config.get("debug", "DEBUG")
+
+if debug_key == "TRUE":
+    DEBUG = True
+else:
+    DEBUG = False
 
 
 # Application definition
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "78.155.218.63", "winematch.ru", "winematch"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -120,6 +128,15 @@ DATABASES = {
         'PORT': config.get('database_default', 'DATABASE_PORT'),
         'OPTIONS': {'charset': 'utf8'},
         'CONN_MAX_AGE': 0
+    },
+    'sphinx': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
+        'PORT': 9312,
+        'USER': '',
+        'PASSWORD': '',
+        'NAME': '',
+        'OPTIONS': {'charset': 'utf8'},
     }
 }
 
@@ -164,6 +181,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = config.get('media', 'MEDIA_ROOT')
 STATICFILES_DIRS = os.path.join(SOURCE_ROOT, "static"),
+STATIC_ROOT = config.get('static', 'STATIC_DIR')
 
 AUTH_USER_MODEL = "users.UserModel"
 
@@ -172,3 +190,16 @@ SESSION_SAVE_EVERY_REQUEST = True
 SESSION_COOKIE_AGE = 12096000
 
 MATCH_URL = config.get('match_system', 'BASE_URL')
+
+ADMINS = (
+    ('Vladimir Denisov', 'v.denisov@corp.mail.ru'),
+    ('Anastasiya Dudina', 'a.dyudina@corp.mail.ru'),
+)
+
+EMAIL_HOST = config.get('mailing', 'EMAIL_HOST')
+EMAIL_PORT = config.get('mailing', 'EMAIL_PORT')
+EMAIL_HOST_USER = config.get('mailing', 'EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config.get('mailing', 'EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

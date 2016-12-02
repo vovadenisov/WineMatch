@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from survey.views import main, survey, survey_yesno, info, result, favorite, feedback, thnx_for_feedback
+from survey.views import *
 
 urlpatterns = [
     url(r'^$', main, name="main"),
@@ -9,5 +9,11 @@ urlpatterns = [
     url(r'^result/$', result, name="result"),
     url(r'^favorite/$', favorite, name="favorite"),
     url(r'^feedback/$', feedback, name="feedback"),
-    url(r'^thnx/$', thnx_for_feedback, name="thnx")
+    url(r'^thnx/$', thnx_for_feedback, name="thnx"),
+    url(r'^search/$', search, name='search'),
+    url(r'^filtration/$', filtration, name='filtration'),
+    url(r'^filters/$', mobile_filtration, name='filters'),
+    url(r'^wine/(?P<wine_id>\d+)', wine, name='wine'),
+    url(r'^wine/(?P<wine_id>\d+)', wine, name='wine'),
+    url(r'^search_result/', search_result, name='search_result')
 ]

@@ -3,7 +3,7 @@
 
 {% block title %}
     <div class="result-item__title">
-        <h2>Избранное</h2>
+        <h2>{% if not recommended %}Избранное{% else %}Рекомендованные вина{% endif %}</h2>
     </div>
 {% endblock %}
 
