@@ -142,7 +142,7 @@ function setAboutTab() {
         var title = "Я пью " + $(this).closest(".result-item__content_conteiner").find(".js-wine-name").text();
         var url = "http://winematch.ru";
         var description = $(this).closest(".result-item__content_conteiner").find(".js-stylistic").text();
-        var image = $(this).closest(".result-item__content_conteiner").find("img").attr("src");
+        var image = $(this).closest(".result-item__content_conteiner").find(".js-share-img").val();
         var button = VK.Share.button({url: url, title: title, description: description, image: url+image}, {type: 'round_nocount', text: "поделиться"})
         $(this).append(button)
     });
