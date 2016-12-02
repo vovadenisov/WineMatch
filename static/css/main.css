@@ -677,7 +677,9 @@ body{
     .mobile-share{
         background-color: #6287ae;
         border-radius: 2px;
-        display: inline;
+        display: inline-block;
+        height: 30px;
+        padding-top: 5px;
     }
 
     .top-menu__search {
