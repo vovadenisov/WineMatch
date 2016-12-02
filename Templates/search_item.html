@@ -1,5 +1,7 @@
+
 {% load wine_color %}
 {% load staticfiles %}
+{% for wine in wines %}
           <a href="/wine/{{ wine.id }}">
             <div class="wine-item">
                 <div style="min-height: 42px" class="wine-item__title">
@@ -38,3 +40,4 @@
                 </div>
             </div>
             </a>
+{% endfor %}

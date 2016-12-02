@@ -11,20 +11,40 @@
     <link href="{% static "css/flags.css"%}" rel="stylesheet">
     <link rel="stylesheet" href="{% static "fontawesome/css/font-awesome.min.css" %}">
     <script>
-       /*function filterWines() {
+       function showEmptyWines() {
+           $('.js-nothing-found').show();
+           $('.js-wines-block').hide();
+       }
+
+       function filterWines(isEmpty) {
            //form request
            var requestParams = {};
-           $('.js-filter').each(function() {
-               var el = $( this );
-               if (el.is(':checked')) {
-                   requestParams[] ||= [];
-                   
-               }
-           });
-           $('.js-filter-input').each(function() {
-               var el = $( this );
-           });
-       }*/
+           if (!(isEmpty)) {
+               $('.js-filter, .js-filter-input').each(function() {
+                   var el = $( this );
+                   if (el.is(':checked')) {
+                       requestParam[el.data('id')] = requestParam[el.data('id')] || [];
+                       requestParam[el.data('id')].push(el.attr('value'));
+                   }
+               });
+           }
+           $.ajax({
+             type: "GET",
+             url: '/filtration/',
+             data: requestParams,
+             success: function(wines) {
+                 if (wines) {
+                     $('.js-wines-block').show();
+                     $('.js-wines-block').html(wines);
+                 } else {
+                     showEmptyWines();
+                 }
+             },
+             error: function() {
+                 showEmptyWines();
+             }
+        });
+       }
       
        $(document).ready(function() {
        $('.wine-item__types__icon').hover(
@@ -39,7 +59,13 @@
        );
       
        //filter on change / input
+       $('.js-filter-input').mouseout(filterWines);
+       $('.js-filter').change(filterWines);
+
        //clear filters on click
+       $('.js-clear-all').click(function() {
+           filterWines(true);
+       });
        });
       
        
@@ -273,9 +299,10 @@
 
 
     <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 js-wines-block">
-        {% for wine in wines %}
-             {% include "search_item.html" with wine=wine %}
-        {% endfor %}
+        {% include "search_item.html" with wines=wines %}
+    </div>
+    <div class="js-nothing-found" style="display: none;">
+        <h2>Ой, здесь ничего нет :(</h2>
     </div>
 </div>
 {% endblock %}
