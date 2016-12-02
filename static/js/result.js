@@ -138,7 +138,7 @@ function setAboutTab() {
         }    
     });
 
-    $('.desktop-share').each(function(){
+    $('.desktop-share, .mobile-share').each(function(){
         var title = "Я пью " + $(this).closest(".result-item__content_conteiner").find(".js-wine-name").text();
         var url = "http://winematch.ru";
         var description = $(this).closest(".result-item__content_conteiner").find(".js-stylistic").text();

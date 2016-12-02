@@ -44,7 +44,7 @@
                     <input class="top-menu__search js-search-value" type="text" name="search" placeholder="поиск винишка."/>
                     <input type="button" name="search_button" class="js-search top-menu__search_button"/>
                 </li>
-                <li><a href="{% url "surveys:info" %}">Кто мы</a></li>
+                <li><a href="{% url "surveys:filters" %}">Фильтры</a></li>
                 <li><a href="{% url "recommended" %}">Рекомендованное</a></li>
                 <li><a href="{% url "surveys:favorite" %}">Избранное</a></li>
                 {% if not request.user.is_authenticated or not request.user.vk_id %}

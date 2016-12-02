@@ -9,7 +9,7 @@ from django.core.management.base import BaseCommand
 from django.core import files
 from django.conf import settings
 
-from survey.models import Wine, Country, Question, Answer, Favorites
+from survey.models import Wine, Country, Question, Answer, Favorites, Sort, SortToWine
 from feedback.models import Feedback
 
 TARANTOOL_CONNCTION = {
@@ -44,6 +44,10 @@ class Command(BaseCommand):
             self.remove_duplicates()
         elif options['command'] == 'price':
             self.price()
+        elif options['command'] == 'add_wine_sort':
+            self.add_wine_sort()
+        elif options['command'] == 'add_region':
+            self.add_region()
         else:
             print ("Command not found!")
 
@@ -101,6 +105,70 @@ class Command(BaseCommand):
         self.create_all_wines()
         self.create_taste_questions()
         self.create_formal_questions()
+
+
+    def add_region(self):
+        tnt = tarantool.connect(**TARANTOOL_CONNCTION)
+        offset = 0
+        length = 100
+        tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+        while len(tuples) > 0 and tuples[0]:
+            for t in tuples:
+                print(t[6])
+                try:
+                    w = Wine.objects.get(title=t[0])
+                    w.region=t[6]
+                    w.save()
+                except:
+                    pass
+            offset += length
+            tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+
+
+    def add_wine_sort(self):
+        self.create_all_sort()
+        tnt = tarantool.connect(**TARANTOOL_CONNCTION)
+        offset = 0
+        length = 100
+        tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+        varieties = []
+        while len(tuples) > 0 and tuples[0]:
+            for t in tuples:
+                list = t[4]
+                try:
+                    w = Wine.objects.get(title=t[0])
+                    for v in list:
+                        #if v not in varieties:
+                        s = Sort.objects.get(name=v)
+                        sort_to_winw = SortToWine(wine=w, sort=s)
+                        sort_to_winw.save()
+                except:
+                    pass
+            offset += length
+            tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+
+    def create_all_sort(self):
+        tnt = tarantool.connect(**TARANTOOL_CONNCTION)
+        offset = 0
+        length = 100
+        tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+        varieties = []
+        while len(tuples) > 0 and tuples[0]:
+            for t in tuples:
+                #print(t[4])
+                list = t[4]
+                for v in list:
+                    if v not in varieties:
+                        varieties.append(v)
+            offset += length
+            tuples = tnt.call('wine.find_by_chunk', [offset, length, False ]).data
+        for v in varieties:
+            s = Sort(name=v)
+            try:
+                s.save()
+            except Exception as e:
+                pass
+
 
     def create_all_wines(self):
         print('create_all_wines')

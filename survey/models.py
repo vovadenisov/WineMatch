@@ -52,6 +52,26 @@ class Country(models.Model):
         verbose_name_plural = "Страны"
 
 
+class Group(models.Model):
+    name = models.CharField(max_length=250, unique=True, verbose_name="название подборки")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Подборка вина"
+        verbose_name_plural = "Подборка вина"
+
+class Sort(models.Model):
+    name = models.CharField(max_length=200, unique=True, verbose_name="название сорта")
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Сорт винограда"
+        verbose_name_plural = "Сорт винограда"
+
+
 class Wine(models.Model):
     color = models.CharField(max_length=10, verbose_name="Цвет")
     type = models.CharField(max_length=50, verbose_name="Сладость")
@@ -66,7 +86,9 @@ class Wine(models.Model):
     img = models.ImageField(verbose_name="Картинка вина")
     image2share = models.ImageField(verbose_name="Картинка вина для шаринга", null=True, blank=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name="Страна")
-
+    group = models.ForeignKey(Group, null=True, on_delete=models.CASCADE, verbose_name="подборка вина")
+    wine_to_sort = models.ManyToManyField(Sort, through='SortToWine')
+    region = models.CharField(max_length=255, null=True, verbose_name="регион")
     @property
     def absolute_img_path(self):
         return "{0}/..{1}".format(MEDIA_ROOT, self.img.url)
@@ -191,3 +213,8 @@ class WineToShop(models.Model):
     class Meta:
         verbose_name = "Вино в магазине"
         verbose_name_plural = "Вина в магазине"
+
+
+class SortToWine(models.Model):
+    wine = models.ForeignKey(Wine, verbose_name='Вино')
+    sort = models.ForeignKey(Sort, verbose_name='Сорт')

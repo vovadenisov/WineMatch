@@ -33,6 +33,7 @@ function getParameters() {
 
 $(document).ready(function() {
     var param = getParameters();
+
     if (typeof param.query != 'undefined') {
         $('.js-search-value').val(param.query);
     }

@@ -2,14 +2,15 @@ import json
 import requests
 
 from django.conf import settings
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse
 from django.shortcuts import render_to_response
 from django.core.mail import send_mail
 
 import survey.sphinx as sphinx
 from users.models import UserModel
 from feedback.models import Feedback
-from survey.models import Survey, Question, Wine
+from survey.models import Survey, Question, Wine, Country
+
 
 MAX_TRIES_COUNT = 3
 
@@ -29,6 +30,7 @@ def search_result(request):
 def main(request):
     return render_to_response(template_name="main.html", context={"request":request})
 
+
 def search(request):
     q = request.GET.get('query')
     if q:
@@ -39,6 +41,7 @@ def search(request):
         wines = []
     return render_to_response(template_name="search_result.html", context={'wines': wines, "request": request})
 
+
 def wine(request, wine_id):
    try:
        wines = [
@@ -47,6 +50,30 @@ def wine(request, wine_id):
    except Wine.DoesNotExist:
        wines = []
    return render_to_response(template_name="result.html", context={'wines': wines, 'one_wine_page': True})
+
+
+def mobile_filtration(request):
+    countries = [c.name for c in Country.objects.all()]
+    return render_to_response(template_name="filtration.html", context={ "countries": countries,})
+
+
+def filtration(request):
+    categories = {}
+    #country_list = request.GET.getlist('country')
+    country = request.GET.get('country')
+    if country:
+        categories.update({'country__name': country})
+    for category in ('color', 'type'):
+        category_list = request.GET.getlist(category)
+        if category_list: categories.update({category + '__in': category_list})
+    for category in ('year__lt', 'year__gt', 'price__lt', 'price__gt'):
+        c = request.GET.get(category)
+        if c: categories.update({category: int(c)})
+    #sort = request.GET.get('sort')
+    #if sort: categories.update({'wine_to_sort__name': sort})
+    wines = Wine.objects.select_related("country").filter(**categories)[:50]
+    return render_to_response("filter_results.html", context={ "wines": wines})
+
 
 def survey(request):
     if request.user.is_authenticated():

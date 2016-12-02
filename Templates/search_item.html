@@ -1,0 +1,37 @@
+{% load wine_color %}
+{% load staticfiles %}
+<a href="{% url "surveys:wine" wine.id %}">
+    <div class="wine-item">
+        <div class="wine-item__title">
+            <span>{{ wine.title }}</span>
+        </div>
+        <div class="wine-item__img">
+            <img src="{% if wine.img %}{{ wine.img.url }}{% else %}{% static "img/auth-vine.jpg" %}{% endif %}">
+        </div>
+        <div class="wine-item__types">
+            <div class="wine-item__types__color">
+                <span>{{ wine.color }}</span>
+            </div>
+            <div class="wine-item__types__type">
+                <span>{{ wine.type }}</span>
+            </div>
+            <div class="wine-item__types__country">
+                <span>{{ wine.country}}</span>
+            </div>
+        </div>
+        <div class="wine-item__types">
+            <div class="wine-item__types__color">
+                <span class="span-color {{ wine.color|color }} icon"></span>
+            </div>
+            <div class="wine-item__types__type">
+                <span class="span-type dry icon"></span>
+            </div>
+            <div class="wine-item__types__country">
+                <span class="flag flag-{{ wine.country.short_name }} icon"></span>
+            </div>
+        </div>
+        <div class="wine-item__price">
+            <span>{{ wine.price }}</span>
+        </div>
+    </div>
+</a>
