@@ -8,15 +8,14 @@ $(document).ready(function () {
     $('.filters__dropdown__choice').click(function(event) {
         var content = $(this).text();
         $(this).closest(".js-choice-container").find('.countryChoice').val(content);
+        $(this).closest(".js-choice-container").find('.countryChoice').trigger("change")
     });
 
-    console.log("input")
 
     $("input").on("change", function(){
-        console.log("change");
-        var form = $(this).closest("form")
-        var data = form.serialize()
-        var url = form.data("url")
+        var form = $(this).closest("form");
+        var data = form.serialize();
+        var url = form.data("url");
         $.ajax({
             url: url,
             data: data,
