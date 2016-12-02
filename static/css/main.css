@@ -660,10 +660,18 @@ body{
     background-size: 35% auto; //contain;
 }
 
+.mobile-share{
+    display: none;
+}
+
 @media only screen and (max-width : 800px) {
 
     .desktop-share{
         display: none;
+    }
+
+    .mobile-share{
+        display: inline;
     }
 
     .top-menu__search {
