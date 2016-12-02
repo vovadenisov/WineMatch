@@ -464,6 +464,12 @@ body{
     border-radius: 10px;
 }
 
+.desktop-share{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .result-item-style{
     background-image: url("/static/img/110580.svg");
 }
@@ -586,7 +592,90 @@ body{
     margin-left: 40%;
 }
 
+.search-wrapper {
+    width: 1000px;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.wine-item{
+    width: 200px;
+    float: left;
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 300px;
+    margin-bottom: 60px;
+    background-color: rgba(0, 0, 0, 0.81);
+    border-radius: 5px;
+}
+
+.wine-item img{
+    height: 200px;
+    margin: auto;
+    width: auto;
+}
+
+.wine-item__types__color,
+.wine-item__types__type,
+.wine-item__types__country{
+    display: inline;
+    margin-right: 5px;
+}
+
+.top-menu__search {
+    width: 297px;
+    padding: 11px 0 15px 20px;
+    font-size: 16px;
+    border: 0 none;
+    height: 26px;
+    margin-right: 0;
+    color: white;
+    outline: none;
+    background: #AA7339;
+    float: left;
+    box-sizing: border-box;
+    transition: all 0.15s;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: white;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: white;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: white;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: white;
+}
+.top-menu__search_button {
+    border: 0 none;
+    background: #804C15 url('/media/128.png') center no-repeat;
+    width: 60px;
+    float: left;
+    padding: 0;
+    text-align: center;
+    height: 26px;
+    cursor: pointer;
+    background-size: 50% auto; //contain;
+}
+
 @media only screen and (max-width : 800px) {
+
+    .top-menu__search {
+        width: 50%;
+        margin-left: 20%;
+    }
+
+    .search-wrapper{
+        width: 600px;
+        margin-top: 7em;
+    }
+
+    .search-wrapper .wine-item{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 
     .result-item__content__wine-info__info div{
         float: none;
@@ -691,6 +780,16 @@ body{
 }
 
 @media only screen and (max-width : 500px) {
+
+    .search-wrapper{
+        margin-top: 4em;
+        width: 300px;
+    }
+
+    .search-wrapper .wine-item{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 
     .result-item{
         height: 100%!important;

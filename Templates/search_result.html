@@ -1,0 +1,15 @@
+{% extends "baseTemplate.html" %}
+
+{% load wine_color %}
+{% load staticfiles %}
+{% block script %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="search-wrapper">
+        {% for wine in "asdfasdfasdfasdfasdfasdf" %}
+            {% include "search_item.html" %}
+        {% endfor %}
+    </div>
+{% endblock %}

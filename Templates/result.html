@@ -51,7 +51,7 @@
                             </div>
                             <div class="result-item__content__wine-info">
                                 <div class="result-item__content__wine-info__title">
-                                    <h3>{{ wine.title }}</h3>
+                                    <h3 class="js-wine-name">{{ wine.title }}</h3>
                                 </div>
                                 {% block grade %}
                                 {% endblock %}
@@ -62,12 +62,12 @@
                                         <div class="result-item__content__wine-info__info__type">
                                             <span class="span-type dry icon"></span><span>{{ wine.type }}</span>
                                         </div>
-                                        <div class="result-item__content__wine-info__info__country">
-                                            <span class="flag flag-{{ wine.country.short_name }} icon"></span><span>{{ wine.country.name }}</span>
+                                        <div class="result-item__content__wine-info__info__country ">
+                                            <span class="flag flag-{{ wine.country.short_name }} icon"></span><span class="js-country">{{ wine.country.name }}</span>
                                         </div>
                                         <div class="result-item__content__wine-info__info__style">
                                             <i class="fa fa-glass result-item-style icon" aria-hidden="true"></i>
-                                            <span class="span-style">{{ wine.stylistic }}</span>
+                                            <span class="span-style js-stylistic">{{ wine.stylistic }}</span>
                                         </div>
                                     </div>
                                         <div class="result-item__content__wine-info__text result-item__content__wine-info__text__text">
@@ -84,7 +84,7 @@
                                                 <i class="fa fa-rub" aria-hidden="true"></i>В среднем {{ wine.price }} Р. за бутылку
                                             {%endif%}
                                         </div>
-
+                                        <div class="desktop-share"></div>
                                 {% block buttons %}
                                     <div class="js-hide-on-selection result-item__content__wine-info__select">
                                         {% if forloop.last %}
@@ -102,6 +102,7 @@
                         </div>
 
                     </div>
+
                     {% for shop in wine.get_shops %}
                     <div class="result-item__where">
                         <div class="result-item__where__store">
