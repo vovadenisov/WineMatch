@@ -53,7 +53,8 @@ def wine(request, wine_id):
 
 
 def mobile_filtration(request):
-    return render_to_response(template_name="filtration.html")
+    countries = [c.name for c in Country.objects.all()]
+    return render_to_response(template_name="filtration.html", context={ "countries": countries,})
 
 
 def filtration(request):
@@ -70,11 +71,8 @@ def filtration(request):
         if c: categories.update({category: int(c)})
     #sort = request.GET.get('sort')
     #if sort: categories.update({'wine_to_sort__name': sort})
-    countries = [c.name for c in Country.objects.all()]
-    wines = Wine.objects.select_related("country").filter(**categories)[:5]
-    return render_to_response("filter_results.html", context={ "wines": wines,
-                                                              "countries" : countries,
-                                                              })
+    wines = Wine.objects.select_related("country").filter(**categories)[:50]
+    return render_to_response("filter_results.html", context={ "wines": wines})
 
 
 def survey(request):

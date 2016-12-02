@@ -91,26 +91,13 @@
         </div>
         <div class="filters__container__block js-choice-container">
             <div class="filters__dropdown__container text-left toggleDropdown">
-                <input class="countryChoice" id="countryChoice" type="text" name="country" value="" placeholder="Страна">
+                <input class="countryChoice" id="countryChoice" type="text" name="country" value="" placeholder="Страна" disabled>
                 <span class="filters__container__title open__dropdown "><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
             </div>
             <ul class="filters__dropdown__body text-left active">
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
+                {% for c in countries %}
+                    <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">{{c}}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>
@@ -232,26 +219,13 @@
         </div>
         <div class="col-sm-12 col-xs-12 mobile-filters-menu-item js-choice-container">
             <div class="filters__dropdown__container text-left toggleDropdown">
-                <input class="countryChoice" id="countryChoice" type="text" name="country" value="" placeholder="Страна">
+                <input class="countryChoice" id="countryChoice" type="text" name="country" value="" placeholder="Страна" disabled>
                 <span class="mobile-filters__container__title open__dropdown"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
             </div>
             <ul class="filters__dropdown__body text-left active">
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Грузия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Италия</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Чили</li>
-                <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">Испания</li>
+                {% for c in countries %}
+                    <li class="filters__container__subtitle filters__dropdown__choice toggleDropdown">{{c}}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>
