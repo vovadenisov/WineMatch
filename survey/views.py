@@ -39,7 +39,7 @@ def search(request):
         wines = [wines.get(id_) for id_ in wine_ids]
     else:
         wines = []
-    return render_to_response(template_name="result.html", context={'wines': wines})
+    return render_to_response(template_name="search_result.html", context={'wines': wines, "request": request})
 
 
 def wine(request, wine_id):
@@ -49,7 +49,7 @@ def wine(request, wine_id):
        ]
    except Wine.DoesNotExist:
        wines = []
-   return render_to_response(template_name="result.html", context={'wines': wines})
+   return render_to_response(template_name="result.html", context={'wines': wines, 'one_wine_page': True})
 
 
 def mobile_filtration(request):

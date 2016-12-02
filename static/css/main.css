@@ -657,7 +657,7 @@ body{
     text-align: center;
     height: 26px;
     cursor: pointer;
-    background-size: 50% auto; //contain;
+    background-size: 35% auto; //contain;
 }
 
 @media only screen and (max-width : 800px) {
@@ -675,6 +675,10 @@ body{
     .search-wrapper .wine-item{
         margin-left: 50px;
         margin-right: 50px;
+    }
+
+    .wine-item__img_background {
+        height: 250px;
     }
 
     .result-item__content__wine-info__info div{
