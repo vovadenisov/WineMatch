@@ -662,6 +662,10 @@ body{
 
 @media only screen and (max-width : 800px) {
 
+    .desktop-share{
+        display: none;
+    }
+
     .top-menu__search {
         width: 50%;
         margin-left: 20%;
