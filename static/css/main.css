@@ -468,6 +468,8 @@ body{
     position: absolute;
     top: 0;
     right: 0;
+    background-color: #6287ae;
+    border-radius: 2px;
 }
 
 .result-item-style{
@@ -664,6 +666,8 @@ body{
     display: none;
 }
 
+
+
 @media only screen and (max-width : 800px) {
 
     .desktop-share{
@@ -671,6 +675,8 @@ body{
     }
 
     .mobile-share{
+        background-color: #6287ae;
+        border-radius: 2px;
         display: inline;
     }
 
