@@ -33,6 +33,12 @@ function getParameters() {
 
 $(document).ready(function() {
     var param = getParameters();
+    $(".js-search-value").keypress(function(e){
+        if(e.keyCode==13){
+            e.preventDefault();
+            $('.js-search').click();
+        }
+    });
     if (typeof param.query != 'undefined') {
         $('.js-search-value').val(param.query);
     }
