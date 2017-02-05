@@ -1,0 +1,86 @@
+
+                    <div class="swiper-slide js-main-description" id="js-main-description__{{ wine.id }}">
+                        <div class="wine_slide">
+                            <div class="wine_slide__left" style="background-image: url('/media/{{ wine.img }}')">
+            
+                            </div>
+                            <div class="wine_slide__right">
+                                <div class="wine_slider__right__content">
+                                    <p class="wine_slide__small_text">
+                                        {{ wine.color }}
+                                    </p>
+                                    <p class="wine_slide__small_text">
+                                        {{ wine.type }}
+                                    </p>
+                                    <p class="wine_slide__small_text">
+                                        {{ wine.country.name }}
+                                    </p>
+                                    <p class="wine_slide__title">
+                                        {{ wine.title }}
+                                    </p>
+                                    <p class="wine_slide__about">
+                                        {{ wine.description }}
+                                    </p>
+                                    <div class="wine_store">
+                                        <p class="wine_store__title">
+                                            Средняя цена
+                                        </p>
+                                        <div>
+                                            <p class="wine_store__price">
+                                                {{ wine.price }} руб
+                                            </p>
+                                            <button class="wine_store__button js-show-where-to-buy" data-id="{{ wine.id }}">
+                                                где купить
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wine_slide__heart {% if wine.is_in_fav %} active {% endif %} js-change-fav" data-id="{{ wine.id }}">
+            
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="wine_slide js-where-to-buy" style="display: none" id="js-where-to-buy__{{ wine.id }}">
+                            <div class="wine_slide__left" style="background-image: url('/media/{{ wine.img }}')">
+                        
+                            </div>
+                            <div class="wine_slide__right">
+                                <div class="wine_slider__right__content">
+                                    <p class="standart_text">
+                                        Вы можете купить
+                                    </p>
+                                    <p class="wine_slide__title">
+                                        {{ wine.title }}
+                                    </p>
+                                    {% for shop in wine.get_shops %}
+                                    <div class="wine_store">
+                                        <p class="wine_store__title">
+                                           {{shop.name}}
+                                        </p>
+                                        <div>
+                                            <p class="wine_store__price">
+                                                {{shop.price}} руб
+                                            </p>
+                                            <button class="wine_store__button js-go-to-shop" data-href="{{ shop.url }}">
+                                                купить
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+
+                                    <div class="wine_store">
+                                        <div>
+                                            <button class="wine_store__button js-show-description" data-id="{{ wine.id }}">
+                                                Описание
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wine_slide__heart {% if wine.is_in_fav %} active {% endif %} js-change-fav" data-id="{{ wine.id }}">
+                        
+                            </div>
+                        </div>

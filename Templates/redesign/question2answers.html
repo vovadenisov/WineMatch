@@ -1,0 +1,49 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+<div class="page_container">
+    <div class="header">
+        <div class="header__logo">
+
+        </div>
+    </div>
+    <div class="main_container background_container" style="background-image: url('/media/{{ image }}'">
+        <div class="question_block">
+            <div class="question_block__content">
+                <div class="answers_2">
+                    <div class="answers_2__question">
+                        {{ text }}
+                    </div>
+                    <!--<div class="answers_2__title">
+                        Вопрос {{ question.order_number }}
+                    </div>-->
+                    <div class="answers_2__answer js-select-answer" data-id="1"> <!-- put active here -->
+
+                        <div class="answers_2__answer__center_block">
+                            <div class="answers_2__answer__center_block__img" style="background-image: url({% static 'img/yes.svg' %}')">
+                
+                            </div>
+                            <p class="answers_2__answer__center_block__title">
+                                да, конечно
+                            </p>
+                        </div>
+                    </div>
+                    <div class="answers_2__answer js-select-answer" data-id="2">
+                        <div class="answers_2__answer__center_block">
+                            <div class="answers_2__answer__center_block__img" style="background-image: url({% static 'img/no.svg' %}')">
+                
+                            </div>
+                            <p class="answers_2__answer__center_block__title">
+                                нет, зачем
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="question_block__arrow js-go-to-next" data-id="{{ survey.id }}">
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

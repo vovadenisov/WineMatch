@@ -1,0 +1,72 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+        <div class="page_container js-is-not-adult">
+        <div class="main_container background_gradient">
+        <div class="container_18">
+            <div class="big_logo" style="background-image: url({% static 'img/big_logo.svg' %})">
+
+            </div>
+            <p class="standart_text">
+                Сайт содержит информацию, не рекомендованную для лиц, не достигших совершеннолетнего возраста. Для доступа на сайт подтвердите, пожалуйста, свое совершеннолетие.
+            </p>
+            <p class="standart_text">
+                Сведения, размещенные на сайте, носят исключительно информационный характер и предназначены только для личного использования.
+            </p>
+            <button class="main_button" id="js-confirm-adult">
+                мне уже есть 18
+            </button>
+        </div>
+        </div>
+        </div>
+
+        <div class="page_container js-is-adult" style="display: none;">
+            <div class="header">
+                <div class="header__logo">
+            
+                </div>
+                <div class="header__nav">
+                    <a href="/" class="header__nav__link header__nav__link__uppercase">winematch</a>
+                    <a href="#" class="header__nav__link header__nav__link__underline">войти</a>
+                </div>
+            </div>
+            <div class="main_container background_gradient">
+                <div class="start_slider">
+                    <div class="swiper-container start_slider__swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide start_slider__swiper__slide" style="background-image: url({% static 'img/first_slide.jpg' %})">
+                                <p class="start_slider__swiper__slide__title">
+                                    Миллион поводов и
+                                    для каждого свое вино
+                                </p>
+                            </div>
+                            <div class="swiper-slide start_slider__swiper__slide" style="background-image: url({% static 'iimg/second_slide.jpg' %})">
+                                <p class="start_slider__swiper__slide__title">
+                                    Миллион поводов и
+                                    для каждого свое вино
+                                </p>
+                            </div>
+                            <div class="swiper-slide start_slider__swiper__slide" style="background-image: url({% static 'iimg/third_slide.jpg' %})">
+                                <p class="start_slider__swiper__slide__title">
+                                    Миллион поводов и
+                                    для каждого свое вино
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="start_slider__description">
+                        <div class="start_slider__description__left">
+                            <p class="standart_text">
+                                Подберите вино как профессиональный сомелье, всего за 2 минуты
+                            </p>
+                        </div>
+                        <div class="start_slider__description__right">
+                            <button class="main_button">
+                                нужный текст
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

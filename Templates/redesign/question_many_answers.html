@@ -1,0 +1,38 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+<div class="page_container">
+    <div class="header">
+        <div class="header__logo">
+
+        </div>
+    </div>
+    <div class="main_container background_gradient">
+        <div class="question_block">
+            <div class="question_block__content">
+                <!--<p class="question_block__title">
+                    вопрос №3
+                </p>-->
+                <p class="standart_text">
+                    {{ text }}
+                </p>
+                <div class="answers_6">
+                    {% for answer in  answers %}
+                    <!-- set active -->
+                    <div class="answers_6__answer js-answer-for-deactivate js-select-answer">
+                        <p class="answers_6__answer__title">
+                            {{ answer.text }}
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="question_block__arrow js-go-to-next" data-id="{{ survey.id }}">
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

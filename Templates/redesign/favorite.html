@@ -1,0 +1,45 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+<div class="page_container">
+    <div class="header">
+        <div class="header__logo">
+
+        </div>
+        <p class="header__text">Избранное</p>
+        <div class="header__nav">
+            <a href="/" class="header__nav__link header__nav__link__uppercase">winematch</a>
+            <a href="/recommended/" class="header__nav__link">рекомендации</a>
+            <a href="#" class="header__nav__link header__nav__link__underline">выйти</a>
+        </div>
+    </div>
+    <div class="main_container background_gradient">
+        <div class="slider_container">
+            <!-- Slider main container -->
+            <div class="swiper-container match_slider">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    {% for wine in wines %}
+                    {% include "redesign/wine.html" with wine=wine %}
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-prev match_prev" style="background-image: url('{% static 'img/prev_wh.svg' %})"></div>
+                <div class="swiper-button-next match_next" style="background-image: url('{% static 'img/right_wh.svg' %})"></div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination match_pagination"></div>
+            
+            <script>
+                var matchSwiper = new Swiper('.match_slider', {
+                    speed: 400,
+                    initialSlide: 0,
+                    pagination: '.swiper-pagination',
+                    nextButton: '.match_next',
+                    prevButton: '.match_prev'
+                });
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

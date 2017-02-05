@@ -89,6 +89,21 @@ class Wine(models.Model):
     group = models.ForeignKey(Group, null=True, on_delete=models.CASCADE, verbose_name="подборка вина")
     wine_to_sort = models.ManyToManyField(Sort, through='SortToWine')
     region = models.CharField(max_length=255, null=True, verbose_name="регион")
+
+    def __init__(self, *args, **kwargs):
+        s = super(Wine, self).__init__(*args, **kwargs)
+        self._is_in_fav = False
+        return s
+
+    @property
+    def is_in_fav(self):
+        return self._is_in_fav
+
+    @is_in_fav.setter
+    def is_in_fav(self, value):
+        self._is_in_fav = value
+        return value
+
     @property
     def absolute_img_path(self):
         return "{0}/..{1}".format(MEDIA_ROOT, self.img.url)
@@ -112,13 +127,16 @@ class Wine(models.Model):
 
 
 class Answer(models.Model):
-    answer_text = models.CharField(max_length=100, verbose_name="Текст ответа")
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, verbose_name="Вопрос")
-    api_response = models.IntegerField(default=0, verbose_name="Ответ РС")
+    #answer_text = models.CharField(max_length=100, verbose_name="Текст ответа")
+    #question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, verbose_name="Вопрос")
+    api_node = models.CharField(vebose_name="Node", max_length=255)
+    api_answer_id = models.IntegerField(default=0, verbose_name="Ответ РС")
+    image = models.ImageField(verbose_name="Image for answer")
 
     class Meta:
         verbose_name = "Ответ"
         verbose_name_plural = "Ответы"
+        unique_together = ('api_node', 'api_answer_id')
 
 
 class Favorites(models.Model):
@@ -158,6 +176,16 @@ class Favorites(models.Model):
     @property
     def emplty_stars(self):
         return range(5 - self.rating)
+
+
+class Recommended(models.Model):
+    user = models.ForeignKey('users.UserModel', verbose_name="Пользователь")
+    wine = models.ForeignKey(Wine, verbose_name="Вино")
+
+    class Meta:
+        unique_together = ('user', 'wine',)
+        verbose_name = "Рекомендованное"
+        verbose_name_plural = "Рекрмендованное"
 
 
 ANSWER_TYPE_CHOICES = (('json', 'json'), ('html', 'html'))
