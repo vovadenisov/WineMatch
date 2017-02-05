@@ -78,7 +78,7 @@ def main(request):
 def add_fav_to_wines(user, wines):
     wine_ids = [w.id for w in wines]
     wines = {w.id: w for w in wines}
-    for f in Favorites.objects.filter(user=user).filter(wine_id__in=wine_ids)
+    for f in Favorites.objects.filter(user=user).filter(wine_id__in=wine_ids):
         wines[f.wine_id].is_in_fav = True
     return list(wines.values())
 
@@ -86,7 +86,7 @@ def add_fav_to_wines(user, wines):
 def _get_answers(node, json_answers):
     answers = {
         a.api_answer_id: a.image 
-        for Answer.objects.filter(api_node=node).filter(
+        for a in Answer.objects.filter(api_node=node).filter(
             api_answer_id__in=[
                 a['id'] for a in json_answers
             ]
@@ -119,7 +119,7 @@ def _render_answers(user, wines_response):
         try:
             w = Wine.objects.get(title=wine['title'])
             try:
-                user.recommended_set.create()
+                user.recommended_set.create(wine=w)
             except IntegrityError:
                 pass
             wines.append(w)
@@ -166,7 +166,7 @@ def survey(request):
     is_end = match_response.get("is_end")
     #tries_count = 0
     try:
-        q = Question.objects.get(node=node)
+        q = Question.objects.get(node=question.get('node'))
     except Question.DoesNotExist:
         send_error_mail("returned question is not find node: {}".format(question))
         return HttpResponseRedirect("/")
@@ -249,7 +249,7 @@ def toggle_favorite(request):
         fav.delete()
     except Favorites.DoesNotExist:
         Favorites.objects.create(user=user, wine=wine)
-     return HttpResponse()
+    return HttpResponse()
 
 #def feedback(request):
 #    if not request.user.is_authenticated():
@@ -268,7 +268,7 @@ def toggle_favorite(request):
 #        }
 #    )
 
-def recommedned(request):
+def recommended(request):
     if request.user.is_authenticated():
         user = UserModel.objects.get(username=request.user)
         recommended = user.recommended_set.all()

@@ -129,7 +129,7 @@ class Wine(models.Model):
 class Answer(models.Model):
     #answer_text = models.CharField(max_length=100, verbose_name="Текст ответа")
     #question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, verbose_name="Вопрос")
-    api_node = models.CharField(vebose_name="Node", max_length=255)
+    api_node = models.CharField(verbose_name="Node", max_length=255)
     api_answer_id = models.IntegerField(default=0, verbose_name="Ответ РС")
     image = models.ImageField(verbose_name="Image for answer")
 

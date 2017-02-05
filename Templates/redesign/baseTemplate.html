@@ -1,3 +1,4 @@
+{% load static %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,11 @@
         <title>WineMatch</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;subset=cyrillic" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css" />
-        <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen" title="no title" charset="utf-8">
+       <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
         <script src="{% static 'js/main.js' %}" charset="utf-8"></script>
         <script>

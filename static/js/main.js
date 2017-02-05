@@ -24,6 +24,11 @@ $(document).ready(function() {
     } else {
         showAdult();
     }
+
+    $('.js-select-wine').click(function() {
+        window.location.href = '/find/';
+    });
+
     })();
 
     //questions

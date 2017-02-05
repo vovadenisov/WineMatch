@@ -1,4 +1,5 @@
-{% extends "baseTemplate.html" %}
+{% extends "redesign/baseTemplate.html" %}
+{% load staticfiles %}
 
 {% block content %}
         <div class="page_container js-is-not-adult">
@@ -40,13 +41,13 @@
                                     для каждого свое вино
                                 </p>
                             </div>
-                            <div class="swiper-slide start_slider__swiper__slide" style="background-image: url({% static 'iimg/second_slide.jpg' %})">
+                            <div class="swiper-slide start_slider__swiper__slide" style="background-image: url({% static 'img/second_slide.jpg' %})">
                                 <p class="start_slider__swiper__slide__title">
                                     Миллион поводов и
                                     для каждого свое вино
                                 </p>
                             </div>
-                            <div class="swiper-slide start_slider__swiper__slide" style="background-image: url({% static 'iimg/third_slide.jpg' %})">
+                            <div class="swiper-slide start_slider__swiper__slide" style="background-image: url({% static 'img/third_slide.jpg' %})">
                                 <p class="start_slider__swiper__slide__title">
                                     Миллион поводов и
                                     для каждого свое вино
@@ -61,8 +62,8 @@
                             </p>
                         </div>
                         <div class="start_slider__description__right">
-                            <button class="main_button">
-                                нужный текст
+                            <button class="main_button js-select-wine" >
+                                Подобрать
                             </button>
                         </div>
                     </div>
