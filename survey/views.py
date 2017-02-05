@@ -29,7 +29,7 @@ def send_error_mail(message):
 
 
 def main(request):
-    return render_to_response(template_name="redesign/index.html", context={"request":request})
+    return render_to_response(template_name="/index.html", context={"request":request})
 
 
 #def search(request):
@@ -98,7 +98,7 @@ def _get_answers(node, json_answers):
     return json_answers
 
 
-def _render_question(q, answers):
+def _render_question(q, answers, current_survey, context):
     context.update({
         "image": q.img,
         "text": q.get_question(),
@@ -107,12 +107,12 @@ def _render_question(q, answers):
     })
     answers_len = len(context["answers"])
     if answers_len < 5 and answers_len >= 2:
-        return render_to_response(template_name="redesigin/question{}answers.html".format(answers_len), context=context)
+        return render_to_response(template_name="redesign/question{}answers.html".format(answers_len), context=context)
     else:
-        return render_to_response(template_name="redesigin/question_many_answers.html", context=context)
+        return render_to_response(template_name="redesign/question_many_answers.html", context=context)
 
 
-def _render_answers(user, wines_response):
+def _render_answers(user, wines_response, context):
     wines_list = wines_response["wines"]
     wines = []
     for wine in wines_list:
@@ -127,7 +127,7 @@ def _render_answers(user, wines_response):
             pass #its ok to loose some wine
     wines = add_fav_to_wines(user, wines)
     context.update({"wines": wines})
-    return render_to_response(template_name="redesigin/match.html", context=context)
+    return render_to_response(template_name="redesign/match.html", context=context)
 
 
 def survey(request):
@@ -152,16 +152,20 @@ def survey(request):
     }
     if answer_pk:
         params.update({"answer_id": answer_pk})
-    match_response = requests.get('/'.join((settings.MATCH_URL,"next")), params=params)
+    tries_count = 0
+    while tries_count < 4:
+        match_response = requests.get('/'.join((settings.MATCH_URL,"next")), params=params)
     
-    if not match_response.status_code == 200:
-        send_error_mail("next resonse return not 200 \n returned {}".format(match_response.text))
-        return HttpResponseRedirect("/")
-    match_response = json.loads(match_response.text)
-    context = {
-        "request": request
-    }
+        if not match_response.status_code == 200:
+            send_error_mail("next resonse return not 200 \n returned {}".format(match_response.text))
+            return HttpResponseRedirect("/")
+        match_response = json.loads(match_response.text)
+        if match_response.get('question').get('node'): break
+        tries_count = tries_count + 1
 
+    context = {
+            "request": request
+    }
     question = match_response.get("question")
     is_end = match_response.get("is_end")
     #tries_count = 0
@@ -169,6 +173,7 @@ def survey(request):
         q = Question.objects.get(node=question.get('node'))
     except Question.DoesNotExist:
         send_error_mail("returned question is not find node: {}".format(question))
+        raise ValueError(question)
         return HttpResponseRedirect("/")
 
     #while tries_count < MAX_TRIES_COUNT:
@@ -181,14 +186,14 @@ def survey(request):
      #       tries_count += 1
 
     if not is_end:
-        return _render_question(q, question['answers'])
+        return _render_question(q, question['answers'], current_survey, context)
     else:
         match_response = requests.get('/'.join((settings.MATCH_URL,"wine_list", str(survey.pk))))
         if not match_response.status_code == 200:    
             send_error_mail("next resonse return not 200 \n returned {}".format(match_response.text))
             return HttpResponseRedirect("/")
         match_response = json.loads(match_response.text)
-        return _render_answers(request.user, match_response)
+        return _render_answers(request.user, match_response, context)
 
 
 def _wine_description(wine):
