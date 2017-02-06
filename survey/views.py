@@ -3,7 +3,7 @@ import requests
 
 from django.db import IntegrityError
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, JsonResponse
 from django.shortcuts import render_to_response
 from django.core.mail import send_mail
 
@@ -29,7 +29,7 @@ def send_error_mail(message):
 
 
 def main(request):
-    return render_to_response(template_name="/index.html", context={"request":request})
+    return render_to_response(template_name="redesign/index.html", context={"request":request})
 
 
 #def search(request):
@@ -150,6 +150,7 @@ def survey(request):
     params = {
         "user_id": current_survey.pk,
     }
+#    raise ValueError(params)
     if answer_pk:
         params.update({"answer_id": answer_pk})
     tries_count = 0
@@ -169,14 +170,6 @@ def survey(request):
     question = match_response.get("question")
     is_end = match_response.get("is_end")
     #tries_count = 0
-    try:
-        q = Question.objects.get(node=question.get('node'))
-    except Question.DoesNotExist:
-        send_error_mail("returned question is not find node: {}".format(question))
-        raise ValueError(question)
-        return HttpResponseRedirect("/")
-
-    #while tries_count < MAX_TRIES_COUNT:
     #    if is_end: break
     #    node = question["node"]
     #    try:
@@ -186,9 +179,15 @@ def survey(request):
      #       tries_count += 1
 
     if not is_end:
+        try:
+            q = Question.objects.get(node=question.get('node'))
+        except Question.DoesNotExist:
+            send_error_mail("returned question is not find node: {}".format(question))
+            return HttpResponseRedirect("/")
+
         return _render_question(q, question['answers'], current_survey, context)
     else:
-        match_response = requests.get('/'.join((settings.MATCH_URL,"wine_list", str(survey.pk))))
+        match_response = requests.get('/'.join((settings.MATCH_URL,"wine_list", str(current_survey.pk))))
         if not match_response.status_code == 200:    
             send_error_mail("next resonse return not 200 \n returned {}".format(match_response.text))
             return HttpResponseRedirect("/")
@@ -245,15 +244,15 @@ def toggle_favorite(request):
     if not request.user.is_authenticated() or not request.POST.get('wine_id'):
         return HttpResponseForbidden()
     try:
-        wine = Wine.objects.get(request.POST.get('wine_id'))
+        wine = Wine.objects.get(id = request.POST.get('wine_id'))
     except Wine.DoesNotExist:
         return HttpResponseForbidden()
 
     try:
-        fav = Favorites.objects.get(user=user, wine=wine)
+        fav = Favorites.objects.get(user=request.user, wine=wine)
         fav.delete()
     except Favorites.DoesNotExist:
-        Favorites.objects.create(user=user, wine=wine)
+        Favorites.objects.create(user=request.user, wine=wine)
     return HttpResponse()
 
 #def feedback(request):

@@ -97,16 +97,16 @@ $(document).ready(function() {
             });
         });
 
-        $('.js-show-description').clik(function(ev) {
+        $('.js-show-description').click(function(ev) {
             ev.preventDefault();
             $('#js-where-to-buy__' + $(ev.target).data('id')).fadeOut();
-            $('#js-main-description__' + $(ev.target).data('id')).fadeOut();
+            $('#js-main-description__' + $(ev.target).data('id')).fadeIn();
         });
 
         $('.js-show-where-to-buy').click(function(ev) {
             ev.preventDefault();
             $('#js-main-description__' + $(ev.target).data('id')).fadeOut();
-            $('#js-where-to-buy__' + $(ev.target).data('id')).fadeOut();
+            $('#js-where-to-buy__' + $(ev.target).data('id')).fadeIn();
         });
 
         $('.js-go-to-shop').click(function(ev) {
@@ -114,5 +114,5 @@ $(document).ready(function() {
              window.location.href = $(ev.target).data('href');
         });
 
-    })
+    })();
 });

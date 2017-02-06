@@ -20,7 +20,9 @@
                 <div class="answers_6">
                     {% for answer in  answers %}
                     <!-- set active -->
-                    <div class="answers_6__answer js-answer-for-deactivate js-select-answer">
+                    <div class="answers_6__answer 
+                         js-answer-for-deactivate js-select-answer"
+                         data-id="{{ answer.id }}">
                         <p class="answers_6__answer__title">
                             {{ answer.text }}
                         </p>
@@ -34,6 +36,4 @@
         </div>
     </div>
 </div>
-</body>
-
-</html>
+{% endblock %}

@@ -25,8 +25,8 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="swiper-button-prev match_prev" style="background-image: url('{% static 'img/prev_wh.svg' %})"></div>
-            <div class="swiper-button-next match_next" style="background-image: url('{% static 'img/right_wh.svg' %})"></div>
+            <div class="swiper-button-prev match_prev" style="background-image: url('{% static 'img/prev_wh.svg' %}')"></div>
+            <div class="swiper-button-next match_next" style="background-image: url('{% static 'img/right_wh.svg' %}')"></div>
             <!-- If we need pagination -->
             <div class="swiper-pagination match_pagination"></div>
             
@@ -36,7 +36,9 @@
                     initialSlide: 0,
                     pagination: '.swiper-pagination',
                     nextButton: '.match_next',
-                    prevButton: '.match_prev'
+                    prevButton: '.match_prev',
+                    preventClicks: false,
+                    preventClicksPropagation: false,
                 });
             </script>
         </div>
