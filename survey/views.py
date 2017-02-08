@@ -120,7 +120,7 @@ def _render_answers(user, wines_response, context):
             w = Wine.objects.get(title=wine['title'])
             try:
                 user.recommended_set.create(wine=w)
-            except IntegrityError:
+            except IntegrityError as e:
                 pass
             wines.append(w)
         except Wine.DoesNotExist:
