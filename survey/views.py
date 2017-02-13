@@ -134,7 +134,7 @@ def survey(request):
 #    if request.user.is_authenticated():
 #        feedback = Feedback.objects.get_last_review(request.user.id) 
 #        if feedback: return HttpResponseRedirect("/feedback")
-        
+    question_order = request.GET.get("question")
     answer_pk = request.GET.get("answer")
     if not answer_pk:
         survey_context = {}
@@ -153,6 +153,10 @@ def survey(request):
 #    raise ValueError(params)
     if answer_pk:
         params.update({"answer_id": answer_pk})
+    if question_order:
+        params.update({"order_number": int(question_order) + 1})
+    else:
+        params.update({"order_number":  1})
     tries_count = 0
     while tries_count < 4:
         match_response = requests.get('/'.join((settings.MATCH_URL,"next")), params=params)

@@ -37,11 +37,12 @@ $(document).ready(function() {
                 answerId = $(ev.target).data('id');
                 $('.js-go-to-next').addClass('active');
             }
-        )
+        );
         $('.js-go-to-next').click(function(ev) {
             ev.preventDefault();
             if (!(answerId)) { return; }
-            window.location.href = '/find/?answer=' + answerId + '&survey=' + $(ev.target).data('id');
+            var question_number = $('.js-question-number').html();
+            window.location.href = '/find/?answer=' + answerId + '&survey=' + $(ev.target).data('id') + '&question=' + question_number;
         });
     })();
 
