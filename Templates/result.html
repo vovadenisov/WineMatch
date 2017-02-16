@@ -15,7 +15,7 @@
     {% if wines %}
 
         {% if not one_wine_page  %}
-            <i class="js-hide-on-selection js-slick-navigation-left slick-navigation slick-navigation-left fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            <i class="js-hide-on-selection js-slick-navigation-left slick-navigation slick-navigation-left fa fa-arrow-left" aria-hidden="true"></i>
         {% endif %}
         <div class="result-wrapper">
             {% for wine in wines %}
@@ -39,6 +39,7 @@
                                 <h2>Мы подобрали вино:</h2>
                             </div>
                            {% else %}
+                            <div class="result-item__content__wine-info__title">Вино {{ forloop.counter }} из {{ wines|length }}</div>
                             <div class="js-hide-on-selection result-item__title">
                                 <h2>Уверены, вам понравится</h2>
                             </div>
@@ -95,7 +96,7 @@
                                 {% block buttons %}
                                 {% if one_wine_page  %}
                                 <div style="min-width: 180px" class="result-item__content__wine-info__select">
-                                    <a style="min-width: 180px" href="/find/" class="b-button">Подобрать винишко</a>
+                                    <a style="min-width: 180px" href="/find/" class="b-button">Подобрать вино</a>
                                 </div>
                                {% else %}
                                     <div class="js-hide-on-selection result-item__content__wine-info__select">
@@ -149,7 +150,7 @@
             {% endfor %}
         </div>
         {% if  not one_wine_page  %}
-            <i class="js-hide-on-selection js-slick-navigation-right slick-navigation slick-navigation-right fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+            <i class="js-hide-on-selection js-slick-navigation-right slick-navigation slick-navigation-right fa fa-arrow-right" aria-hidden="true"></i>
         {% endif %}
     {% else %}
     <div class="feedback-wrapper-thx">
