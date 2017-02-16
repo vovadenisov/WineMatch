@@ -540,8 +540,8 @@ body{
 }
 
 .slick-navigation{
-    font-size: 25px!important;
-    color: #990000;
+    font-size: 40px!important;
+    color: #ffffff;
     top:400px;
     position:fixed;
     cursor: pointer;
@@ -549,6 +549,10 @@ body{
 
 .slick-navigation-left{
     left: 6%;
+}
+
+.desktop_form input{
+    color: white;
 }
 
 .slick-navigation-right{
